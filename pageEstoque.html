@@ -55,9 +55,9 @@
         <nav>
           <ul>
             <li>
-              <a href="./pageAdm.html">
+              <a href="./pageEstoque.html">
                 <img
-                src="./assets/images/profile-svgrepo-com.svg"
+                  src="./assets/images/profile-svgrepo-com.svg"
                   alt="Gestão de usuarios"
                   width="25px"
                 />
@@ -67,8 +67,8 @@
             <li>
               <a href="./pagePerfis.html">
                 <img
-                src="./assets/images/user-adm.svg"
-                alt="Gestão de usuarios"
+                  src="./assets/images/user-adm.svg"
+                  alt="Gestão de usuarios"
                   width="25px"
                 />
                 <span> Gestão de perfil </span>
@@ -87,7 +87,7 @@
             <li>
               <a href="#">
                 <img
-                src="./assets/images/reposrts-folders-svgrepo-com.svg"
+                  src="./assets/images/reposrts-folders-svgrepo-com.svg"
                   alt="Gestão de estoque"
                   width="25px"
                 />
@@ -127,8 +127,8 @@
             <li>
               <a href="./pageRelatorios.html">
                 <img
-                src="./assets/images/stock-market.svg"
-                alt="Relatorios"
+                  src="./assets/images/stock-market.svg"
+                  alt="Relatorios"
                   width="25px"
                 />
                 <span> Relatorios </span>
@@ -150,20 +150,83 @@
           />
           <button id="search">Pesquisar...</button>
         </div>
-        <button
-          type="button"
-          data-func="dt-add"
-          class="btn btn-add btn-xs dt-add"
-        >
-          Cadastrar novo
-          <img
-            src="./assets/images/add-create-new.svg"
-            alt="Botão Adicionar"
-            width="25px"
-          />
-        </button>
+
+        <div class="actionsUser">
+          <button
+            type="button"
+            data-func="dt-add"
+            class="btn btn-add btn-xs dt-add"
+            onclick="openModalCaduser()"
+          >
+            Cadastrar novo estoque
+            <img
+              src="./assets/images/add-create-new.svg"
+              alt="Botão Adicionar"
+              width="25px"
+            />
+          </button>
+          <div id="open-modal-cadUser" class="modal-window">
+            <div>
+              <a
+                href="#"
+                title="Close"
+                class="modal-close"
+                onclick="closeModalCaduser()"
+                >X</a
+              >
+              <div class="containerRegister">
+                <form
+                  action="./pageEstoque.html"
+                  onsubmit="addData(); return false;"
+                >
+                  <h1>Cadastrar novo estoque</h1>
+                  <div class="formContent">
+                    <div>
+                      <label for="loja">Loja:</label>
+                      <input
+                        type="text"
+                        id="loja"
+                        placeholder="Digite o numero da loja"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label for="estoque">Estoque atual:</label>
+                      <input
+                        type="number"
+                        id="estoque"
+                        placeholder="Digite o estoque atual"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label for="quantRecom">Quantidade recomendada:</label>
+                      <input
+                        type="number"
+                        id="quantRecom"
+                        placeholder="Digite a quantidade recomendada"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label for="quantMin">Quantidade minima:</label>
+                      <input
+                        type="number"
+                        id="quantMin"
+                        placeholder="Digite a quantidade minima"
+                        required
+                      />
+                    </div>
+                    <button type="submit">Adicionar</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <table
-          id="example"
+          id="registerCRUD"
           class="table table-striped table-bordered"
           cellspacing="0"
         >
@@ -176,7 +239,7 @@
                   data-func="dt-add"
                   class="btn btn-success btn-xs dt-add"
                 >
-                  Quantidade
+                  Estoque atual
                   <img
                     src="./assets/images/arrow-down.svg"
                     alt="Botão organizar"
@@ -184,6 +247,8 @@
                   />
                 </button>
               </th>
+              <th>Quant. recomendada</th>
+              <th>Quant. minima</th>
               <th>Status</th>
               <th>Ações</th>
             </tr>
@@ -401,6 +466,83 @@
             </tr>
           </tbody>
         </table>
+
+        <div id="open-modal-editUser" class="modal-window">
+          <div>
+            <a
+              href="#"
+              title="Close"
+              class="modal-close"
+              onclick="closeModalEdituser()"
+              >X</a
+            >
+            <div class="containerRegister">
+              <form
+                action="./pageEstoque.html"
+                onsubmit="addData(); return false;"
+              >
+                <h1>Editar estoque</h1>
+                <div class="formContent">
+                  <div>
+                    <label for="lojaEdit">Loja:</label>
+                    <input
+                      type="number"
+                      id="lojaEdit"
+                      placeholder="Digite o numero da sua loja"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label for="estoqueEdit">Estoque atual:</label>
+                    <input
+                      type="number"
+                      id="estoqueEdit"
+                      placeholder="Digite o estoque atual"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label for="quantRecomEdit">Quantidade recomendada:</label>
+                    <input
+                      type="number"
+                      id="quantRecomEdit"
+                      placeholder="Digite a quantidade recomendada"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label for="quantMinEdit">Quantidade mínima:</label>
+                    <input
+                      type="number"
+                      id="quantMinEdit"
+                      placeholder="Digite a quantidade mínima"
+                      required
+                    />
+                  </div>
+                  <button type="submit" id="update">Atualizar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div id="open-modal-DeleteUser" class="modal-window">
+          <div>
+            <a
+              href="#"
+              title="Close"
+              class="modal-close"
+              onclick="closeModalDeleteUser()"
+              >X</a
+            >
+            <div class="containerDelete">
+              <!-- Realmente deseja deletar esse usuario?
+              <button type="submit" id="delete" onclick="deleteData()">
+                Deletar
+              </button> -->
+            </div>
+          </div>
+        </div>
       </section>
     </main>
     <footer>
@@ -411,5 +553,6 @@
       />
     </footer>
     <script src="./assets/js/global/index.js"></script>
+    <script src="./assets/js/pages/pageEstoque.js"></script>
   </body>
 </html>

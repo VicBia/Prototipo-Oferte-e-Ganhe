@@ -57,7 +57,7 @@
             <li>
               <a href="./pageAdm.html">
                 <img
-                src="./assets/images/profile-svgrepo-com.svg"
+                  src="./assets/images/profile-svgrepo-com.svg"
                   alt="Gestão de usuarios"
                   width="25px"
                 />
@@ -67,8 +67,8 @@
             <li>
               <a href="./pagePerfis.html">
                 <img
-                src="./assets/images/user-adm.svg"
-                alt="Gestão de usuarios"
+                  src="./assets/images/user-adm.svg"
+                  alt="Gestão de usuarios"
                   width="25px"
                 />
                 <span> Gestão de perfil </span>
@@ -87,7 +87,7 @@
             <li>
               <a href="./pageEstoque.html">
                 <img
-                src="./assets/images/reposrts-folders-svgrepo-com.svg"
+                  src="./assets/images/reposrts-folders-svgrepo-com.svg"
                   alt="Gestão de estoque"
                   width="25px"
                 />
@@ -127,8 +127,8 @@
             <li>
               <a href="#">
                 <img
-                src="./assets/images/stock-market.svg"
-                alt="Relatorios"
+                  src="./assets/images/stock-market.svg"
+                  alt="Relatorios"
                   width="25px"
                 />
                 <span> Relatorios </span>
@@ -140,11 +140,75 @@
       <section>
         <h1>Relatórios</h1>
         <div class="container grid grid-template-columns">
-          <button id="itemRel">Relatório Usuários cadastrados</button>
-          <button id="itemRel">Relatório Perfis de usuários</button>
-          <button id="itemRel">Relatório Lista de módulos</button>
-          <button id="itemRel">Relatório Lista de transações</button>
-          <button id="itemRel">Relatório Lista de funções cadastradas</button>
+          <div>
+            <button
+              class="itemRel"
+              id="btn1"
+              onclick="toggleContent('content1')"
+            >
+              Relatório Usuários cadastrados
+            </button>
+            <div id="content1" class="report-content">
+              Aqui está o conteúdo do relatório de usuários cadastrados.
+              <div>
+                <input type="radio" id="todos" />
+                <label for="todos">Todos usuarios</label>
+              </div>
+
+              <div>
+                <input type="radio" id="personalizado" />
+                <label for="personalizado">Escolher usuario por loja</label>
+              </div>
+            </div>
+          </div>
+          <div>
+            <button
+              class="itemRel"
+              id="btn2"
+              onclick="toggleContent('content2')"
+            >
+              Relatório Perfis de usuários
+            </button>
+            <div id="content2" class="report-content">
+              Aqui está o conteúdo do relatório de perfis de usuários.
+            </div>
+          </div>
+          <div>
+            <button
+              class="itemRel"
+              id="btn3"
+              onclick="toggleContent('content3')"
+            >
+              Relatório Lista de módulos
+            </button>
+            <div id="content3" class="report-content">
+              Aqui está o conteúdo do relatório de módulos.
+            </div>
+          </div>
+          <div>
+            <button
+              class="itemRel"
+              id="btn4"
+              onclick="toggleContent('content4')"
+            >
+              Relatório Lista de transações
+            </button>
+            <div id="content4" class="report-content">
+              Aqui está o conteúdo do relatório de transações.
+            </div>
+          </div>
+          <div>
+            <button
+              class="itemRel"
+              id="btn5"
+              onclick="toggleContent('content5')"
+            >
+              Relatório Lista de funções cadastradas
+            </button>
+            <div id="content5" class="report-content">
+              Aqui está o conteúdo do relatório de funções cadastradas.
+            </div>
+          </div>
         </div>
       </section>
     </main>
@@ -156,5 +220,6 @@
       />
     </footer>
     <script src="./assets/js/global/index.js"></script>
+    <script src="./assets/js/pages/pageRelatorios.js"></script>
   </body>
 </html>

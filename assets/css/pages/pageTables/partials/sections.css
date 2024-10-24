@@ -63,8 +63,8 @@ a {
 
 a:hover {
   /* color: #1a7944; */
-  transform: scale(1.05);
-  font-weight: 600;
+  transform: scale(1.2);
+  font-weight: 400;
 }
 
 .actionsUser {

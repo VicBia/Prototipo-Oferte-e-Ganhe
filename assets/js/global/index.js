@@ -1,17 +1,17 @@
-// Tabela alerta
+// // Tabela alerta
 
-document.querySelectorAll("tr").forEach(function (row) {
-  row.querySelectorAll("td").forEach(function (cell) {
-    if (
-      cell.textContent.trim() === "ALERTA" ||
-      cell.textContent.trim() === "Atrasado"
-    ) {
-      row.style.backgroundColor = "#f96060";
-      row.style.color = "#fff";
-      row.style.fontWeight = "600";
-    }
-  });
-});
+// document.querySelectorAll("tr").forEach(function (row) {
+//   row.querySelectorAll("td").forEach(function (cell) {
+//     if (
+//       cell.textContent.trim() === "ALERTA" ||
+//       cell.textContent.trim() === "Atrasado"
+//     ) {
+//       row.style.backgroundColor = "#f96060";
+//       row.style.color = "#fff";
+//       row.style.fontWeight = "600";
+//     }
+//   });
+// });
 
 // Menu Dropdown
 

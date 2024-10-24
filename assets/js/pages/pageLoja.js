@@ -1,4 +1,4 @@
-// CRUD REGISTER
+// CRUD LOJA
 function validateFormRegister() {
   var loja = document.getElementById("loja").value.trim();
 
@@ -19,10 +19,19 @@ function initializeLojaList() {
         loja: "Matriz",
       },
       {
-        loja: "123",
+        loja: "126",
       },
       {
         loja: "245",
+      },
+      {
+        loja: "54",
+      },
+      {
+        loja: "191",
+      },
+      {
+        loja: "12",
       }
     );
     localStorage.setItem("lojaList", JSON.stringify(lojaList));
