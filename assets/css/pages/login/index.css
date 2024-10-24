@@ -1,0 +1,9 @@
+@import "./partials/background.css";
+@import "./partials/form.css";
+
+@import "../../global/fonts.css";
+@import "../../global/normalize.css";
+
+body {
+  background-color: #0e9f56;
+}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro</title>
+    <link rel="stylesheet" href="./assets/css/pages/login/index.css" />
+  </head>
+  <body>
+    <div class="background">
+      <div class="shape"></div>
+      <div class="shape"></div>
+    </div>
+    <div class="containerRegister">
+      <form action="./registerObs.html">
+        <div class="title">
+          <img
+            src="./assets/images/Logos-QQ-e-Verde.webp"
+            alt="Logo lojas queroquero e verdeCard"
+            width="225px"
+          />
+          <h1>Cadastre-se</h1>
+          <span>Tem uma conta? <a href="./login.html">Login</a></span>
+        </div>
+        <div class="formContent">
+          <div>
+            <label for="name">Nome:</label>
+            <input
+              type="text"
+              id="name"
+              placeholder="Digite o seu nome"
+              required
+            />
+          </div>
+          <div>
+            <label for="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="Digite o seu email"
+              required
+            />
+          </div>
+          <div>
+            <label for="loja">Loja:</label>
+            <input
+              type="number"
+              id="loja"
+              placeholder="Digite o numero da sua loja"
+              required
+            />
+          </div>
+          <div>
+            <label for="password">Senha:</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Digite a sua senha"
+              required
+            />
+          </div>
+          <div>
+            <label for="passwordRepeat">Repita sua senha:</label>
+            <input
+              type="passwordRepeat"
+              id="passwordRepeat"
+              placeholder="Digite a sua senha"
+              required
+            />
+          </div>
+          <button type="submit">Registre-se</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

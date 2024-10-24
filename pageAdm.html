@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Página de gestão de perfil</title>
+    <link rel="stylesheet" href="./assets/css/pages/pageTables/index.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div id="menu-hamb">
+          <img
+            src="./assets/images/close-svgrepo-com.svg"
+            alt="Fechar menu hamburguer"
+            id="close"
+            width="25px"
+          />
+          <img
+            src="./assets/images/menu-hamb.svg"
+            alt="Abrir menu hamburguer"
+            id="open"
+            width="25px"
+          />
+          <img
+            src="./assets/images/Logos-QQ-e-Verde.webp"
+            alt="Logo lojas queroquero e verdeCard"
+            width="125px"
+          />
+        </div>
+        <div id="menu">
+          <img
+            src="./assets/images/Logos-QQ-e-Verde.webp"
+            alt="Logo lojas queroquero e verdeCard"
+            width="125px"
+          />
+        </div>
+        <div class="dropdown">
+          <button class="buttonMenu" onclick="toggleDropdown()">
+            <span>Usuário</span>
+            <img
+              src="./assets/images/arrow-down.svg"
+              alt="Menu Usuario"
+              width="25px"
+            />
+          </button>
+          <ul id="dropdownMenu" class="dropdown-content">
+            <li><a href="./login.html">Logout</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <section id="menu-hamb-section">
+        <nav>
+          <ul>
+            <li>
+              <a href="#">
+                <img
+                  src="./assets/images/profile-svgrepo-com.svg"
+                  alt="Gestão de usuarios"
+                  width="25px"
+                />
+                <span> Gestão de usuarios </span>
+              </a>
+            </li>
+            <li>
+              <a href="./pagePerfis.html">
+                <img
+                  src="./assets/images/user-adm.svg"
+                  alt="Gestão de usuarios"
+                  width="25px"
+                />
+                <span> Gestão de perfil </span>
+              </a>
+            </li>
+            <li>
+              <a href="./pageEstoque.html">
+                <img
+                  src="./assets/images/reposrts-folders-svgrepo-com.svg"
+                  alt="Gestão de estoque"
+                  width="25px"
+                />
+                <span> Gestão de estoque </span>
+              </a>
+            </li>
+            <li>
+              <a href="./pageEnvio.html">
+                <img
+                  src="./assets/images/send-arrow.svg"
+                  alt="Gestão de envio"
+                  width="25px"
+                />
+                <span> Gestão de envio </span>
+              </a>
+            </li>
+            <li>
+              <a href="./pageRecebimento.html">
+                <img
+                  src="./assets/images/receive.svg"
+                  alt="Gestão de recebimento"
+                  width="25px"
+                />
+                <span> Gestão de recebimento </span>
+              </a>
+            </li>
+            <li>
+              <a href="./pageManutencao.html">
+                <img
+                  src="./assets/images/maintenance-svgrepo-com.svg"
+                  alt="Manutenção"
+                  width="25px"
+                />
+                <span> Manutenção </span>
+              </a>
+            </li>
+            <li>
+              <a href="./pageRelatorios.html">
+                <img
+                  src="./assets/images/stock-market.svg"
+                  alt="Relatorios"
+                  width="25px"
+                />
+                <span> Relatorios </span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </section>
+      <section>
+        <h1>Gestão de usuários</h1>
+        <div id="search-container">
+          <input
+            type="search"
+            id="search-input"
+            placeholder="Pesquise pelo nome do usuario.."
+          />
+          <button id="search">Pesquisar...</button>
+        </div>
+        <div class="actionsUser">
+          <button
+            type="button"
+            class="btn btn-add btn-xs"
+            onclick="openModalCaduser()"
+          >
+            Cadastrar novo usuário
+            <img
+              src="./assets/images/add-create-new.svg"
+              alt="Botão Adicionar"
+              width="25px"
+            />
+          </button>
+
+          <div id="open-modal-cadUser" class="modal-window">
+            <div>
+              <a
+                href="#"
+                title="Close"
+                class="modal-close"
+                onclick="closeModalCaduser()"
+                >X</a
+              >
+              <div class="containerRegister">
+                <form
+                  action="./pageAdm.html"
+                  onsubmit="addData(); return false;"
+                >
+                  <h1>Cadastrar novo usuário</h1>
+                  <div class="formContent">
+                    <div>
+                      <label for="name">Nome:</label>
+                      <input
+                        type="text"
+                        id="name"
+                        placeholder="Digite o seu nome"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label for="email">Email:</label>
+                      <input
+                        type="email"
+                        id="email"
+                        placeholder="Digite o seu email"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label for="loja">Loja:</label>
+                      <input
+                        type="number"
+                        id="loja"
+                        placeholder="Digite o numero da sua loja"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label for="password">Senha:</label>
+                      <input
+                        type="password"
+                        id="password"
+                        placeholder="Digite a sua senha"
+                        required
+                      />
+                    </div>
+                    <button type="submit">Adicionar</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <table
+          id="registerCRUD"
+          class="table table-striped table-bordered"
+          cellspacing="0"
+        >
+          <thead>
+            <tr>
+              <th id="organise">
+                <button
+                  type="button"
+                  data-column-index="0"
+                  onclick="sortTable(0)"
+                >
+                  Nome
+                  <img
+                    src="./assets/images/arrow-down.svg"
+                    alt="Botão organizar"
+                    width="25px"
+                  />
+                </button>
+              </th>
+              <th>Email</th>
+              <th id="organise">
+                <button
+                  type="button"
+                  data-column-index="2"
+                  onclick="sortTable(2)"
+                >
+                  Loja
+                  <img
+                    src="./assets/images/arrow-down.svg"
+                    alt="Botão organizar"
+                    width="25px"
+                  />
+                </button>
+              </th>
+              <th id="organise">
+                <button
+                  type="button"
+                  data-column-index="3"
+                  onclick="sortTable(3)"
+                >
+                  Criado em
+                  <img
+                    src="./assets/images/arrow-down.svg"
+                    alt="Botão organizar"
+                    width="25px"
+                  />
+                </button>
+              </th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+
+        <div id="open-modal-editUser" class="modal-window">
+          <div>
+            <a
+              href="#"
+              title="Close"
+              class="modal-close"
+              onclick="closeModalEdituser()"
+              >X</a
+            >
+            <div class="containerRegister">
+              <form action="./pageAdm.html" onsubmit="addData(); return false;">
+                <h1>Editar usuário</h1>
+                <div class="formContent">
+                  <div>
+                    <label for="nameEdit">Nome:</label>
+                    <input
+                      type="text"
+                      id="nameEdit"
+                      placeholder="Digite o seu nome"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label for="emailEdit">Email:</label>
+                    <input
+                      type="email"
+                      id="emailEdit"
+                      placeholder="Digite o seu email"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label for="lojaEdit">Loja:</label>
+                    <input
+                      type="number"
+                      id="lojaEdit"
+                      placeholder="Digite o numero da sua loja"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label for="passwordEdit">Senha:</label>
+                    <input
+                      type="password"
+                      id="passwordEdit"
+                      placeholder="Digite a sua senha"
+                      required
+                    />
+                  </div>
+                  <button type="submit" id="update">Atualizar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div id="open-modal-DeleteUser" class="modal-window">
+          <div>
+            <a
+              href="#"
+              title="Close"
+              class="modal-close"
+              onclick="closeModalDeleteUser()"
+              >X</a
+            >
+            <div class="containerDelete">
+              <!-- Realmente deseja deletar esse usuario?
+              <button type="submit" id="delete" onclick="deleteData()">
+                Deletar
+              </button> -->
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="./assets/js/global/index.js"></script>
+    <script src="./assets/js/pages/pageAdm.js"></script>
+  </body>
+</html>

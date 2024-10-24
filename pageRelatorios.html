@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Página manutenção</title>
+    <link rel="stylesheet" href="./assets/css/pages/pageTables/index.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div id="menu-hamb">
+          <img
+            src="./assets/images/close-svgrepo-com.svg"
+            alt="Fechar menu hamburguer"
+            id="close"
+            width="25px"
+          />
+          <img
+            src="./assets/images/menu-hamb.svg"
+            alt="Abrir menu hamburguer"
+            id="open"
+            width="25px"
+          />
+          <img
+            src="./assets/images/Logos-QQ-e-Verde.webp"
+            alt="Logo lojas queroquero e verdeCard"
+            width="125px"
+          />
+        </div>
+        <div id="menu">
+          <img
+            src="./assets/images/Logos-QQ-e-Verde.webp"
+            alt="Logo lojas queroquero e verdeCard"
+            width="125px"
+          />
+        </div>
+        <div class="dropdown">
+          <button class="buttonMenu" onclick="toggleDropdown()">
+            <span>Usuário</span>
+            <img
+              src="./assets/images/arrow-down.svg"
+              alt="Menu Usuario"
+              width="25px"
+            />
+          </button>
+          <ul id="dropdownMenu" class="dropdown-content">
+            <li><a href="./login.html">Logout</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <section id="menu-hamb-section">
+        <nav>
+          <ul>
+            <li>
+              <a href="./pageAdm.html">
+                <img
+                src="./assets/images/profile-svgrepo-com.svg"
+                  alt="Gestão de usuarios"
+                  width="25px"
+                />
+                <span> Gestão de usuarios </span>
+              </a>
+            </li>
+            <li>
+              <a href="./pagePerfis.html">
+                <img
+                src="./assets/images/user-adm.svg"
+                alt="Gestão de usuarios"
+                  width="25px"
+                />
+                <span> Gestão de perfil </span>
+              </a>
+            </li>
+            <li>
+              <a href="./pageEstoque.html">
+                <img
+                src="./assets/images/reposrts-folders-svgrepo-com.svg"
+                  alt="Gestão de estoque"
+                  width="25px"
+                />
+                <span> Gestão de estoque </span>
+              </a>
+            </li>
+            <li>
+              <a href="./pageEnvio.html">
+                <img
+                  src="./assets/images/send-arrow.svg"
+                  alt="Gestão de envio"
+                  width="25px"
+                />
+                <span> Gestão de envio </span>
+              </a>
+            </li>
+            <li>
+              <a href="./pageRecebimento.html">
+                <img
+                  src="./assets/images/receive.svg"
+                  alt="Gestão de recebimento"
+                  width="25px"
+                />
+                <span> Gestão de recebimento </span>
+              </a>
+            </li>
+            <li>
+              <a href="./pageManutencao.html">
+                <img
+                  src="./assets/images/maintenance-svgrepo-com.svg"
+                  alt="Manutenção"
+                  width="25px"
+                />
+                <span> Manutenção </span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img
+                src="./assets/images/stock-market.svg"
+                alt="Relatorios"
+                  width="25px"
+                />
+                <span> Relatorios </span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </section>
+      <section>
+        <h1>Relatórios</h1>
+        <div class="container grid grid-template-columns">
+          <button id="itemRel">Relatório Usuários cadastrados</button>
+          <button id="itemRel">Relatório Perfis de usuários</button>
+          <button id="itemRel">Relatório Lista de módulos</button>
+          <button id="itemRel">Relatório Lista de transações</button>
+          <button id="itemRel">Relatório Lista de funções cadastradas</button>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <img
+        src="./assets/images/Logos-QQ-e-Verde.webp"
+        alt="Logo lojas queroquero e verdeCard"
+        width="125px"
+      />
+    </footer>
+    <script src="./assets/js/global/index.js"></script>
+  </body>
+</html>

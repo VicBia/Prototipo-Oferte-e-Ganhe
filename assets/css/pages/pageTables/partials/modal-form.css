@@ -1,0 +1,51 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.formContent {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+input {
+  font-size: 14px;
+  line-height: 28px;
+  padding: 8px 16px;
+  width: 100%;
+  min-height: 35px;
+  border: unset;
+  border-radius: 4px;
+  margin-top: 10px;
+  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(60, 66, 87, 0.16) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+}
+
+form button,
+table ~ button,
+.btn-del {
+  justify-content: center;
+  background-color: #64ba8c;
+  padding: 10px;
+  color: #ffffff;
+  font-weight: 600;
+  width: -webkit-fill-available;
+}
+
+form button:hover,
+table ~ button:hover,
+.btn-del:hover {
+  background-color: #377051;
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+input[type="checkbox"] {
+  min-height: 18px;
+  margin: 0;
+  box-shadow: none;
+}

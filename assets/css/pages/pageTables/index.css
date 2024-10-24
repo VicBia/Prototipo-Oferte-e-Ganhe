@@ -1,0 +1,20 @@
+@import "./partials/dropdown.css";
+@import "./partials/footer.css";
+@import "./partials/grid.css";
+@import "./partials/header.css";
+@import "./partials/modal-form.css";
+@import "./partials/modal.css";
+@import "./partials/search.css";
+@import "./partials/sections.css";
+@import "./partials/table-headers.css";
+@import "./partials/table.css";
+@import "./partials/menu-hamb.css";
+
+@import "../../global/fonts.css";
+@import "../../global/normalize.css";
+
+body {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+}

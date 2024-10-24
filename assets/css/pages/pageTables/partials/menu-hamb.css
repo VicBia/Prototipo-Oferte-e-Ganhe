@@ -1,0 +1,35 @@
+#menu {
+  display: flex;
+  align-items: center;
+}
+#menu-hamb {
+  display: none;
+}
+#menu-hamb-section {
+  display: flow;
+  position: fixed;
+}
+
+@media (max-width: 708px) {
+  #menu,
+  #close {
+    display: none;
+  }
+  #menu-hamb {
+    display: flex;
+    align-items: center;
+  }
+  #menu-hamb-section {
+    display: none;
+    position: fixed;
+    background-color: #a1e7c1;
+    height: 100vh;
+    width: 280px;
+  }
+  section nav {
+    justify-content: center;
+  }
+  main > section:nth-child(2) {
+    margin-left: 0;
+  }
+}

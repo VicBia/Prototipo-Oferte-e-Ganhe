@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Página estoque</title>
+    <link rel="stylesheet" href="./assets/css/pages/pageTables/index.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div id="menu-hamb">
+          <img
+            src="./assets/images/close-svgrepo-com.svg"
+            alt="Fechar menu hamburguer"
+            id="close"
+            width="25px"
+          />
+          <img
+            src="./assets/images/menu-hamb.svg"
+            alt="Abrir menu hamburguer"
+            id="open"
+            width="25px"
+          />
+          <img
+            src="./assets/images/Logos-QQ-e-Verde.webp"
+            alt="Logo lojas queroquero e verdeCard"
+            width="125px"
+          />
+        </div>
+        <div id="menu">
+          <img
+            src="./assets/images/Logos-QQ-e-Verde.webp"
+            alt="Logo lojas queroquero e verdeCard"
+            width="125px"
+          />
+        </div>
+        <div class="dropdown">
+          <button class="buttonMenu" onclick="toggleDropdown()">
+            <span>Usuário</span>
+            <img
+              src="./assets/images/arrow-down.svg"
+              alt="Menu Usuario"
+              width="25px"
+            />
+          </button>
+          <ul id="dropdownMenu" class="dropdown-content">
+            <li><a href="./login.html">Logout</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <section id="menu-hamb-section">
+        <nav>
+          <ul>
+            <li>
+              <a href="./pageAdm.html">
+                <img
+                src="./assets/images/profile-svgrepo-com.svg"
+                  alt="Gestão de usuarios"
+                  width="25px"
+                />
+                <span> Gestão de usuarios </span>
+              </a>
+            </li>
+            <li>
+              <a href="./pagePerfis.html">
+                <img
+                src="./assets/images/user-adm.svg"
+                alt="Gestão de usuarios"
+                  width="25px"
+                />
+                <span> Gestão de perfil </span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img
+                src="./assets/images/reposrts-folders-svgrepo-com.svg"
+                  alt="Gestão de estoque"
+                  width="25px"
+                />
+                <span> Gestão de estoque </span>
+              </a>
+            </li>
+            <li>
+              <a href="./pageEnvio.html">
+                <img
+                  src="./assets/images/send-arrow.svg"
+                  alt="Gestão de envio"
+                  width="25px"
+                />
+                <span> Gestão de envio </span>
+              </a>
+            </li>
+            <li>
+              <a href="./pageRecebimento.html">
+                <img
+                  src="./assets/images/receive.svg"
+                  alt="Gestão de recebimento"
+                  width="25px"
+                />
+                <span> Gestão de recebimento </span>
+              </a>
+            </li>
+            <li>
+              <a href="./pageManutencao.html">
+                <img
+                  src="./assets/images/maintenance-svgrepo-com.svg"
+                  alt="Manutenção"
+                  width="25px"
+                />
+                <span> Manutenção </span>
+              </a>
+            </li>
+            <li>
+              <a href="./pageRelatorios.html">
+                <img
+                src="./assets/images/stock-market.svg"
+                alt="Relatorios"
+                  width="25px"
+                />
+                <span> Relatorios </span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </section>
+      <section>
+        <h1>Estoque de talões</h1>
+        <p>- Configurar Estoque Mínimo e Máximo;</p>
+        <p>- Gerar Alertas de Estoque Baixo;</p>
+        <p>- Consultar Estoque Atual.</p>
+        <div id="search-container">
+          <input
+            type="search"
+            id="search-input"
+            placeholder="Pesquise pelo número da loja.."
+          />
+          <button id="search">Pesquisar...</button>
+        </div>
+        <button
+          type="button"
+          data-func="dt-add"
+          class="btn btn-add btn-xs dt-add"
+        >
+          Cadastrar novo
+          <img
+            src="./assets/images/add-create-new.svg"
+            alt="Botão Adicionar"
+            width="25px"
+          />
+        </button>
+        <table
+          id="example"
+          class="table table-striped table-bordered"
+          cellspacing="0"
+        >
+          <thead>
+            <tr>
+              <th>Loja</th>
+              <th id="organise">
+                <button
+                  type="button"
+                  data-func="dt-add"
+                  class="btn btn-success btn-xs dt-add"
+                >
+                  Quantidade
+                  <img
+                    src="./assets/images/arrow-down.svg"
+                    alt="Botão organizar"
+                    width="25px"
+                  />
+                </button>
+              </th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>159</td>
+              <td>56</td>
+              <td>OK</td>
+              <td class="buttons">
+                <button type="button" class="btn btn-primary btn-xs dt-edit">
+                  <img
+                    src="./assets/images/edit-pencil.svg"
+                    alt="Botão Editar"
+                    width="25px"
+                  />
+                </button>
+                <button type="button" class="btn btn-danger btn-xs dt-delete">
+                  <img
+                    src="./assets/images/delete-trash.svg"
+                    alt="Botão Excluir"
+                    width="25px"
+                  />
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>319</td>
+              <td>6</td>
+              <td>ALERTA</td>
+              <td class="buttons">
+                <button type="button" class="btn btn-primary btn-xs dt-edit">
+                  <img
+                    src="./assets/images/edit-pencil.svg"
+                    alt="Botão Editar"
+                    width="25px"
+                  />
+                </button>
+                <button type="button" class="btn btn-danger btn-xs dt-delete">
+                  <img
+                    src="./assets/images/delete-trash.svg"
+                    alt="Botão Excluir"
+                    width="25px"
+                  />
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>164</td>
+              <td>26</td>
+              <td>OK</td>
+              <td class="buttons">
+                <button type="button" class="btn btn-primary btn-xs dt-edit">
+                  <img
+                    src="./assets/images/edit-pencil.svg"
+                    alt="Botão Editar"
+                    width="25px"
+                  />
+                </button>
+                <button type="button" class="btn btn-danger btn-xs dt-delete">
+                  <img
+                    src="./assets/images/delete-trash.svg"
+                    alt="Botão Excluir"
+                    width="25px"
+                  />
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>267</td>
+              <td>85</td>
+              <td>OK</td>
+              <td class="buttons">
+                <button type="button" class="btn btn-primary btn-xs dt-edit">
+                  <img
+                    src="./assets/images/edit-pencil.svg"
+                    alt="Botão Editar"
+                    width="25px"
+                  />
+                </button>
+                <button type="button" class="btn btn-danger btn-xs dt-delete">
+                  <img
+                    src="./assets/images/delete-trash.svg"
+                    alt="Botão Excluir"
+                    width="25px"
+                  />
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>25</td>
+              <td>10</td>
+              <td>ALERTA</td>
+              <td class="buttons">
+                <button type="button" class="btn btn-primary btn-xs dt-edit">
+                  <img
+                    src="./assets/images/edit-pencil.svg"
+                    alt="Botão Editar"
+                    width="25px"
+                  />
+                </button>
+                <button type="button" class="btn btn-danger btn-xs dt-delete">
+                  <img
+                    src="./assets/images/delete-trash.svg"
+                    alt="Botão Excluir"
+                    width="25px"
+                  />
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>342</td>
+              <td>67</td>
+              <td>OK</td>
+              <td class="buttons">
+                <button type="button" class="btn btn-primary btn-xs dt-edit">
+                  <img
+                    src="./assets/images/edit-pencil.svg"
+                    alt="Botão Editar"
+                    width="25px"
+                  />
+                </button>
+                <button type="button" class="btn btn-danger btn-xs dt-delete">
+                  <img
+                    src="./assets/images/delete-trash.svg"
+                    alt="Botão Excluir"
+                    width="25px"
+                  />
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>201</td>
+              <td>70</td>
+              <td>OK</td>
+              <td class="buttons">
+                <button type="button" class="btn btn-primary btn-xs dt-edit">
+                  <img
+                    src="./assets/images/edit-pencil.svg"
+                    alt="Botão Editar"
+                    width="25px"
+                  />
+                </button>
+                <button type="button" class="btn btn-danger btn-xs dt-delete">
+                  <img
+                    src="./assets/images/delete-trash.svg"
+                    alt="Botão Excluir"
+                    width="25px"
+                  />
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>56</td>
+              <td>50</td>
+              <td>OK</td>
+              <td class="buttons">
+                <button type="button" class="btn btn-primary btn-xs dt-edit">
+                  <img
+                    src="./assets/images/edit-pencil.svg"
+                    alt="Botão Editar"
+                    width="25px"
+                  />
+                </button>
+                <button type="button" class="btn btn-danger btn-xs dt-delete">
+                  <img
+                    src="./assets/images/delete-trash.svg"
+                    alt="Botão Excluir"
+                    width="25px"
+                  />
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>184</td>
+              <td>99</td>
+              <td>OK</td>
+              <td class="buttons">
+                <button type="button" class="btn btn-primary btn-xs dt-edit">
+                  <img
+                    src="./assets/images/edit-pencil.svg"
+                    alt="Botão Editar"
+                    width="25px"
+                  />
+                </button>
+                <button type="button" class="btn btn-danger btn-xs dt-delete">
+                  <img
+                    src="./assets/images/delete-trash.svg"
+                    alt="Botão Excluir"
+                    width="25px"
+                  />
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>46</td>
+              <td>7</td>
+              <td>ALERTA</td>
+              <td class="buttons">
+                <button type="button" class="btn btn-primary btn-xs dt-edit">
+                  <img
+                    src="./assets/images/edit-pencil.svg"
+                    alt="Botão Editar"
+                    width="25px"
+                  />
+                </button>
+                <button type="button" class="btn btn-danger btn-xs dt-delete">
+                  <img
+                    src="./assets/images/delete-trash.svg"
+                    alt="Botão Excluir"
+                    width="25px"
+                  />
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+    <footer>
+      <img
+        src="./assets/images/Logos-QQ-e-Verde.webp"
+        alt="Logo lojas queroquero e verdeCard"
+        width="125px"
+      />
+    </footer>
+    <script src="./assets/js/global/index.js"></script>
+  </body>
+</html>

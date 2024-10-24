@@ -1,0 +1,33 @@
+header {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  /* background-color: #a1e7c1;
+    height: 54px;
+    border-bottom: 2px solid #eae5e9; */
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  max-width: 1050px;
+  width: 100%;
+  padding: 5px;
+  justify-content: space-between;
+}
+
+header > nav {
+  position: fixed;
+  background-color: #fff;
+  border-bottom: 2px solid #eae5e9;
+  background-color: #a1e7c1;
+}
+
+button {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  cursor: pointer;
+  resize: vertical;
+  border: none;
+}

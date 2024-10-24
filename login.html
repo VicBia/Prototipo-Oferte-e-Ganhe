@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="./assets/css/pages/login/index.css" />
+  </head>
+  <body>
+    <div class="background">
+      <div class="shape"></div>
+      <div class="shape"></div>
+    </div>
+    <div class="containerLogin">
+      <form action="./pageManutencao.html">
+        <div class="title">
+          <img
+            src="./assets/images/Logos-QQ-e-Verde.webp"
+            alt="Logo lojas queroquero e verdeCard"
+            width="225px"
+          />
+          <h1>Fazer login</h1>
+          <span
+            >Não tem uma conta?
+            <a href="./register.html">Registre-se</a></span
+          >
+        </div>
+        <div class="formContent">
+          <div>
+            <label for="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="Digite o seu email"
+              required
+            />
+          </div>
+          <div>
+            <label for="password">Senha:</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Digite a sua senha"
+              required
+            />
+          </div>
+          <a href="./forgotPassword.html">Esqueci a senha</a>
+          <button type="submit">Login</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

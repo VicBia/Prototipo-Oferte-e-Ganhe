@@ -1,0 +1,52 @@
+.modal-window {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+}
+
+.modal-window.show {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-window > div {
+  width: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 2em;
+  background: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
+.modal-close {
+  color: #857d7d;
+  font-weight: 600;
+  font-size: large;
+  position: absolute;
+  right: 10px;
+  top: 7px;
+  text-decoration: none;
+}
+
+.modal-close:hover {
+  color: rgb(36, 1, 1);
+}
+
+.containerDelete {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: justify;
+}
