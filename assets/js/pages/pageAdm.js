@@ -36,19 +36,19 @@ function initializeRegisterList() {
   if (registerList.length === 0) {
     registerList.push(
       {
-        name: "Admin",
+        name: "Ana",
         email: "admin@example.com",
         loja: "Matriz",
         password: "admin123",
       },
       {
-        name: "Gerente",
+        name: "Julio",
         email: "gerente@example.com",
         loja: "126",
         password: "gerente123",
       },
       {
-        name: "Loja",
+        name: "Carla",
         email: "loja@example.com",
         loja: "126",
         password: "loja123",
