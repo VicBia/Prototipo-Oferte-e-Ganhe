@@ -54,47 +54,57 @@
       <section id="menu-hamb-section">
         <nav>
           <ul>
-            <li>
-              <a href="./pageAdm.html">
+            <li data-permission="dashboard">
+              <a href="./pageDashboard.html">
                 <img
-                src="./assets/images/profile-svgrepo-com.svg"
+                  src="./assets/images/dashboard-svgrepo-com.svg"
+                  alt="Dashboard"
+                  width="25px"
+                />
+                <span> Dashboard </span>
+              </a>
+            </li>
+            <li data-permission="usuarios">
+              <a href="#">
+                <img
+                  src="./assets/images/profile-svgrepo-com.svg"
                   alt="Gestão de usuarios"
                   width="25px"
                 />
                 <span> Gestão de usuarios </span>
               </a>
             </li>
-            <li>
-              <a href="#">
+            <li data-permission="perfis">
+              <a href="./pagePerfis.html">
                 <img
-                src="./assets/images/user-adm.svg"
-                alt="Gestão de usuarios"
+                  src="./assets/images/user-adm.svg"
+                  alt="Gestão de perfis"
                   width="25px"
                 />
                 <span> Gestão de perfil </span>
               </a>
             </li>
-            <li>
+            <li data-permission="lojas">
               <a href="./pageLoja.html">
                 <img
                   src="./assets/images/store-svgrepo-com.svg"
-                  alt="Gestão de usuarios"
+                  alt="Gestão de loja"
                   width="25px"
                 />
                 <span> Gestão de loja </span>
               </a>
             </li>
-            <li>
+            <li data-permission="estoque">
               <a href="./pageEstoque.html">
                 <img
-                src="./assets/images/reposrts-folders-svgrepo-com.svg"
+                  src="./assets/images/reposrts-folders-svgrepo-com.svg"
                   alt="Gestão de estoque"
                   width="25px"
                 />
                 <span> Gestão de estoque </span>
               </a>
             </li>
-            <li>
+            <li data-permission="envio">
               <a href="./pageEnvio.html">
                 <img
                   src="./assets/images/send-arrow.svg"
@@ -104,7 +114,7 @@
                 <span> Gestão de envio </span>
               </a>
             </li>
-            <li>
+            <li data-permission="recebimento">
               <a href="./pageRecebimento.html">
                 <img
                   src="./assets/images/receive.svg"
@@ -114,7 +124,7 @@
                 <span> Gestão de recebimento </span>
               </a>
             </li>
-            <li>
+            <li data-permission="manutencao">
               <a href="./pageManutencao.html">
                 <img
                   src="./assets/images/maintenance-svgrepo-com.svg"
@@ -124,11 +134,11 @@
                 <span> Manutenção </span>
               </a>
             </li>
-            <li>
+            <li data-permission="relatorios">
               <a href="./pageRelatorios.html">
                 <img
-                src="./assets/images/stock-market.svg"
-                alt="Relatorios"
+                  src="./assets/images/stock-market.svg"
+                  alt="Relatorios"
                   width="25px"
                 />
                 <span> Relatorios </span>
@@ -137,6 +147,7 @@
           </ul>
         </nav>
       </section>
+      
       <section>
         <h1>Gestão de perfis</h1>
         <div id="search-container">
@@ -167,162 +178,125 @@
               <a
                 href="#"
                 title="Close"
-                class="modal-close"
+                class="modal-close-perfil"
                 onclick="closeModalCriarPerfil()"
                 >X</a
               >
-              <h1>Cadastrar novo perfil</h1>
-              <label for="nomePerfil">Nome</label>
-              <input type="text" id="nomePerfil" />
-              <table
-                id="example"
-                class="table table-striped table-bordered"
-                cellspacing="0"
-              >
-                <thead>
-                  <tr>
-                    <th>Acesso a...</th>
-                    <th>Editar</th>
-                    <th>Visualizar</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Gestão de Usuários</td>
-                    <td>
-                      <input
-                        type="checkbox"
-                        name="perfilEditar"
-                        id="admin"
-                        value="admin"
-                      />
-                    </td>
-                    <td>
-                      <input
-                        type="checkbox"
-                        name="perfilVisualizar"
-                        id="admin"
-                        value="admin"
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Gestão de Perfis</td>
-                    <td>
-                      <input
-                        type="checkbox"
-                        name="perfilEditar"
-                        id="admin"
-                        value="admin"
-                      />
-                    </td>
-                    <td>
-                      <input
-                        type="checkbox"
-                        name="perfilVisualizar"
-                        id="admin"
-                        value="admin"
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Gestão de estoque</td>
-                    <td>
-                      <input
-                        type="checkbox"
-                        name="perfilEditar"
-                        id="gerente"
-                        value="gerente"
-                      />
-                    </td>
-                    <td>
-                      <input
-                        type="checkbox"
-                        name="perfilVisualizar"
-                        id="gerente"
-                        value="gerente"
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Gestão de envio</td>
-                    <td>
-                      <input
-                        type="checkbox"
-                        name="perfilEditar"
-                        id="caixa"
-                        value="caixa"
-                      />
-                    </td>
-                    <td>
-                      <input
-                        type="checkbox"
-                        name="perfilVisualizar"
-                        id="caixa"
-                        value="caixa"
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Gestão de recebimento</td>
-                    <td>
-                      <input
-                        type="checkbox"
-                        name="perfilEditar"
-                        id="caixa"
-                        value="caixa"
-                      />
-                    </td>
-                    <td>
-                      <input
-                        type="checkbox"
-                        name="perfilVisualizar"
-                        id="caixa"
-                        value="caixa"
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Manutenção</td>
-                    <td>
-                      <input
-                        type="checkbox"
-                        name="perfilEditar"
-                        id="caixa"
-                        value="caixa"
-                      />
-                    </td>
-                    <td>
-                      <input
-                        type="checkbox"
-                        name="perfilVisualizar"
-                        id="caixa"
-                        value="caixa"
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Relatórios</td>
-                    <td>
-                      <input
-                        type="checkbox"
-                        name="perfilEditar"
-                        id="caixa"
-                        value="caixa"
-                      />
-                    </td>
-                    <td>
-                      <input
-                        type="checkbox"
-                        name="perfilVisualizar"
-                        id="caixa"
-                        value="caixa"
-                      />
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <button onclick="closeModalCriarPerfil()">Salvar</button>
+              <div class="containerRegister">
+                <form
+                  action="./pagePerfis.html"
+                  onsubmit="addData(); return false;"
+                >
+                  <h1>Cadastrar novo perfil</h1>
+                  <label for="nomePerfil">Nome</label>
+                  <input type="text" id="nomePerfil" required />
+                  <table
+                    id="newPerfil"
+                    class="table table-striped table-bordered"
+                    cellspacing="0"
+                  >
+                    <thead>
+                      <tr>
+                        <th>Acesso a/ao...</th>
+                        <th>Módulo</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Apenas loja</td>
+                        <td>
+                          <input
+                            type="checkbox"
+                            name="Loja do Usuario"
+                            value="lojaEspecifica"
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Dashboard</td>
+                        <td>
+                          <input
+                            type="checkbox"
+                            name="Dashboard"
+                            value="dashboard"
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Gestão de Usuários</td>
+                        <td>
+                          <input
+                            type="checkbox"
+                            name="Gestão de Usuarios"
+                            value="usuarios"
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Gestão de Perfis</td>
+                        <td>
+                          <input type="checkbox" name="Perfis" value="perfis" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Gestão de Lojas</td>
+                        <td>
+                          <input type="checkbox" name="Lojas" value="lojas" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Gestão de estoque</td>
+                        <td>
+                          <input
+                            type="checkbox"
+                            name="estoque"
+                            value="estoque"
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Gestão de envio</td>
+                        <td>
+                          <input type="checkbox" name="envio" value="envio" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Gestão de recebimento</td>
+                        <td>
+                          <input
+                            type="checkbox"
+                            name="recebimento"
+                            value="recebimento"
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Manutenção</td>
+                        <td>
+                          <input
+                            type="checkbox"
+                            name="Manutencao"
+                            value="manutencao"
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Relatórios</td>
+                        <td>
+                          <input
+                            type="checkbox"
+                            name="Relatorios"
+                            value="relatorios"
+                          />
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <button type="submit" onclick="closeModalCriarPerfil()">
+                    Salvar
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
 
@@ -339,7 +313,6 @@
               width="25px"
             />
           </button>
-
           <div id="open-modal-cadPerfil" class="modal-window">
             <div>
               <a
@@ -349,146 +322,54 @@
                 onclick="closeModalCadPerfil()"
                 >X</a
               >
-              <h1>Definir perfis para o usuario</h1>
-              <div id="search-container">
+              <h1>Definir perfis para o usuário</h1>
+
+              <div id="search-container-perfil">
                 <input
-                  type="search"
-                  id="search-input"
-                  placeholder="Pesquise pelo nome do usuario.."
+                  type="text"
+                  id="mySearch"
+                  placeholder="Pesquise pelo nome do usuário..."
+                  onclick="showUserList()"
+                  onkeyup="filterUsers()"
                 />
-                <button id="search">Pesquisar...</button>
+                <ul id="myMenu" style="display: none"></ul>
               </div>
-              <table
-                id="example"
-                class="table table-striped table-bordered"
-                cellspacing="0"
-              >
+
+              <table>
                 <thead>
                   <tr>
                     <th>Perfil</th>
-                    <th>Ativado</th>
+                    <th>Ativar</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td>Adiministrador</td>
-                    <td>
-                      <input
-                        type="checkbox"
-                        name="perfilAtivado"
-                        id="admin"
-                        value="admin"
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Gerente</td>
-                    <td>
-                      <input
-                        type="checkbox"
-                        name="perfilAtivado"
-                        id="gerente"
-                        value="gerente"
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Caixa</td>
-                    <td>
-                      <input
-                        type="checkbox"
-                        name="perfilAtivado"
-                        id="caixa"
-                        value="caixa"
-                      />
-                    </td>
-                  </tr>
-                </tbody>
+                <tbody id="perfil-options"></tbody>
               </table>
-              <button onclick="closeModalCadPerfil()">Salvar</button>
+
+              <button onclick="savePerfilToUser()">Salvar</button>
             </div>
           </div>
         </div>
+
         <h3>Perfis cadastrados</h3>
         <table
-          id="example"
+          id="registerCRUD"
           class="table table-striped table-bordered"
           cellspacing="0"
         >
           <thead>
             <tr>
               <th>Nome</th>
+              <th>Acessos</th>
               <th>Ações</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>Adiministrador</td>
-
-              <td class="buttons">
-                <button type="button" class="btn btn-primary btn-xs dt-edit">
-                  <img
-                    src="./assets/images/edit-pencil.svg"
-                    alt="Botão Editar"
-                    width="25px"
-                  />
-                </button>
-                <button type="button" class="btn btn-danger btn-xs dt-delete">
-                  <img
-                    src="./assets/images/delete-trash.svg"
-                    alt="Botão Excluir"
-                    width="25px"
-                  />
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td>Gerente</td>
-
-              <td class="buttons">
-                <button type="button" class="btn btn-primary btn-xs dt-edit">
-                  <img
-                    src="./assets/images/edit-pencil.svg"
-                    alt="Botão Editar"
-                    width="25px"
-                  />
-                </button>
-                <button type="button" class="btn btn-danger btn-xs dt-delete">
-                  <img
-                    src="./assets/images/delete-trash.svg"
-                    alt="Botão Excluir"
-                    width="25px"
-                  />
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td>Caixa</td>
-
-              <td class="buttons">
-                <button type="button" class="btn btn-primary btn-xs dt-edit">
-                  <img
-                    src="./assets/images/edit-pencil.svg"
-                    alt="Botão Editar"
-                    width="25px"
-                  />
-                </button>
-                <button type="button" class="btn btn-danger btn-xs dt-delete">
-                  <img
-                    src="./assets/images/delete-trash.svg"
-                    alt="Botão Excluir"
-                    width="25px"
-                  />
-                </button>
-              </td>
-            </tr>
-          </tbody>
+          <tbody></tbody>
         </table>
+
         <h3>Perfis dos usuarios</h3>
         <table
-          id="example"
           class="table table-striped table-bordered"
-          cellspacing="0"
+          id="user-perfil-table"
         >
           <thead>
             <tr>
@@ -498,7 +379,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <!-- <tr>
               <td>Leandro</td>
               <td>Adiministrador</td>
               <td class="buttons">
@@ -557,9 +438,151 @@
                   />
                 </button>
               </td>
-            </tr>
+            </tr> -->
           </tbody>
         </table>
+
+        <div id="open-modal-editUser" class="modal-window">
+          <div>
+            <a
+              href="#"
+              title="Close"
+              class="modal-close-perfil"
+              onclick="closeModalEdituser()"
+              >X</a
+            >
+            <div class="containerRegister">
+              <form
+                action="./pagePerfis.html"
+                onsubmit="updateData(); return false;"
+              >
+                <h1>Editar perfil</h1>
+                <div class="formContent">
+                  <div>
+                    <label for="nomePerfilEdit">Nome</label>
+                    <input type="text" id="nomePerfilEdit" required />
+                  </div>
+                  <table
+                    id="example"
+                    class="table table-striped table-bordered"
+                    cellspacing="0"
+                  >
+                    <thead>
+                      <tr>
+                        <th>Acesso a/ao...</th>
+                        <th>Módulo</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Apenas loja</td>
+                        <td>
+                          <input
+                            type="checkbox"
+                            name="Loja do Usuario"
+                            value="lojaEspecifica"
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Dashboard</td>
+                        <td>
+                          <input
+                            type="checkbox"
+                            name="Dashboard"
+                            value="dashboard"
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Gestão de Usuários</td>
+                        <td>
+                          <input
+                            type="checkbox"
+                            name="Gestão de Usuarios"
+                            value="usuarios"
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Gestão de Perfis</td>
+                        <td>
+                          <input type="checkbox" name="Perfis" value="perfis" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Gestão de Lojas</td>
+                        <td>
+                          <input type="checkbox" name="Lojas" value="lojas" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Gestão de estoque</td>
+                        <td>
+                          <input
+                            type="checkbox"
+                            name="estoque"
+                            value="estoque"
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Gestão de envio</td>
+                        <td>
+                          <input type="checkbox" name="envio" value="envio" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Gestão de recebimento</td>
+                        <td>
+                          <input
+                            type="checkbox"
+                            name="recebimento"
+                            value="recebimento"
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Manutenção</td>
+                        <td>
+                          <input
+                            type="checkbox"
+                            name="Manutencao"
+                            value="manutencao"
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Relatórios</td>
+                        <td>
+                          <input
+                            type="checkbox"
+                            name="Relatorios"
+                            value="relatorios"
+                          />
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <button type="submit" id="update">Atualizar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div id="open-modal-DeleteUser" class="modal-window">
+          <div>
+            <a
+              href="#"
+              title="Close"
+              class="modal-close"
+              onclick="closeModalDeleteUser()"
+              >X</a
+            >
+            <div class="containerDelete"></div>
+          </div>
+        </div>
       </section>
     </main>
     <footer>
@@ -570,5 +593,6 @@
       />
     </footer>
     <script src="./assets/js/global/index.js"></script>
+    <script src="./assets/js/pages/pagePerfil.js"></script>
   </body>
 </html>

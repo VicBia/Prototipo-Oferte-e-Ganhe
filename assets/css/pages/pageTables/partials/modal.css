@@ -40,6 +40,16 @@
   text-decoration: none;
 }
 
+.modal-close-perfil {
+  right: 9px;
+  top: 27px;
+  color: #857d7d;
+  font-weight: 600;
+  font-size: large;
+  position: absolute;
+  text-decoration: none;
+}
+
 .modal-close:hover {
   color: rgb(36, 1, 1);
 }

@@ -54,47 +54,57 @@
       <section id="menu-hamb-section">
         <nav>
           <ul>
-            <li>
-              <a href="./pageAdm.html">
+            <li data-permission="dashboard">
+              <a href="./pageDashboard.html">
                 <img
-                src="./assets/images/profile-svgrepo-com.svg"
+                  src="./assets/images/dashboard-svgrepo-com.svg"
+                  alt="Dashboard"
+                  width="25px"
+                />
+                <span> Dashboard </span>
+              </a>
+            </li>
+            <li data-permission="usuarios">
+              <a href="#">
+                <img
+                  src="./assets/images/profile-svgrepo-com.svg"
                   alt="Gestão de usuarios"
                   width="25px"
                 />
                 <span> Gestão de usuarios </span>
               </a>
             </li>
-            <li>
+            <li data-permission="perfis">
               <a href="./pagePerfis.html">
                 <img
-                src="./assets/images/user-adm.svg"
-                alt="Gestão de usuarios"
+                  src="./assets/images/user-adm.svg"
+                  alt="Gestão de perfis"
                   width="25px"
                 />
                 <span> Gestão de perfil </span>
               </a>
             </li>
-            <li>
+            <li data-permission="lojas">
               <a href="./pageLoja.html">
                 <img
                   src="./assets/images/store-svgrepo-com.svg"
-                  alt="Gestão de usuarios"
+                  alt="Gestão de loja"
                   width="25px"
                 />
                 <span> Gestão de loja </span>
               </a>
             </li>
-            <li>
+            <li data-permission="estoque">
               <a href="./pageEstoque.html">
                 <img
-                src="./assets/images/reposrts-folders-svgrepo-com.svg"
+                  src="./assets/images/reposrts-folders-svgrepo-com.svg"
                   alt="Gestão de estoque"
                   width="25px"
                 />
                 <span> Gestão de estoque </span>
               </a>
             </li>
-            <li>
+            <li data-permission="envio">
               <a href="./pageEnvio.html">
                 <img
                   src="./assets/images/send-arrow.svg"
@@ -104,7 +114,7 @@
                 <span> Gestão de envio </span>
               </a>
             </li>
-            <li>
+            <li data-permission="recebimento">
               <a href="./pageRecebimento.html">
                 <img
                   src="./assets/images/receive.svg"
@@ -114,8 +124,8 @@
                 <span> Gestão de recebimento </span>
               </a>
             </li>
-            <li>
-              <a href="#">
+            <li data-permission="manutencao">
+              <a href="./pageManutencao.html">
                 <img
                   src="./assets/images/maintenance-svgrepo-com.svg"
                   alt="Manutenção"
@@ -124,11 +134,11 @@
                 <span> Manutenção </span>
               </a>
             </li>
-            <li>
+            <li data-permission="relatorios">
               <a href="./pageRelatorios.html">
                 <img
-                src="./assets/images/stock-market.svg"
-                alt="Relatorios"
+                  src="./assets/images/stock-market.svg"
+                  alt="Relatorios"
                   width="25px"
                 />
                 <span> Relatorios </span>
@@ -137,6 +147,7 @@
           </ul>
         </nav>
       </section>
+
       <section id="manutencao">
         <h1>Manutenção</h1>
         <p>- Consultar Talões Enviados;</p>

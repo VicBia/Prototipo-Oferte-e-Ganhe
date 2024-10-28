@@ -1,18 +1,3 @@
-// // Tabela alerta
-
-// document.querySelectorAll("tr").forEach(function (row) {
-//   row.querySelectorAll("td").forEach(function (cell) {
-//     if (
-//       cell.textContent.trim() === "ALERTA" ||
-//       cell.textContent.trim() === "Atrasado"
-//     ) {
-//       row.style.backgroundColor = "#f96060";
-//       row.style.color = "#fff";
-//       row.style.fontWeight = "600";
-//     }
-//   });
-// });
-
 // Menu Dropdown
 
 function toggleDropdown() {
@@ -42,13 +27,17 @@ function closeModalCriarPerfil() {
   document.getElementById("open-modal-criarPerfil").classList.remove("show");
 }
 
-function openModalCadPerfil() {
-  document.getElementById("open-modal-cadPerfil").classList.add("show");
+function closeModalEditPerfil() {
+  document.getElementById("open-modal-editUser").classList.remove("show");
 }
 
-function closeModalCadPerfil() {
-  document.getElementById("open-modal-cadPerfil").classList.remove("show");
-}
+// function openModalCadPerfil() {
+//   document.getElementById("open-modal-cadPerfil").classList.add("show");
+// }
+
+// function closeModalCadPerfil() {
+//   document.getElementById("open-modal-cadPerfil").classList.remove("show");
+// }
 
 // Menu hamburguer
 
@@ -68,3 +57,49 @@ menuButton.addEventListener("click", function () {
     close.style.display = "block";
   }
 });
+
+// Autenticação
+
+// Função para configurar o menu com base nas permissões do perfil
+function configureMenuByPerfil() {
+  // Obtém o perfil do usuário autenticado
+  const user = JSON.parse(sessionStorage.getItem("authenticatedUser"));
+
+  if (!user || !user.perfis) {
+    alert("Usuário não autenticado ou sem perfil.");
+    window.location.href = "./login.html"; // Redireciona para login se não estiver autenticado
+    return;
+  }
+
+  // Obtém a lista de perfis do localStorage
+  const perfilList = JSON.parse(localStorage.getItem("perfilList"));
+
+  if (!perfilList) {
+    console.error("Perfil não encontrado no localStorage.");
+    return;
+  }
+
+  // Obtém as permissões do perfil do usuário
+  const userPerfil = user.perfis[0]; // Considerando que o usuário tem um único perfil
+  const perfilData = perfilList.find((perfil) => perfil.name === userPerfil);
+
+  if (!perfilData) {
+    console.error("Perfil não encontrado na lista de perfis.");
+    return;
+  }
+
+  // Seleciona todos os itens da navegação
+  const allLinks = document.querySelectorAll("#menu-hamb-section nav ul li");
+
+  allLinks.forEach((link) => {
+    const permission = link.getAttribute("data-permission");
+
+    // Verifica se a permissão existe no perfil do usuário
+    if (!perfilData.permissions[permission]) {
+      link.style.display = "none"; // Esconde o link se o perfil não tem permissão
+    }
+  });
+}
+
+// Chama a função quando a página carregar
+window.onload = configureMenuByPerfil;

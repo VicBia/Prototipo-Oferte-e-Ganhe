@@ -54,7 +54,17 @@
       <section id="menu-hamb-section">
         <nav>
           <ul>
-            <li>
+            <li data-permission="dashboard">
+              <a href="./pageDashboard.html">
+                <img
+                  src="./assets/images/dashboard-svgrepo-com.svg"
+                  alt="Dashboard"
+                  width="25px"
+                />
+                <span> Dashboard </span>
+              </a>
+            </li>
+            <li data-permission="usuarios">
               <a href="#">
                 <img
                   src="./assets/images/profile-svgrepo-com.svg"
@@ -64,27 +74,27 @@
                 <span> Gestão de usuarios </span>
               </a>
             </li>
-            <li>
+            <li data-permission="perfis">
               <a href="./pagePerfis.html">
                 <img
                   src="./assets/images/user-adm.svg"
-                  alt="Gestão de usuarios"
+                  alt="Gestão de perfis"
                   width="25px"
                 />
                 <span> Gestão de perfil </span>
               </a>
             </li>
-            <li>
+            <li data-permission="lojas">
               <a href="./pageLoja.html">
                 <img
                   src="./assets/images/store-svgrepo-com.svg"
-                  alt="Gestão de usuarios"
+                  alt="Gestão de loja"
                   width="25px"
                 />
                 <span> Gestão de loja </span>
               </a>
             </li>
-            <li>
+            <li data-permission="estoque">
               <a href="./pageEstoque.html">
                 <img
                   src="./assets/images/reposrts-folders-svgrepo-com.svg"
@@ -94,7 +104,7 @@
                 <span> Gestão de estoque </span>
               </a>
             </li>
-            <li>
+            <li data-permission="envio">
               <a href="./pageEnvio.html">
                 <img
                   src="./assets/images/send-arrow.svg"
@@ -104,7 +114,7 @@
                 <span> Gestão de envio </span>
               </a>
             </li>
-            <li>
+            <li data-permission="recebimento">
               <a href="./pageRecebimento.html">
                 <img
                   src="./assets/images/receive.svg"
@@ -114,7 +124,7 @@
                 <span> Gestão de recebimento </span>
               </a>
             </li>
-            <li>
+            <li data-permission="manutencao">
               <a href="./pageManutencao.html">
                 <img
                   src="./assets/images/maintenance-svgrepo-com.svg"
@@ -124,7 +134,7 @@
                 <span> Manutenção </span>
               </a>
             </li>
-            <li>
+            <li data-permission="relatorios">
               <a href="./pageRelatorios.html">
                 <img
                   src="./assets/images/stock-market.svg"
@@ -137,6 +147,7 @@
           </ul>
         </nav>
       </section>
+
       <section>
         <h1>Gestão de usuários</h1>
         <div id="search-container">
@@ -343,12 +354,7 @@
               onclick="closeModalDeleteUser()"
               >X</a
             >
-            <div class="containerDelete">
-              <!-- Realmente deseja deletar esse usuario?
-              <button type="submit" id="delete" onclick="deleteData()">
-                Deletar
-              </button> -->
-            </div>
+            <div class="containerDelete"></div>
           </div>
         </div>
       </section>

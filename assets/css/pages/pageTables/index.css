@@ -8,6 +8,7 @@
 @import "./partials/sections.css";
 @import "./partials/table-headers.css";
 @import "./partials/table.css";
+@import "./partials/card.css";
 @import "./partials/menu-hamb.css";
 
 @import "../../global/fonts.css";

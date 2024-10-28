@@ -19,8 +19,48 @@
 
 .report-content {
   display: none;
+  /* margin: 10px 0; */
   padding: 10px;
   background-color: #f4f4f4;
   border: 1px solid #ccc;
-  /* border-radius: 5px; */
+  border-radius: 5px;
+  /* max-width: 400px;
+  width: 100%; */
+}
+
+.report-content .options {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+input[type="radio"] {
+  width: 18px;
+  box-shadow: none;
+}
+
+.lojas-content {
+  margin: 10px 0;
+  display: none;
+}
+
+.lojas-content div {
+  display: flex;
+  width: fit-content;
+  gap: 15px;
+}
+
+.gerarRel {
+  padding: 0.5em 1em;
+  background-color: #64ba8c;
+  color: #ffffff;
+  border-radius: 5px;
+  width: -webkit-fill-available;
+  justify-content: center;
+}
+@media (max-width: 440px) {
+  .itemRel {
+    width: 250px;
+  }
 }

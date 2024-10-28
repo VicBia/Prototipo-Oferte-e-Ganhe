@@ -4,6 +4,27 @@
   justify-content: center;
 }
 
+#search-container-perfil {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#myMenu {
+  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(60, 66, 87, 0.16) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+  padding: 10px;
+  position: absolute;
+  width: 336px;
+  top: 142px;
+  background-color: #fff;
+}
+#myMenu a:hover {
+  transform: scale(1);
+}
 #search-container input {
   background-color: transparent;
   max-width: 400px;
@@ -31,4 +52,12 @@
   gap: 6px;
   color: #ffffff;
   font-weight: 600;
+}
+
+#myMenu {
+  display: none;
+}
+
+#myMenu.show {
+  display: block;
 }

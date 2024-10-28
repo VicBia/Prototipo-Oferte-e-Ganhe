@@ -54,8 +54,18 @@
       <section id="menu-hamb-section">
         <nav>
           <ul>
-            <li>
-              <a href="./pageAdm.html">
+            <li data-permission="dashboard">
+              <a href="./pageDashboard.html">
+                <img
+                  src="./assets/images/dashboard-svgrepo-com.svg"
+                  alt="Dashboard"
+                  width="25px"
+                />
+                <span> Dashboard </span>
+              </a>
+            </li>
+            <li data-permission="usuarios">
+              <a href="#">
                 <img
                   src="./assets/images/profile-svgrepo-com.svg"
                   alt="Gestão de usuarios"
@@ -64,27 +74,27 @@
                 <span> Gestão de usuarios </span>
               </a>
             </li>
-            <li>
+            <li data-permission="perfis">
               <a href="./pagePerfis.html">
                 <img
                   src="./assets/images/user-adm.svg"
-                  alt="Gestão de usuarios"
+                  alt="Gestão de perfis"
                   width="25px"
                 />
                 <span> Gestão de perfil </span>
               </a>
             </li>
-            <li>
+            <li data-permission="lojas">
               <a href="./pageLoja.html">
                 <img
                   src="./assets/images/store-svgrepo-com.svg"
-                  alt="Gestão de usuarios"
+                  alt="Gestão de loja"
                   width="25px"
                 />
                 <span> Gestão de loja </span>
               </a>
             </li>
-            <li>
+            <li data-permission="estoque">
               <a href="./pageEstoque.html">
                 <img
                   src="./assets/images/reposrts-folders-svgrepo-com.svg"
@@ -94,7 +104,7 @@
                 <span> Gestão de estoque </span>
               </a>
             </li>
-            <li>
+            <li data-permission="envio">
               <a href="./pageEnvio.html">
                 <img
                   src="./assets/images/send-arrow.svg"
@@ -104,7 +114,7 @@
                 <span> Gestão de envio </span>
               </a>
             </li>
-            <li>
+            <li data-permission="recebimento">
               <a href="./pageRecebimento.html">
                 <img
                   src="./assets/images/receive.svg"
@@ -114,7 +124,7 @@
                 <span> Gestão de recebimento </span>
               </a>
             </li>
-            <li>
+            <li data-permission="manutencao">
               <a href="./pageManutencao.html">
                 <img
                   src="./assets/images/maintenance-svgrepo-com.svg"
@@ -124,8 +134,8 @@
                 <span> Manutenção </span>
               </a>
             </li>
-            <li>
-              <a href="#">
+            <li data-permission="relatorios">
+              <a href="./pageRelatorios.html">
                 <img
                   src="./assets/images/stock-market.svg"
                   alt="Relatorios"
@@ -137,9 +147,11 @@
           </ul>
         </nav>
       </section>
+      
       <section>
         <h1>Relatórios</h1>
         <div class="container grid grid-template-columns">
+          <!-- Relatório Usuários Cadastrados -->
           <div>
             <button
               class="itemRel"
@@ -148,19 +160,43 @@
             >
               Relatório Usuários cadastrados
             </button>
+
             <div id="content1" class="report-content">
-              Aqui está o conteúdo do relatório de usuários cadastrados.
-              <div>
-                <input type="radio" id="todos" />
-                <label for="todos">Todos usuarios</label>
+              <div class="options">
+                <input
+                  type="radio"
+                  id="todos"
+                  name="relatorio"
+                  onclick="toggleLojas(false, 'lojasUsuario')"
+                />
+                <label for="todos">Todos usuários</label>
               </div>
 
-              <div>
-                <input type="radio" id="personalizado" />
-                <label for="personalizado">Escolher usuario por loja</label>
+              <div class="options">
+                <input
+                  type="radio"
+                  id="personalizado"
+                  name="relatorio"
+                  onclick="toggleLojas(true, 'lojasUsuario')"
+                />
+                <label for="personalizado">Escolher usuário por loja</label>
               </div>
+
+              <div id="lojasUsuario" class="lojas-content">
+                <label>Escolha as lojas:</label>
+                <div id="lojasCheckboxesUsuario"></div>
+              </div>
+
+              <button
+                class="gerarRel"
+                onclick="processarRelatorio('lojasCheckboxesUsuario')"
+              >
+                Gerar Relatório
+              </button>
             </div>
           </div>
+
+          <!-- Relatório Perfis de Usuários -->
           <div>
             <button
               class="itemRel"
@@ -170,43 +206,171 @@
               Relatório Perfis de usuários
             </button>
             <div id="content2" class="report-content">
-              Aqui está o conteúdo do relatório de perfis de usuários.
+              <div class="options">
+                <input
+                  type="radio"
+                  id="todos"
+                  name="relatorio"
+                  onclick="toggleLojas(false, 'lojasPerfil')"
+                />
+                <label for="todos">Todos usuários</label>
+              </div>
+
+              <div class="options">
+                <input
+                  type="radio"
+                  id="personalizado"
+                  name="relatorio"
+                  onclick="toggleLojas(true, 'lojasPerfil')"
+                />
+                <label for="personalizado">Escolher usuário por loja</label>
+              </div>
+
+              <div id="lojasPerfil" class="lojas-content">
+                <label>Escolha as lojas:</label>
+                <div id="lojasCheckboxesPerfil"></div>
+              </div>
+
+              <button
+                class="gerarRel"
+                onclick="processarRelatorio('lojasCheckboxesPerfil')"
+              >
+                Gerar Relatório
+              </button>
             </div>
           </div>
+
+          <!-- Relatório Manutenção -->
           <div>
             <button
               class="itemRel"
               id="btn3"
               onclick="toggleContent('content3')"
             >
-              Relatório Lista de módulos
+              Relatório Manutenção
             </button>
             <div id="content3" class="report-content">
-              Aqui está o conteúdo do relatório de módulos.
+              <div class="options">
+                <input
+                  type="radio"
+                  id="todos"
+                  name="relatorio"
+                  onclick="toggleLojas(false, 'lojasManutencao')"
+                />
+                <label for="todos">Todos dados de manutenção</label>
+              </div>
+
+              <div class="options">
+                <input
+                  type="radio"
+                  id="personalizado"
+                  name="relatorio"
+                  onclick="toggleLojas(true, 'lojasManutencao')"
+                />
+                <label for="personalizado">Escolher loja para manutenção</label>
+              </div>
+
+              <div id="lojasManutencao" class="lojas-content">
+                <label>Escolha as lojas:</label>
+                <div id="lojasCheckboxesManutencao"></div>
+              </div>
+
+              <button
+                class="gerarRel"
+                onclick="processarRelatorio('lojasCheckboxesManutencao')"
+              >
+                Gerar Relatório
+              </button>
             </div>
           </div>
+
+          <!-- Relatório Recebimento -->
           <div>
             <button
               class="itemRel"
               id="btn4"
               onclick="toggleContent('content4')"
             >
-              Relatório Lista de transações
+              Relatório Recebimento
             </button>
             <div id="content4" class="report-content">
-              Aqui está o conteúdo do relatório de transações.
+              <div class="options">
+                <input
+                  type="radio"
+                  id="todos"
+                  name="relatorio"
+                  onclick="toggleLojas(false, 'lojasRecebimento')"
+                />
+                <label for="todos">Todos recebimentos</label>
+              </div>
+
+              <div class="options">
+                <input
+                  type="radio"
+                  id="personalizado"
+                  name="relatorio"
+                  onclick="toggleLojas(true, 'lojasRecebimento')"
+                />
+                <label for="personalizado"
+                  >Escolher loja para recebimento</label
+                >
+              </div>
+
+              <div id="lojasRecebimento" class="lojas-content">
+                <label>Escolha as lojas:</label>
+                <div id="lojasCheckboxesRecebimento"></div>
+              </div>
+
+              <button
+                class="gerarRel"
+                onclick="processarRelatorio('lojasCheckboxesRecebimento')"
+              >
+                Gerar Relatório
+              </button>
             </div>
           </div>
+
+          <!-- Relatório Estoque -->
           <div>
             <button
               class="itemRel"
               id="btn5"
               onclick="toggleContent('content5')"
             >
-              Relatório Lista de funções cadastradas
+              Relatório Estoque
             </button>
             <div id="content5" class="report-content">
-              Aqui está o conteúdo do relatório de funções cadastradas.
+              <div class="options">
+                <input
+                  type="radio"
+                  id="todos"
+                  name="relatorio"
+                  onclick="toggleLojas(false, 'lojasEstoque')"
+                />
+                <label for="todos">Todos estoques</label>
+              </div>
+
+              <div class="options">
+                <input
+                  type="radio"
+                  id="personalizado"
+                  name="relatorio"
+                  onclick="toggleLojas(true, 'lojasEstoque')"
+                />
+                <label for="personalizado">Escolher loja para estoque</label>
+              </div>
+
+              <div id="lojasEstoque" class="lojas-content">
+                <label>Escolha as lojas:</label>
+                <div id="lojasCheckboxesEstoque"></div>
+              </div>
+
+              <button
+                class="gerarRel"
+                onclick="processarRelatorio('lojasCheckboxesEstoque')"
+              >
+                Gerar Relatório
+              </button>
             </div>
           </div>
         </div>

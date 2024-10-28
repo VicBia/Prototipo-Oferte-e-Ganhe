@@ -12,7 +12,7 @@ section {
   min-height: 80vh;
   max-width: 900px;
   /* width: 100vw; */
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   padding: 25px;
   gap: 15px;
