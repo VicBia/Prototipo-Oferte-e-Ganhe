@@ -1,14 +1,16 @@
-// Função para autenticar o login
+const LOGIN_TIMEOUT = 10 * 2 * 1;
+const MAX_ATTEMPTS = 3;
+let loginAttempts = 0;
+
 function authenticateLogin(email, password) {
   const registerList = JSON.parse(localStorage.getItem("registerList")) || [];
 
-  // Verifica se o usuário existe e a senha está correta
   const user = registerList.find(
     (user) => user.email === email && user.password === password
   );
 
   if (user) {
-    // Autenticação bem-sucedida, guarda o perfil do usuário
+    user.isLoggedIn = true;
     sessionStorage.setItem(
       "authenticatedUser",
       JSON.stringify({
@@ -18,14 +20,22 @@ function authenticateLogin(email, password) {
     );
     alert("Login bem-sucedido!");
 
-    // Redireciona o usuário com base no perfil
     redirectUserByPerfil(user.perfis);
+  } else if (user.isLoggedIn) {
+    alert("O usuário já está logado em outro dispositivo.");
+    return;
   } else {
     alert("Email ou senha incorretos.");
+    loginAttempts++;
+    checkLoginAttempts();
   }
+
+  setTimeout(() => {
+    alert("Sessão expirada, por favor faça login novamente.");
+    logout();
+  }, LOGIN_TIMEOUT);
 }
 
-// Função para redirecionar o usuário com base no perfil
 function redirectUserByPerfil(perfis) {
   if (perfis.includes("ADM")) {
     window.location.href = "/PrototipoOrganizado/pageDashboard.html"; // Exemplo de redirecionamento para admin
@@ -38,13 +48,17 @@ function redirectUserByPerfil(perfis) {
   }
 }
 
-// Adiciona o evento de submit ao formulário de login
 document.getElementById("loginForm").addEventListener("submit", function (e) {
-  e.preventDefault(); // Previne o comportamento padrão do formulário
+  e.preventDefault();
 
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
-  // Chama a função de autenticação
   authenticateLogin(email, password);
 });
+
+function checkLoginAttempts() {
+  if (loginAttempts >= MAX_ATTEMPTS) {
+    alert("Muitas tentativas de login falhadas. Por favor, tente novamente mais tarde.");
+  }
+}

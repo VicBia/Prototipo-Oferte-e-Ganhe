@@ -102,4 +102,43 @@ function configureMenuByPerfil() {
 }
 
 // Chama a função quando a página carregar
+
+function logout() {
+  const authenticatedUser = JSON.parse(
+    sessionStorage.getItem("authenticatedUser")
+  );
+
+  if (authenticatedUser) {
+    // Atualiza o status do usuário no localStorage
+    const registerList = JSON.parse(localStorage.getItem("registerList"));
+    const updatedUsers = registerList.map((user) => {
+      if (user.email === authenticatedUser.email) {
+        user.isLoggedIn = false;
+      }
+      return user;
+    });
+    localStorage.setItem("registerList", JSON.stringify(updatedUsers));
+
+    // Remove o usuário autenticado do sessionStorage
+    sessionStorage.removeItem("authenticatedUser");
+
+    // Redireciona para a página de login
+    window.location.href = "./PrototipoOrganizado/login.html";
+  }
+}
+
+document.getElementById("logoutButton").onclick = logout;
+
+function checkSession() {
+  const authenticatedUser = JSON.parse(
+    sessionStorage.getItem("authenticatedUser")
+  );
+
+  if (!authenticatedUser) {
+    alert("Sessão expirada ou não iniciada. Faça login novamente.");
+    window.location.href = "./login.html"; // Redireciona para a página de login
+  }
+}
+
 window.onload = configureMenuByPerfil;
+window.onload = checkSession;
