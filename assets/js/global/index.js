@@ -82,6 +82,7 @@ function configureMenuByPerfil() {
   // Obtém as permissões do perfil do usuário
   const userPerfil = user.perfis[0]; // Considerando que o usuário tem um único perfil
   const perfilData = perfilList.find((perfil) => perfil.name === userPerfil);
+  console.log("aaaaaaaaaaaaaaaaaaaaaaa");
 
   if (!perfilData) {
     console.error("Perfil não encontrado na lista de perfis.");
@@ -102,4 +103,42 @@ function configureMenuByPerfil() {
 }
 
 // Chama a função quando a página carregar
-window.onload = configureMenuByPerfil;
+
+function logout() {
+  const authenticatedUser = JSON.parse(
+    sessionStorage.getItem("authenticatedUser")
+  );
+
+  if (authenticatedUser) {
+    const registerList = JSON.parse(localStorage.getItem("registerList")) || [];
+    const updatedUsers = registerList.map((user) => {
+      if (user.email === authenticatedUser.email) {
+        user.isLoggedIn = false;
+      }
+      return user;
+    });
+    localStorage.setItem("registerList", JSON.stringify(updatedUsers));
+
+    sessionStorage.removeItem("authenticatedUser");
+
+    window.location.href = "./login.html";
+  }
+}
+
+document.getElementById("logoutButton").onclick = logout;
+
+function checkSession() {
+  const authenticatedUser = JSON.parse(
+    sessionStorage.getItem("authenticatedUser")
+  );
+
+  if (!authenticatedUser) {
+    alert("Sessão expirada ou não iniciada. Faça login novamente.");
+    window.location.href = "./login.html";
+  }
+}
+
+window.addEventListener("load", () => {
+  checkSession(); // Verifica se a sessão está ativa
+  configureMenuByPerfil(); // Configura o menu com base nas permissões
+});
