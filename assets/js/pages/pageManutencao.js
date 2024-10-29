@@ -9,6 +9,7 @@ function initializeTaloesList() {
         quantidade: "37",
         status: "Enviado",
         dataEnvio: "2024-10-12 15:36",
+        remessa: "D5EG56142",
       },
       { loja: "51", quantidade: "56", status: "Solicitado" },
       {
@@ -18,6 +19,8 @@ function initializeTaloesList() {
         status: "Recebido",
         dataEnvio: "2024-10-12 15:36",
         dataRecebimento: "2024-10-29 09:30",
+        pessoaRecebido: "Mario Augusto",
+        remessa: "G45S9Q842",
       },
       {
         loja: "89",
@@ -25,6 +28,7 @@ function initializeTaloesList() {
         quantidade: "45",
         status: "Enviado",
         dataEnvio: "2024-10-15 12:45",
+        remessa: "F8E456S95",
       },
       {
         loja: "34",
@@ -37,6 +41,7 @@ function initializeTaloesList() {
         quantidade: "30",
         status: "Enviado",
         dataEnvio: "2024-10-18 10:15",
+        remessa: "A12D56Q48",
       },
       {
         loja: "78",
@@ -50,6 +55,8 @@ function initializeTaloesList() {
         status: "Recebido",
         dataEnvio: "2024-10-20 08:30",
         dataRecebimento: "2024-10-29 16:45",
+        pessoaRecebido: "Anna Giulia",
+        remessa: "GW85A4621",
       },
       {
         loja: "56",
@@ -57,11 +64,28 @@ function initializeTaloesList() {
         quantidade: "50",
         status: "Enviado",
         dataEnvio: "2024-10-14 14:20",
+        remessa: "G1D26S458",
       },
       {
         loja: "110",
         quantidade: "70",
         status: "Solicitado",
+      },
+      {
+        loja: "201",
+        previsaoChegada: "2024-10-15",
+        quantidade: "37",
+        status: "Atrasado",
+        dataEnvio: "2024-09-12 15:36",
+        remessa: "T1W254E64",
+      },
+      {
+        loja: "89",
+        previsaoChegada: "2024-10-02",
+        quantidade: "45",
+        status: "Atrasado",
+        dataEnvio: "2024-09-03 12:45",
+        remessa: "Q123W4E68",
       }
     );
     localStorage.setItem("taloesList", JSON.stringify(taloesList));
@@ -116,7 +140,7 @@ function getData() {
 
   var html = "";
   taloesList.forEach(function (element, index) {
-    if (element.status === "Enviado") {
+    if (element.status === "Enviado" || element.status === "Atrasado") {
       html += "<tr>";
       html += `<td>${element.loja}</td>`;
       html += `<td>${element.quantidade}</td>`;

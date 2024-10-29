@@ -189,10 +189,19 @@
                   <h1>Cadastrar nova loja</h1>
                   <div class="formContent">
                     <div>
-                      <label for="loja">Número:</label>
+                      <label for="name">Nome:</label>
                       <input
                         type="text"
-                        id="loja"
+                        id="name"
+                        placeholder="Digite o nome da loja"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label for="codLoja">Código:</label>
+                      <input
+                        type="number"
+                        id="codLoja"
                         placeholder="Digite o número da loja"
                         required
                       />
@@ -225,7 +234,7 @@
                   />
                 </button>
               </th>
-
+              <th>Código</th>
               <th>Ações</th>
             </tr>
           </thead>
@@ -247,16 +256,26 @@
                 onsubmit="addData(); return false;"
               >
                 <h1>Editar loja</h1>
+                <div>
+                  <label for="nameEdit">Nome:</label>
+                  <input
+                    type="text"
+                    id="nameEdit"
+                    placeholder="Digite o nome da loja"
+                    required
+                  />
+                </div>
                 <div class="formContent">
                   <div>
-                    <label for="lojaEdit">Numero:</label>
+                    <label for="codLojaEdit">Numero:</label>
                     <input
                       type="text"
-                      id="lojaEdit"
+                      id="codLojaEdit"
                       placeholder="Digite o numero da loja"
                       required
                     />
                   </div>
+
                   <button type="submit" id="update">Atualizar</button>
                 </div>
               </form>

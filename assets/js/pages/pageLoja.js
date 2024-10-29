@@ -1,8 +1,9 @@
 // CRUD LOJA
 function validateFormRegister() {
-  var loja = document.getElementById("loja").value.trim();
+  var codLoja = document.getElementById("codLoja").value.trim();
+  var name = document.getElementById("name").value.trim();
 
-  if (!loja) {
+  if (!codLoja || !name) {
     alert("Por favor, preencha todos os campos.");
     return false;
   }
@@ -16,22 +17,28 @@ function initializeLojaList() {
   if (lojaList.length === 0) {
     lojaList.push(
       {
-        loja: "Matriz",
+        name: "Matriz",
+        codLoja: "0",
       },
       {
-        loja: "126",
+        name: "Rio Grande",
+        codLoja: "126",
       },
       {
-        loja: "245",
+        name: "Caxias do Sul",
+        codLoja: "245",
       },
       {
-        loja: "54",
+        name: "Arroio Grande",
+        codLoja: "54",
       },
       {
-        loja: "191",
+        name: "Viamão",
+        codLoja: "191",
       },
       {
-        loja: "12",
+        name: "Alpestre",
+        codLoja: "12",
       }
     );
     localStorage.setItem("lojaList", JSON.stringify(lojaList));
@@ -46,7 +53,8 @@ function showData() {
   var html = "";
   lojaList.forEach(function (element, index) {
     html += "<tr>";
-    html += `<td>${element.loja}</td>`;
+    html += `<td>${element.name}</td>`;
+    html += `<td>${element.codLoja}</td>`;
     html += '<td class="buttons">';
     html +=
       `
@@ -70,12 +78,14 @@ function showData() {
 
 function addData() {
   if (validateFormRegister() == true) {
-    var loja = document.getElementById("loja").value.trim();
+    var codLoja = document.getElementById("codLoja").value.trim();
+    var name = document.getElementById("name").value.trim();
 
     let lojaList = JSON.parse(localStorage.getItem("lojaList")) || [];
 
     lojaList.push({
-      loja: loja,
+      name: name,
+      codLoja: codLoja,
     });
 
     localStorage.setItem("lojaList", JSON.stringify(lojaList));
@@ -83,7 +93,7 @@ function addData() {
 
     showData();
 
-    document.getElementById("loja").value = "";
+    document.getElementById("codLoja").value = "";
   }
 }
 
@@ -91,9 +101,9 @@ function openModalDeleteUser(index) {
   deleteIndex = index;
   let lojaList = JSON.parse(localStorage.getItem("lojaList")) || [];
 
-  const lojaNumber = lojaList[index].loja;
+  const lojaNumber = lojaList[index].codLoja;
   document.querySelector(".containerDelete").innerHTML = `
-     <h2> Realmente deseja deletar essa loja <strong>${lojaNumber}</strong>?</h2>
+     <h2> Realmente deseja deletar a loja <strong>${lojaNumber}</strong>?</h2>
       <button type="button" id="delete" class="btn-del" onclick="deleteData()">
         Deletar
       </button>
@@ -117,9 +127,10 @@ function deleteData() {
 }
 
 function validateFormEdit() {
-  var loja = document.getElementById("lojaEdit").value.trim();
+  var codLoja = document.getElementById("codLojaEdit").value.trim();
+  var name = document.getElementById("nameEdit").value.trim();
 
-  if (!loja) {
+  if (!codLoja || !name) {
     alert("Por favor, preencha todos os campos.");
     return false;
   }
@@ -132,11 +143,13 @@ function updateData(index) {
 
   let lojaList = JSON.parse(localStorage.getItem("lojaList")) || [];
 
-  document.getElementById("lojaEdit").value = lojaList[index].loja;
+  document.getElementById("nameEdit").value = lojaList[index].name;
+  document.getElementById("codLojaEdit").value = lojaList[index].codLoja;
 
   document.querySelector("#update").onclick = function () {
     if (validateFormEdit() == true) {
-      lojaList[index].loja = document.getElementById("lojaEdit").value;
+      lojaList[index].name = document.getElementById("nameEdit").value;
+      lojaList[index].codLoja = document.getElementById("codLojaEdit").value;
 
       localStorage.setItem("lojaList", JSON.stringify(lojaList));
 
@@ -144,7 +157,7 @@ function updateData(index) {
 
       showData();
 
-      document.getElementById("lojaEdit").value = "";
+      document.getElementById("codLojaEdit").value = "";
     }
   };
   showData();

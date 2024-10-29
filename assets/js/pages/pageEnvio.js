@@ -1,4 +1,3 @@
-// Função para obter e renderizar as solicitações na tabela de "Solicitado"
 function getDataSolicitacao() {
   const taloesList = JSON.parse(localStorage.getItem("taloesList")) || [];
 
@@ -24,7 +23,6 @@ function getDataSolicitacao() {
   document.getElementById("tableBody").innerHTML = html;
 }
 
-// Função para abrir o modal de confirmação para deletar uma solicitação
 function openModalDeleteUser(index) {
   deleteIndex = index;
   let taloesList = JSON.parse(localStorage.getItem("taloesList")) || [];
@@ -40,12 +38,10 @@ function openModalDeleteUser(index) {
   document.getElementById("open-modal-DeleteUser").classList.add("show");
 }
 
-// Função para fechar o modal de exclusão
 function closeModalDeleteUser() {
   document.getElementById("open-modal-DeleteUser").classList.remove("show");
 }
 
-// Função para deletar uma solicitação
 function deleteData() {
   let taloesList = JSON.parse(localStorage.getItem("taloesList")) || [];
 
@@ -57,7 +53,6 @@ function deleteData() {
   getDataEnviados();
 }
 
-// Função para obter e renderizar as solicitações na tabela de "Enviado"
 function getDataEnviados() {
   const taloesList = JSON.parse(localStorage.getItem("taloesList")) || [];
 
@@ -69,6 +64,7 @@ function getDataEnviados() {
       html += `<td>${element.quantidade}</td>`;
       html += `<td>${element.dataEnvio}</td>`;
       html += `<td>${element.previsaoChegada}</td>`;
+      html += `<td>${element.remessa}</td>`;
       html += '<td class="buttons">';
       html += `
       <button type="button" class="btn btn-primary btn-xs dt-edit" onclick="updateData(${index})">
@@ -97,14 +93,16 @@ function updateSolicitacao(index) {
     const dataEnvio = document.getElementById("dataEnvio").value;
     const horaEnvio = document.getElementById("horaEnvio").value;
     const previsaoChegada = document.getElementById("previsaoChegada").value;
+    const remessa = document.getElementById("remessa").value;
 
-    if (!dataEnvio || !horaEnvio || !previsaoChegada) {
+    if (!dataEnvio || !horaEnvio || !previsaoChegada || !remessa) {
       alert("Por favor, preencha todos os campos de envio e previsão.");
       return;
     }
 
     const envioFormatado = `${dataEnvio} ${horaEnvio}`;
 
+    selectedTalao.remessa = remessa
     selectedTalao.dataEnvio = envioFormatado;
     selectedTalao.previsaoChegada = previsaoChegada;
     selectedTalao.status = "Enviado";

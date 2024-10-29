@@ -62,14 +62,14 @@ function showData() {
       element.estoque,
       element.quantRecom,
       element.quantMin
-    ); // Calcula o status
+    );
 
     html += "<tr>";
     html += `<td>${element.loja}</td>`;
     html += `<td>${element.estoque}</td>`;
     html += `<td>${element.quantRecom}</td>`;
     html += `<td>${element.quantMin}</td>`;
-    html += `<td>${status}</td>`; // Exibe o status
+    html += `<td>${status}</td>`; 
     html += '<td class="buttons">';
     html +=
       `

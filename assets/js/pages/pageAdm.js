@@ -4,7 +4,6 @@ function validateFormRegister() {
   var email = document.getElementById("email").value.trim();
   var loja = document.getElementById("loja").value.trim();
   var password = document.getElementById("password").value.trim();
-  // var passwordRepeat = document.getElementById("passwordRepeat").value.trim();
 
   if (!name || !email || !loja || !password) {
     alert("Por favor, preencha todos os campos.");
@@ -16,11 +15,6 @@ function validateFormRegister() {
     alert("Por favor, insira um e-mail válido.");
     return false;
   }
-
-  // if (password !== passwordRepeat) {
-  //   alert("As senhas não coincidem.");
-  //   return false;
-  // }
 
   if (password.length < 6) {
     alert("A senha deve ter no mínimo 6 caracteres.");
@@ -116,7 +110,6 @@ function addData() {
     document.getElementById("email").value = "";
     document.getElementById("loja").value = "";
     document.getElementById("password").value = "";
-    //   document.getElementById("passwordRepeat").value = "";
   }
 }
 

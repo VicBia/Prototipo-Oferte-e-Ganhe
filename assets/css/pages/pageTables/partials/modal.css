@@ -60,3 +60,10 @@
   gap: 20px;
   text-align: justify;
 }
+
+.containerDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: justify;
+}
