@@ -77,7 +77,7 @@ function addData() {
     lojaList.push({
       loja: loja,
     });
-    console.log(lojaList);
+
     localStorage.setItem("lojaList", JSON.stringify(lojaList));
     document.getElementById("open-modal-cadUser").classList.remove("show");
 

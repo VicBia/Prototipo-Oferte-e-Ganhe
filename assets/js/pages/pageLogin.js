@@ -11,11 +11,11 @@ function authenticateLogin(email, password) {
 
   if (user) {
     user.isLoggedIn = true;
-    user.isLoggedIn = true;
     sessionStorage.setItem(
       "authenticatedUser",
       JSON.stringify({
         name: user.name,
+        loja: user.loja,
         perfis: user.perfis,
       })
     );
@@ -25,21 +25,11 @@ function authenticateLogin(email, password) {
   } else if (user.isLoggedIn) {
     alert("O usuário já está logado em outro dispositivo.");
     return;
-  } else if (user.isLoggedIn) {
-    alert("O usuário já está logado em outro dispositivo.");
-    return;
   } else {
     alert("Email ou senha incorretos.");
     loginAttempts++;
     checkLoginAttempts();
-    loginAttempts++;
-    checkLoginAttempts();
   }
-
-  setTimeout(() => {
-    alert("Sessão expirada, por favor faça login novamente.");
-    logout();
-  }, LOGIN_TIMEOUT);
 
   setTimeout(() => {
     alert("Sessão expirada, por favor faça login novamente.");
@@ -49,13 +39,13 @@ function authenticateLogin(email, password) {
 
 function redirectUserByPerfil(perfis) {
   if (perfis.includes("ADM")) {
-    window.location.href = "/PrototipoOrganizado/pageDashboard.html"; 
+    window.location.href = "/PrototipoOrganizado/pageDashboard.html";
   } else if (perfis.includes("Gerente")) {
-    window.location.href = "/PrototipoOrganizado/pageDashboard.html"; 
+    window.location.href = "/PrototipoOrganizado/pageDashboard.html";
   } else if (perfis.includes("Caixa")) {
-    window.location.href = "/PrototipoOrganizado/pageManutencao.html"; 
+    window.location.href = "/PrototipoOrganizado/pageManutencao.html";
   } else {
-    window.location.href = "/PrototipoOrganizado/pageManutencao.html"; 
+    window.location.href = "/PrototipoOrganizado/pageManutencao.html";
   }
 }
 

@@ -31,13 +31,13 @@ function closeModalEditPerfil() {
   document.getElementById("open-modal-editUser").classList.remove("show");
 }
 
-// function openModalCadPerfil() {
-//   document.getElementById("open-modal-cadPerfil").classList.add("show");
-// }
+function openModalSolicitacao() {
+  document.getElementById("open-modal-solicitacao").classList.add("show");
+}
 
-// function closeModalCadPerfil() {
-//   document.getElementById("open-modal-cadPerfil").classList.remove("show");
-// }
+function closeModalSolicitacao() {
+  document.getElementById("open-modal-solicitacao").classList.remove("show");
+}
 
 // Menu hamburguer
 
@@ -82,7 +82,6 @@ function configureMenuByPerfil() {
   // Obtém as permissões do perfil do usuário
   const userPerfil = user.perfis[0]; // Considerando que o usuário tem um único perfil
   const perfilData = perfilList.find((perfil) => perfil.name === userPerfil);
-  console.log("aaaaaaaaaaaaaaaaaaaaaaa");
 
   if (!perfilData) {
     console.error("Perfil não encontrado na lista de perfis.");
