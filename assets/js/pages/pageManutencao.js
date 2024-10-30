@@ -146,6 +146,7 @@ function getData() {
       html += `<td>${element.quantidade}</td>`;
       html += `<td>${element.dataEnvio}</td>`;
       html += `<td>${element.previsaoChegada}</td>`;
+      html += `<td>${element.remessa}</td>`;
       html += '<td class="buttons">';
       html += `
         <button type="button" class="btn btn-primary btn-xs dt-edit" onclick="updateData(${index})">
@@ -157,6 +158,47 @@ function getData() {
   });
 
   document.getElementById("enviadosBody").innerHTML = html;
+}
+
+
+function updateData(index) {
+  document.getElementById("open-modal-recebido").classList.add("show");
+
+  const taloesList = JSON.parse(localStorage.getItem("taloesList")) || [];
+  const selectedTalao = taloesList[index];
+
+  document.getElementById("editLoja").value = selectedTalao.loja;
+  document.getElementById("editQuantidade").value = selectedTalao.quantidade;
+
+  document.getElementById("recebimentoForm").onsubmit = function (e) {
+    e.preventDefault();
+
+    const dataRecebimento = document.getElementById("dataRecebimento").value;
+    const horaRecebimento = document.getElementById("horaRecebimento").value;
+    const pessoaRecebido = document.getElementById("pessoaRecebido").value;
+
+    if (!dataRecebimento || !horaRecebimento || !pessoaRecebido) {
+      alert("Por favor, preencha todos os campos de envio e previsão.");
+      return;
+    }
+
+    const envioFormatado = `${dataRecebimento} ${horaRecebimento}`;
+
+    selectedTalao.dataRecebimento = envioFormatado;
+    selectedTalao.pessoaRecebido = pessoaRecebido;
+    selectedTalao.status = "Recebido";
+
+    taloesList[index] = selectedTalao;
+    localStorage.setItem("taloesList", JSON.stringify(taloesList));
+
+    closeModalRecebido();
+    getDataEnviados();
+    getDataRecebidos();
+  };
+}
+
+function closeModalRecebido() {
+  document.getElementById("open-modal-recebido").classList.remove("show");
 }
 
 document.addEventListener("DOMContentLoaded", function () {

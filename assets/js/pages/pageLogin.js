@@ -38,15 +38,48 @@ function authenticateLogin(email, password) {
 }
 
 function redirectUserByPerfil(perfis) {
-  if (perfis.includes("ADM")) {
-    window.location.href = "/PrototipoOrganizado/pageDashboard.html";
-  } else if (perfis.includes("Gerente")) {
-    window.location.href = "/PrototipoOrganizado/pageDashboard.html";
-  } else if (perfis.includes("Caixa")) {
-    window.location.href = "/PrototipoOrganizado/pageManutencao.html";
-  } else {
-    window.location.href = "/PrototipoOrganizado/pageManutencao.html";
+  const perfilList = JSON.parse(localStorage.getItem("perfilList"));
+
+  if (!perfilList) {
+    console.error("Lista de perfis não encontrada no localStorage.");
+    return;
   }
+
+  const routes = [
+    { url: "/PrototipoOrganizado/pageDashboard.html", permission: "dashboard" },
+    { url: "/PrototipoOrganizado/pageEstoque.html", permission: "estoque" },
+    { url: "/PrototipoOrganizado/pageEnvio.html", permission: "envio" },
+    {
+      url: "/PrototipoOrganizado/pageRecebimento.html",
+      permission: "recebimento",
+    },
+    {
+      url: "/PrototipoOrganizado/pageManutencao.html",
+      permission: "manutencao",
+    },
+    { url: "/PrototipoOrganizado/pageAdm.html", permission: "usuarios" },
+    { url: "/PrototipoOrganizado/pagePerfis.html", permission: "perfis" },
+    { url: "/PrototipoOrganizado/pageLoja.html", permission: "lojas" },
+    {
+      url: "/PrototipoOrganizado/pageRelatorios.html",
+      permission: "relatorios",
+    },
+  ];
+
+  for (const perfil of perfis) {
+    const perfilData = perfilList.find((p) => p.name === perfil);
+
+    if (perfilData) {
+      for (const route of routes) {
+        if (perfilData.permissions[route.permission]) {
+          window.location.href = route.url; 
+          return;
+        }
+      }
+    }
+  }
+
+  window.location.href = "/PrototipoOrganizado/pageDashboard.html"; 
 }
 
 document.getElementById("loginForm").addEventListener("submit", function (e) {

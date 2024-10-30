@@ -26,7 +26,6 @@ function showData() {
 
   let totalAssociacoes = 0;
   registerList.forEach(function (element) {
-    console.log(element.perfis)
     if (element.perfis) totalAssociacoes += 1;
   });
 

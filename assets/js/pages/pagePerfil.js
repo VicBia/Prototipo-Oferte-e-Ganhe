@@ -189,11 +189,13 @@ function openModalDeleteUser(index) {
         </button>
       `;
 
-  document.getElementById("open-modal-DeleteUser").classList.add("show");
+  document.getElementById("open-modal-DeletePerfilUser").classList.add("show");
 }
 
 function closeModalDeleteUser() {
-  document.getElementById("open-modal-DeleteUser").classList.remove("show");
+  document
+    .getElementById("open-modal-DeletePerfilUser")
+    .classList.remove("show");
 }
 
 function deleteData() {
@@ -231,7 +233,8 @@ function updateData(index) {
 
   let perfilList = JSON.parse(localStorage.getItem("perfilList")) || [];
 
-  document.getElementById("nomePerfilEdit").value = perfilList[index].name;
+  document.getElementById("nomePerfilEditPerfil").value =
+    perfilList[index].name;
 
   const permissions = perfilList[index].permissions;
   document.querySelector('#example input[value="lojaEspecifica"]').checked =
@@ -417,12 +420,12 @@ function showDataPerfilUsuario() {
     html += '<td class="buttons">';
     html +=
       `
-          <button type="button" class="btn btn-primary btn-xs dt-edit" onclick="updateData(` +
+          <button type="button" class="btn btn-primary btn-xs dt-edit" onclick="openModalEditUserAssociacao(` +
       index +
       `)">
             <img src="./assets/images/edit-pencil.svg" alt="Botão Editar" width="25px"/>
           </button>
-          <button type="button" class="btn btn-danger btn-xs dt-delete" onclick="openModalDeleteUser(` +
+          <button type="button" class="btn btn-danger btn-xs dt-delete" onclick="openModalDeleteUserAssociacao(` +
       index +
       `)">
             <img src="./assets/images/delete-trash.svg" alt="Botão Excluir" width="25px"/>
@@ -433,4 +436,97 @@ function showDataPerfilUsuario() {
   });
 
   document.querySelector("#user-perfil-table tbody").innerHTML = html;
+}
+
+function openModalEditUserAssociacao(index) {
+  let registerList = JSON.parse(localStorage.getItem("registerList")) || [];
+  let perfilList = JSON.parse(localStorage.getItem("perfilList")) || [];
+
+  // Preenche o campo de nome do usuário no modal
+  document.getElementById("nomePerfilAssociacao").value =
+    registerList[index].name;
+
+  // Carrega os perfis e marca os checkboxes de acordo com os perfis já atribuídos
+  let perfilOptionsContainer = document.getElementById("perfil-options-edit");
+  perfilOptionsContainer.innerHTML = "";
+
+  perfilList.forEach((perfil) => {
+    let isChecked = registerList[index].perfis.includes(perfil.name)
+      ? "checked"
+      : "";
+    let row = document.createElement("tr");
+    row.innerHTML = `
+        <td>${perfil.name}</td>
+        <td>
+          <input type="checkbox" class="perfil-checkboxAssociacao" value="${perfil.name}" ${isChecked} />
+        </td>
+      `;
+    perfilOptionsContainer.appendChild(row);
+  });
+
+  document.getElementById("open-modal-editAssociacao").classList.add("show");
+}
+
+document
+  .getElementById("editAssociacao")
+  .addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    let userName = document.getElementById("nomePerfilAssociacao").value;
+    let checkboxes = document.querySelectorAll(".perfil-checkboxAssociacao");
+
+    let selectedPerfis = [];
+    checkboxes.forEach(function (checkbox) {
+      if (checkbox.checked) {
+        selectedPerfis.push(checkbox.value);
+      }
+    });
+
+    let registerList = JSON.parse(localStorage.getItem("registerList")) || [];
+
+    registerList = registerList.map((user) => {
+      if (user.name === userName) {
+        return { ...user, perfis: selectedPerfis };
+      }
+      return user;
+    });
+
+    localStorage.setItem("registerList", JSON.stringify(registerList));
+
+    closeModalEditAssociacao();
+    showDataPerfilUsuario();
+  });
+
+function closeModalEditAssociacao() {
+  document.getElementById("open-modal-editAssociacao").classList.remove("show");
+}
+
+function openModalDeleteUserAssociacao(index) {
+  let containerDelete = document.querySelector(".containerDeleteAssociacao");
+  let registerList = JSON.parse(localStorage.getItem("registerList")) || [];
+
+  const nome = registerList[index].name;
+  containerDelete.innerHTML = `
+    <h3>Deseja realmente excluir os perfis do usuário ${nome}?</h3>
+    <buttontype="button" id="delete" class="btn-del" onclick="deletePerfilFromUser('${index}')">Confirmar</button>
+  `;
+  document
+    .getElementById("open-modal-DeleteUserAssociacao")
+    .classList.add("show");
+}
+
+function closeModalDeleteUserAssociacao() {
+  document
+    .getElementById("open-modal-DeleteUserAssociacao")
+    .classList.remove("show");
+}
+
+function deletePerfilFromUser(index) {
+  let registerList = JSON.parse(localStorage.getItem("registerList")) || [];
+
+  registerList.splice(index, 1);
+
+  localStorage.setItem("registerList", JSON.stringify(registerList));
+  closeModalDeleteUserAssociacao();
+  showDataPerfilUsuario();
 }

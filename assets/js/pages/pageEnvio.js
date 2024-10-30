@@ -1,3 +1,48 @@
+function newSolicitacao() {
+  document.getElementById("open-modal-newSolicitacao").classList.add("show");
+
+  document.getElementById("newSolicitacaoForm").onsubmit = function (e) {
+    e.preventDefault();
+
+    const loja = document.getElementById("loja").value;
+    const quantidade = document.getElementById("quantidade").value;
+    const dataEnvio = document.getElementById("dataEnvioNew").value;
+    const horaEnvio = document.getElementById("horaEnvioNew").value;
+    const previsaoChegada = document.getElementById("previsaoChegadaNew").value;
+    const remessa = document.getElementById("remessa").value;
+
+    if (
+      !loja ||
+      !quantidade ||
+      !dataEnvio ||
+      !horaEnvio ||
+      !previsaoChegada ||
+      !remessa
+    ) {
+      alert("Por favor, preencha todos os campos de envio e previsão.");
+      return;
+    }
+
+    const envioFormatado = `${dataEnvio} ${horaEnvio}`;
+
+    let taloesList = JSON.parse(localStorage.getItem("taloesList")) || [];
+
+    taloesList.push({
+      loja: loja,
+      quantidade: quantidade,
+      dataEnvio: envioFormatado,
+      previsaoChegada: previsaoChegada,
+      remessa: remessa,
+      status: "Enviado"
+    });
+
+    localStorage.setItem("taloesList", JSON.stringify(taloesList));
+    document.getElementById("open-modal-newSolicitacao").classList.remove("show");
+
+    getDataEnviados();
+  };
+}
+
 function getDataSolicitacao() {
   const taloesList = JSON.parse(localStorage.getItem("taloesList")) || [];
 
@@ -102,7 +147,7 @@ function updateSolicitacao(index) {
 
     const envioFormatado = `${dataEnvio} ${horaEnvio}`;
 
-    selectedTalao.remessa = remessa
+    selectedTalao.remessa = remessa;
     selectedTalao.dataEnvio = envioFormatado;
     selectedTalao.previsaoChegada = previsaoChegada;
     selectedTalao.status = "Enviado";
@@ -119,6 +164,8 @@ function updateSolicitacao(index) {
 function closeModalSolicitacao() {
   document.getElementById("open-modal-solicitacao").classList.remove("show");
 }
+
+function exportTableToCSV() {}
 
 document.addEventListener("DOMContentLoaded", function () {
   getDataSolicitacao();

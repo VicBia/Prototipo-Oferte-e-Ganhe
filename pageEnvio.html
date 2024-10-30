@@ -165,6 +165,7 @@
             type="button"
             data-func="dt-add"
             class="btn btn-add btn-xs dt-add"
+            onclick="newSolicitacao()"
           >
             Cadastrar novo envio
             <img
@@ -173,7 +174,70 @@
               width="25px"
             />
           </button>
-          <button id="makeCSV">Exportar CSV (talões enviados)</button>
+          <button id="makeCSV" onclick="exportTableToCSV()">
+            Exportar CSV (talões enviados)
+          </button>
+          <div id="open-modal-newSolicitacao" class="modal-window">
+            <div>
+              <a
+                href="#"
+                title="Close"
+                class="modal-close"
+                onclick="closeModalNewSolicitacao()"
+                >X</a
+              >
+              <div class="containerRegister">
+                <form id="newSolicitacaoForm">
+                  <h1>Enviar talões</h1>
+                  <div>
+                    <label for="loja">Loja:</label>
+                    <input type="text" id="loja" name="editLoja" required />
+                  </div>
+                  <div>
+                    <label for="quantidade">Quantidade de Talões:</label>
+                    <input
+                      type="number"
+                      id="quantidade"
+                      name="quantidade"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label for="remessa">Remessa:</label>
+                    <input type="text" id="remessa" name="remessa" required />
+                  </div>
+                  <div>
+                    <label for="dataEnvioNew">Data de Envio:</label>
+                    <input
+                      type="date"
+                      id="dataEnvioNew"
+                      name="dataEnvio"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label for="horaEnvioNew">Hora de Envio:</label>
+                    <input
+                      type="time"
+                      id="horaEnvioNew"
+                      name="horaEnvio"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label for="previsaoChegadaNew">Previsão de Chegada:</label>
+                    <input
+                      type="date"
+                      id="previsaoChegadaNew"
+                      name="previsaoChegada"
+                      required
+                    />
+                  </div>
+                  <button type="submit">Enviar</button>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
 
         <h3>Solicitações de Talões</h3>

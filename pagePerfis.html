@@ -366,6 +366,53 @@
           <tbody></tbody>
         </table>
 
+        <div id="open-modal-editAssociacao" class="modal-window">
+          <div>
+            <a
+              href="#"
+              title="Close"
+              class="modal-close-perfil"
+              onclick="closeModalEditAssociacao()"
+              >X</a
+            >
+            <div class="containerRegister">
+              <form id="editAssociacao">
+                <h1>Editar perfil do usuario</h1>
+                <div class="formContent">
+                  <div>
+                    <label for="nomePerfilAssociacao">Nome</label>
+                    <input type="text" id="nomePerfilAssociacao" readonly />
+                  </div>
+                
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Perfil</th>
+                        <th>Ativar</th>
+                      </tr>
+                    </thead>
+                    <tbody id="perfil-options-edit"></tbody>
+                  </table>
+                  <button type="submit" id="update">Atualizar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div id="open-modal-DeleteUserAssociacao" class="modal-window">
+          <div>
+            <a
+              href="#"
+              title="Close"
+              class="modal-close"
+              onclick="closeModalDeleteUserAssociacao()"
+              >X</a
+            >
+            <div class="containerDeleteAssociacao"></div>
+          </div>
+        </div>
+
         <h3>Perfis dos usuarios</h3>
         <table
           class="table table-striped table-bordered"
@@ -398,8 +445,8 @@
                 <h1>Editar perfil</h1>
                 <div class="formContent">
                   <div>
-                    <label for="nomePerfilEdit">Nome</label>
-                    <input type="text" id="nomePerfilEdit" required />
+                    <label for="nomePerfilEditPerfil">Nome</label>
+                    <input type="text" id="nomePerfilEditPerfil" required />
                   </div>
                   <table
                     id="example"
@@ -510,7 +557,7 @@
           </div>
         </div>
 
-        <div id="open-modal-DeleteUser" class="modal-window">
+        <div id="open-modal-DeletePerfilUser" class="modal-window">
           <div>
             <a
               href="#"

@@ -26,6 +26,7 @@ function getDataEnviados() {
       html += `<td>${element.quantidade}</td>`;
       html += `<td>${element.dataEnvio}</td>`;
       html += `<td>${element.previsaoChegada}</td>`;
+      html += `<td>${element.remessa}</td>`;
       html += `<td>${status}</td>`;
       html += "<td>";
       html +=

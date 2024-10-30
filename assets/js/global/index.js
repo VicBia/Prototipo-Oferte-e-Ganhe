@@ -60,12 +60,11 @@ menuButton.addEventListener("click", function () {
 
 // Autenticação
 
-// Função para configurar o menu com base nas permissões do perfil
 function configureMenuByPerfil() {
-  // Obtém o perfil do usuário autenticado
+  // Obtém o usuário autenticado e seus perfis
   const user = JSON.parse(sessionStorage.getItem("authenticatedUser"));
 
-  if (!user || !user.perfis) {
+  if (!user || !user.perfis || user.perfis.length === 0) {
     alert("Usuário não autenticado ou sem perfil.");
     window.location.href = "./login.html"; // Redireciona para login se não estiver autenticado
     return;
@@ -75,18 +74,26 @@ function configureMenuByPerfil() {
   const perfilList = JSON.parse(localStorage.getItem("perfilList"));
 
   if (!perfilList) {
-    console.error("Perfil não encontrado no localStorage.");
+    console.error("Lista de perfis não encontrada no localStorage.");
     return;
   }
 
-  // Obtém as permissões do perfil do usuário
-  const userPerfil = user.perfis[0]; // Considerando que o usuário tem um único perfil
-  const perfilData = perfilList.find((perfil) => perfil.name === userPerfil);
+  // Cria um objeto para armazenar todas as permissões agregadas dos perfis do usuário
+  let combinedPermissions = {};
 
-  if (!perfilData) {
-    console.error("Perfil não encontrado na lista de perfis.");
-    return;
-  }
+  // Itera sobre os perfis do usuário e combina as permissões
+  user.perfis.forEach((userPerfil) => {
+    const perfilData = perfilList.find((perfil) => perfil.name === userPerfil);
+
+    if (perfilData && perfilData.permissions) {
+      Object.keys(perfilData.permissions).forEach((permission) => {
+        // Se a permissão for verdadeira em qualquer perfil, ela será mantida como verdadeira
+        if (perfilData.permissions[permission]) {
+          combinedPermissions[permission] = true;
+        }
+      });
+    }
+  });
 
   // Seleciona todos os itens da navegação
   const allLinks = document.querySelectorAll("#menu-hamb-section nav ul li");
@@ -94,9 +101,11 @@ function configureMenuByPerfil() {
   allLinks.forEach((link) => {
     const permission = link.getAttribute("data-permission");
 
-    // Verifica se a permissão existe no perfil do usuário
-    if (!perfilData.permissions[permission]) {
+    // Verifica se a permissão agregada permite exibir o link
+    if (!combinedPermissions[permission]) {
       link.style.display = "none"; // Esconde o link se o perfil não tem permissão
+    } else {
+      link.style.display = ""; // Exibe o link se a permissão está presente
     }
   });
 }
@@ -138,6 +147,9 @@ function checkSession() {
 }
 
 window.addEventListener("load", () => {
-  checkSession(); // Verifica se a sessão está ativa
-  configureMenuByPerfil(); // Configura o menu com base nas permissões
+  checkSession(); 
+  configureMenuByPerfil(); 
 });
+
+
+
