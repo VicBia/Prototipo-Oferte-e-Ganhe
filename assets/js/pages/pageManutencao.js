@@ -11,6 +11,9 @@ function initializeTaloesList() {
         dataEnvio: "2024-10-12 15:36",
         remessa: "D5EG56142",
       },
+      { loja: "126", quantidade: "49", status: "Em espera" },
+      { loja: "54", quantidade: "35", status: "Em espera" },
+      { loja: "21", quantidade: "67", status: "Em espera" },
       { loja: "51", quantidade: "56", status: "Solicitado" },
       {
         loja: "201",
@@ -124,7 +127,7 @@ document
       taloesList.push({
         loja: loja,
         quantidade: quantidade,
-        status: "Solicitado",
+        status: "Em espera",
       });
 
       localStorage.setItem("taloesList", JSON.stringify(taloesList));
@@ -136,7 +139,40 @@ document
   });
 
 function getData() {
-  const taloesList = JSON.parse(localStorage.getItem("taloesList")) || [];
+  const user = JSON.parse(sessionStorage.getItem("authenticatedUser"));
+
+  if (!user || !user.perfis || user.perfis.length === 0) {
+    alert("Usuário não autenticado ou sem perfil.");
+    window.location.href = "./login.html";
+    return;
+  }
+
+  const perfilList = JSON.parse(localStorage.getItem("perfilList"));
+  if (!perfilList) {
+    console.error("Lista de perfis não encontrada no localStorage.");
+    return;
+  }
+
+  let hasLojaEspecifica = false;
+  let lojaEspecifica = "";
+
+  user.perfis.forEach((userPerfil) => {
+    const perfilData = perfilList.find((perfil) => perfil.name === userPerfil);
+    if (
+      perfilData &&
+      perfilData.permissions &&
+      perfilData.permissions.lojaEspecifica
+    ) {
+      hasLojaEspecifica = true;
+      lojaEspecifica = user.loja;
+    }
+  });
+
+  let taloesList = JSON.parse(localStorage.getItem("taloesList")) || [];
+
+  if (hasLojaEspecifica) {
+    taloesList = taloesList.filter(element => element.loja === lojaEspecifica);
+  }
 
   var html = "";
   taloesList.forEach(function (element, index) {
@@ -160,11 +196,10 @@ function getData() {
   document.getElementById("enviadosBody").innerHTML = html;
 }
 
-
 function updateData(index) {
   document.getElementById("open-modal-recebido").classList.add("show");
 
-  const taloesList = JSON.parse(localStorage.getItem("taloesList")) || [];
+  let taloesList = JSON.parse(localStorage.getItem("taloesList")) || [];
   const selectedTalao = taloesList[index];
 
   document.getElementById("editLoja").value = selectedTalao.loja;

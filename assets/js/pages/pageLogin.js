@@ -19,12 +19,11 @@ function authenticateLogin(email, password) {
         perfis: user.perfis,
       })
     );
-    alert("Login bem-sucedido!");
 
     redirectUserByPerfil(user.perfis);
-  } else if (user.isLoggedIn) {
-    alert("O usuário já está logado em outro dispositivo.");
-    return;
+  // } else if (user.isLoggedIn) {
+  //   alert("O usuário já está logado em outro dispositivo.");
+  //   return;
   } else {
     alert("Email ou senha incorretos.");
     loginAttempts++;

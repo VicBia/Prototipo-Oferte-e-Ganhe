@@ -150,14 +150,14 @@
 
       <section>
         <h1>Gestão de perfis</h1>
-        <div id="search-container">
+        <!-- <div id="search-container">
           <input
             type="search"
             id="search-input"
             placeholder="Pesquise pelo perfil do usuario.."
           />
           <button id="search">Pesquisar...</button>
-        </div>
+        </div> -->
         <div class="actionsUser">
           <button
             type="button"
@@ -383,7 +383,7 @@
                     <label for="nomePerfilAssociacao">Nome</label>
                     <input type="text" id="nomePerfilAssociacao" readonly />
                   </div>
-                
+
                   <table>
                     <thead>
                       <tr>
@@ -412,7 +412,14 @@
             <div class="containerDeleteAssociacao"></div>
           </div>
         </div>
-
+        <div id="search-container">
+          <input
+            type="search"
+            id="search-input"
+            placeholder="Pesquise pelo perfil do usuario.."
+          />
+          <button id="search">Pesquisar...</button>
+        </div>
         <h3>Perfis dos usuarios</h3>
         <table
           class="table table-striped table-bordered"
@@ -438,10 +445,7 @@
               >X</a
             >
             <div class="containerRegister">
-              <form
-                action="./pagePerfis.html"
-                onsubmit="updateData(); return false;"
-              >
+              <form id="formEditPerfil" action="./pagePerfis.html">
                 <h1>Editar perfil</h1>
                 <div class="formContent">
                   <div>
@@ -550,7 +554,7 @@
                       </tr>
                     </tbody>
                   </table>
-                  <button type="submit" id="update">Atualizar</button>
+                  <button type="submit" >Atualizar</button>
                 </div>
               </form>
             </div>

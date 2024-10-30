@@ -100,7 +100,6 @@ function addData() {
       loja: loja,
       password: password,
     });
-    console.log(registerList);
     localStorage.setItem("registerList", JSON.stringify(registerList));
     document.getElementById("open-modal-cadUser").classList.remove("show");
 

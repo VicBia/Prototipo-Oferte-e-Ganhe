@@ -101,9 +101,9 @@ function openModalDeleteUser(index) {
   deleteIndex = index;
   let lojaList = JSON.parse(localStorage.getItem("lojaList")) || [];
 
-  const lojaNumber = lojaList[index].codLoja;
+  const name = lojaList[index].name;
   document.querySelector(".containerDelete").innerHTML = `
-     <h2> Realmente deseja deletar a loja <strong>${lojaNumber}</strong>?</h2>
+     <h2> Realmente deseja deletar a loja <strong>${name}</strong>?</h2>
       <button type="button" id="delete" class="btn-del" onclick="deleteData()">
         Deletar
       </button>

@@ -29,12 +29,12 @@ function populateLojas(lojasId) {
 
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
-    checkbox.value = element.loja;
-    checkbox.id = element.loja;
+    checkbox.value = element.codLoja;
+    checkbox.id = element.codLoja;
 
     const label = document.createElement("label");
-    label.htmlFor = element.loja;
-    label.textContent = element.loja;
+    label.htmlFor = element.codLoja;
+    label.textContent = element.codLoja;
 
     // Adicionar checkbox e label ao container
     checkboxContainer.appendChild(checkbox);

@@ -33,14 +33,20 @@ function newSolicitacao() {
       dataEnvio: envioFormatado,
       previsaoChegada: previsaoChegada,
       remessa: remessa,
-      status: "Enviado"
+      status: "Enviado",
     });
 
     localStorage.setItem("taloesList", JSON.stringify(taloesList));
-    document.getElementById("open-modal-newSolicitacao").classList.remove("show");
+    document
+      .getElementById("open-modal-newSolicitacao")
+      .classList.remove("show");
 
     getDataEnviados();
   };
+}
+
+function closeModalNewSolicitacao() {
+  document.getElementById("open-modal-newSolicitacao").classList.remove("show");
 }
 
 function getDataSolicitacao() {

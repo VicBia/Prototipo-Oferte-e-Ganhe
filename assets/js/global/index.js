@@ -61,16 +61,14 @@ menuButton.addEventListener("click", function () {
 // Autenticação
 
 function configureMenuByPerfil() {
-  // Obtém o usuário autenticado e seus perfis
   const user = JSON.parse(sessionStorage.getItem("authenticatedUser"));
 
   if (!user || !user.perfis || user.perfis.length === 0) {
     alert("Usuário não autenticado ou sem perfil.");
-    window.location.href = "./login.html"; // Redireciona para login se não estiver autenticado
+    window.location.href = "./login.html"; 
     return;
   }
 
-  // Obtém a lista de perfis do localStorage
   const perfilList = JSON.parse(localStorage.getItem("perfilList"));
 
   if (!perfilList) {

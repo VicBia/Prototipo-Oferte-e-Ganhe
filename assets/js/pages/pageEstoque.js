@@ -54,7 +54,42 @@ function calculateStatus(estoque, quantRecom, quantMin) {
 }
 
 function showData() {
+  const user = JSON.parse(sessionStorage.getItem("authenticatedUser"));
+
+  if (!user || !user.perfis || user.perfis.length === 0) {
+    alert("Usuário não autenticado ou sem perfil.");
+    window.location.href = "./login.html";
+    return;
+  }
+
+  const perfilList = JSON.parse(localStorage.getItem("perfilList"));
+  if (!perfilList) {
+    console.error("Lista de perfis não encontrada no localStorage.");
+    return;
+  }
+
+  let hasLojaEspecifica = false;
+  let lojaEspecifica = "";
+
+  user.perfis.forEach((userPerfil) => {
+    const perfilData = perfilList.find((perfil) => perfil.name === userPerfil);
+    if (
+      perfilData &&
+      perfilData.permissions &&
+      perfilData.permissions.lojaEspecifica
+    ) {
+      hasLojaEspecifica = true;
+      lojaEspecifica = user.loja;
+    }
+  });
+
   let estoqueList = JSON.parse(localStorage.getItem("estoqueList")) || [];
+
+  if (hasLojaEspecifica) {
+    estoqueList = estoqueList.filter(
+      (element) => element.loja === lojaEspecifica
+    );
+  }
 
   var html = "";
   estoqueList.forEach(function (element, index) {
@@ -69,7 +104,7 @@ function showData() {
     html += `<td>${element.estoque}</td>`;
     html += `<td>${element.quantRecom}</td>`;
     html += `<td>${element.quantMin}</td>`;
-    html += `<td>${status}</td>`; 
+    html += `<td>${status}</td>`;
     html += '<td class="buttons">';
     html +=
       `
@@ -96,10 +131,8 @@ function showData() {
         row.style.backgroundColor = "#f96060";
         row.style.color = "#fff";
         row.style.fontWeight = "600";
-      } else if  (cell.textContent.trim() === "ATENÇÃO") {
+      } else if (cell.textContent.trim() === "ATENÇÃO") {
         row.style.backgroundColor = "#fae984";
-        // row.style.color = "#fff";
-        // row.style.fontWeight = "600";
       }
     });
   });
@@ -121,7 +154,7 @@ function addData() {
       estoque: parseInt(estoque),
       quantRecom: parseInt(quantRecom),
       quantMin: parseInt(quantMin),
-      status: status, 
+      status: status,
     });
 
     localStorage.setItem("estoqueList", JSON.stringify(estoqueList));
@@ -222,7 +255,62 @@ function updateData(index) {
   };
 }
 
+function hasLojaEspecifica() {
+  const user = JSON.parse(sessionStorage.getItem("authenticatedUser"));
+
+  if (!user || !user.perfis || user.perfis.length === 0) {
+    console.error("Usuário não autenticado ou sem perfil.");
+    return false;
+  }
+
+  const perfilList = JSON.parse(localStorage.getItem("perfilList"));
+  if (!perfilList) {
+    console.error("Lista de perfis não encontrada no localStorage.");
+    return false;
+  }
+
+  // Verifica se algum dos perfis do usuário tem lojaEspecifica: true
+  return user.perfis.some((userPerfil) => {
+    const perfilData = perfilList.find((perfil) => perfil.name === userPerfil);
+    return (
+      perfilData &&
+      perfilData.permissions &&
+      perfilData.permissions.lojaEspecifica
+    );
+  });
+}
+function getDataSolicitacao() {
+  let taloesList = JSON.parse(localStorage.getItem("taloesList")) || [];
+
+  if (hasLojaEspecifica()) {
+    const user = JSON.parse(sessionStorage.getItem("authenticatedUser"));
+    taloesList = taloesList.filter((element) => element.loja === user.loja);
+  }
+
+  var html = "";
+  taloesList.forEach(function (element, index) {
+    if (element.status === "Em espera") {
+      html += "<tr>";
+      html += `<td>${element.loja}</td>`;
+      html += `<td>${element.quantidade}</td>`;
+      html += '<td class="buttons">';
+      html += `
+        <button type="button" class="btn btn-primary btn-xs dt-edit" onclick="aprovarSolicitacao(${index})">
+          <img src="./assets/images/edit-pencil.svg" alt="Botão Editar" width="25px"/>
+        </button>
+        <button type="button" class="btn btn-danger btn-xs dt-delete" onclick="openModalDeleteSolicitacap(${index})">
+          <img src="./assets/images/delete-trash.svg" alt="Botão Excluir" width="25px"/>
+        </button>`;
+      html += "</td>";
+      html += "</tr>";
+    }
+  });
+
+  document.getElementById("tableBody").innerHTML = html;
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   initializeEstoqueList();
   showData();
+  getDataSolicitacao();
 });

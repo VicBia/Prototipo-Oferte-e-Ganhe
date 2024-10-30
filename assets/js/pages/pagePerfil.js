@@ -160,8 +160,6 @@ function addData() {
       permissions: permissions,
     });
 
-    console.log(perfilList);
-
     localStorage.setItem("perfilList", JSON.stringify(perfilList));
 
     document.getElementById("open-modal-criarPerfil").classList.remove("show");
@@ -203,13 +201,15 @@ function deleteData() {
 
   perfilList.splice(deleteIndex, 1);
   localStorage.setItem("perfilList", JSON.stringify(perfilList));
-  document.getElementById("open-modal-DeleteUser").classList.remove("show");
+  document.getElementById("open-modal-DeletePerfilUser").classList.remove("show");
 
   showData();
 }
 
 function validateFormEdit() {
-  var nomePerfilEdit = document.getElementById("nomePerfilEdit").value.trim();
+  var nomePerfilEdit = document
+    .getElementById("nomePerfilEditPerfil")
+    .value.trim();
 
   if (!nomePerfilEdit) {
     alert("Por favor, preencha o nome do perfil.");
@@ -229,14 +229,27 @@ function validateFormEdit() {
 }
 
 function updateData(index) {
+  console.log(index);
+  // Exibe o modal de edição
   document.getElementById("open-modal-editUser").classList.add("show");
 
+  // Obtém a lista de perfis do localStorage
   let perfilList = JSON.parse(localStorage.getItem("perfilList")) || [];
+  console.log(perfilList[index]);
 
+  // Verifica se o índice é válido
+  if (!perfilList[index]) {
+    console.error(`Perfil com índice ${index} não encontrado.`);
+    return;
+  }
+
+  // Preenche o nome do perfil no campo de edição
   document.getElementById("nomePerfilEditPerfil").value =
     perfilList[index].name;
 
-  const permissions = perfilList[index].permissions;
+  // Preenche as permissões nos checkboxes
+  const permissions = perfilList[index].permissions || {};
+
   document.querySelector('#example input[value="lojaEspecifica"]').checked =
     permissions.lojaEspecifica || false;
   document.querySelector('#example input[value="dashboard"]').checked =
@@ -258,44 +271,58 @@ function updateData(index) {
   document.querySelector('#example input[value="relatorios"]').checked =
     permissions.relatorios || false;
 
-  document.querySelector("#update").onclick = function () {
-    if (validateFormEdit() == true) {
-      perfilList[index].name = document.getElementById("nomePerfilEdit").value;
+  // Define a ação de atualização no formulário de edição
+  document
+    .querySelector("#formEditPerfil")
+    .addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (validateFormEdit()) {
+        // Atualiza o nome do perfil
+        perfilList[index].name = document.getElementById(
+          "nomePerfilEditPerfil"
+        ).value;
 
-      perfilList[index].permissions = {
-        lojaEspecifica: document.querySelector(
-          '#example input[value="lojaEspecifica"]'
-        ).checked,
-        dashboard: document.querySelector('#example input[value="dashboard"]')
-          .checked,
-        usuarios: document.querySelector('#example input[value="usuarios"]')
-          .checked,
-        perfis: document.querySelector('#example input[value="perfis"]')
-          .checked,
-        lojas: document.querySelector('#example input[value="lojas"]').checked,
-        estoque: document.querySelector('#example input[value="estoque"]')
-          .checked,
-        envio: document.querySelector('#example input[value="envio"]').checked,
-        recebimento: document.querySelector(
-          '#example input[value="recebimento"]'
-        ).checked,
-        manutencao: document.querySelector('#example input[value="manutencao"]')
-          .checked,
-        relatorios: document.querySelector('#example input[value="relatorios"]')
-          .checked,
-      };
+        // Atualiza as permissões do perfil
+        perfilList[index].permissions = {
+          lojaEspecifica: document.querySelector(
+            '#example input[value="lojaEspecifica"]'
+          ).checked,
+          dashboard: document.querySelector('#example input[value="dashboard"]')
+            .checked,
+          usuarios: document.querySelector('#example input[value="usuarios"]')
+            .checked,
+          perfis: document.querySelector('#example input[value="perfis"]')
+            .checked,
+          lojas: document.querySelector('#example input[value="lojas"]')
+            .checked,
+          estoque: document.querySelector('#example input[value="estoque"]')
+            .checked,
+          envio: document.querySelector('#example input[value="envio"]')
+            .checked,
+          recebimento: document.querySelector(
+            '#example input[value="recebimento"]'
+          ).checked,
+          manutencao: document.querySelector(
+            '#example input[value="manutencao"]'
+          ).checked,
+          relatorios: document.querySelector(
+            '#example input[value="relatorios"]'
+          ).checked,
+        };
 
-      localStorage.setItem("perfilList", JSON.stringify(perfilList));
+        // Salva as atualizações no localStorage
+        localStorage.setItem("perfilList", JSON.stringify(perfilList));
 
-      document.getElementById("open-modal-editUser").classList.remove("show");
+        // Fecha o modal
+        document.getElementById("open-modal-editUser").classList.remove("show");
 
-      showData();
+        // Atualiza a exibição de dados
+        showData();
 
-      document.getElementById("nomePerfilEdit").value = "";
-    }
-  };
-
-  showData();
+        // Limpa o campo de nome do perfil
+        document.getElementById("nomePerfilEditPerfil").value = "";
+      }
+    });
 }
 
 document.addEventListener("DOMContentLoaded", function () {

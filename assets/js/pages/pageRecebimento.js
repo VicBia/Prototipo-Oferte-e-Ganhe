@@ -10,8 +10,35 @@ function calculateStatus(dataEnvio, previsaoChegada, status) {
   return status;
 }
 
+function hasLojaEspecifica() {
+  const user = JSON.parse(sessionStorage.getItem("authenticatedUser"));
+  
+  if (!user || !user.perfis || user.perfis.length === 0) {
+    console.error("Usuário não autenticado ou sem perfil.");
+    return false;
+  }
+
+  const perfilList = JSON.parse(localStorage.getItem("perfilList"));
+  if (!perfilList) {
+    console.error("Lista de perfis não encontrada no localStorage.");
+    return false;
+  }
+
+  // Verifica se algum dos perfis do usuário tem lojaEspecifica: true
+  return user.perfis.some((userPerfil) => {
+    const perfilData = perfilList.find((perfil) => perfil.name === userPerfil);
+    return perfilData && perfilData.permissions && perfilData.permissions.lojaEspecifica;
+  });
+}
+
+
 function getDataEnviados() {
-  const taloesList = JSON.parse(localStorage.getItem("taloesList")) || [];
+  let taloesList = JSON.parse(localStorage.getItem("taloesList")) || [];
+
+  if (hasLojaEspecifica()) {
+    const user = JSON.parse(sessionStorage.getItem("authenticatedUser"));
+    taloesList = taloesList.filter(element => element.loja === user.loja);
+  }
 
   var html = "";
   taloesList.forEach(function (element, index) {
@@ -55,7 +82,12 @@ function getDataEnviados() {
 }
 
 function getDataRecebidos() {
-  const taloesList = JSON.parse(localStorage.getItem("taloesList")) || [];
+  let taloesList = JSON.parse(localStorage.getItem("taloesList")) || [];
+
+  if (hasLojaEspecifica()) {
+    const user = JSON.parse(sessionStorage.getItem("authenticatedUser"));
+    taloesList = taloesList.filter(element => element.loja === user.loja);
+  }
 
   var html = "";
   taloesList.forEach(function (element, index) {
@@ -83,7 +115,7 @@ function getDataRecebidos() {
 function updateData(index) {
   document.getElementById("open-modal-recebido").classList.add("show");
 
-  const taloesList = JSON.parse(localStorage.getItem("taloesList")) || [];
+  let taloesList = JSON.parse(localStorage.getItem("taloesList")) || [];
   const selectedTalao = taloesList[index];
 
   document.getElementById("editLoja").value = selectedTalao.loja;
