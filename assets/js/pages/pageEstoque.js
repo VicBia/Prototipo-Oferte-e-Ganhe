@@ -99,12 +99,21 @@ function showData() {
       element.quantMin
     );
 
-    html += "<tr>";
+    html += `<tr class="stock">   `;
     html += `<td>${element.loja}</td>`;
     html += `<td>${element.estoque}</td>`;
     html += `<td>${element.quantRecom}</td>`;
     html += `<td>${element.quantMin}</td>`;
     html += `<td>${status}</td>`;
+    html += "<td>";
+    html +=
+      `
+      <button type="button" class="btn btn-add btn-xs dt-add"  onclick="details(` +
+      index +
+      `)">
+                Detalhes
+              </button>`;
+    html += "</td>";
     html += '<td class="buttons">';
     html +=
       `
@@ -307,6 +316,30 @@ function getDataSolicitacao() {
   });
 
   document.getElementById("tableBody").innerHTML = html;
+}
+
+function details(index) {
+  let estoqueList = JSON.parse(localStorage.getItem("estoqueList")) || [];
+
+  const status = calculateStatus(
+    estoqueList[index].estoque,
+    estoqueList[index].quantRecom,
+    estoqueList[index].quantMin
+  );
+
+  document.querySelector(".containerDetails").innerHTML = `
+     <h2>Detalhes do estoque da loja <strong>${estoqueList[index].loja}</strong></h2>
+    <span>Estoque atual: ${estoqueList[index].estoque}</span>
+    <span>Quantidade recomendada: ${estoqueList[index].quantRecom}</span>
+    <span>Qauantidade minima: ${estoqueList[index].quantMin}</span>
+    <span>Status: ${status}</span>
+    `;
+
+  document.getElementById("open-modal-detalhes").classList.add("show");
+}
+
+function closeModalDetails() {
+  document.getElementById("open-modal-detalhes").classList.remove("show");
 }
 
 document.addEventListener("DOMContentLoaded", function () {

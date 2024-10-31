@@ -110,12 +110,21 @@ function getDataEnviados() {
   var html = "";
   taloesList.forEach(function (element, index) {
     if (element.status === "Enviado") {
-      html += "<tr>";
+      html += `<tr class="send">   `;
       html += `<td>${element.loja}</td>`;
       html += `<td>${element.quantidade}</td>`;
       html += `<td>${element.dataEnvio}</td>`;
       html += `<td>${element.previsaoChegada}</td>`;
       html += `<td>${element.remessa}</td>`;
+      html += "<td>";
+      html +=
+        `
+        <button type="button" class="btn btn-add btn-xs dt-add"  onclick="details(` +
+        index +
+        `)">
+                  Detalhes
+                </button>`;
+      html += "</td>";
       html += '<td class="buttons">';
       html += `
       <button type="button" class="btn btn-primary btn-xs dt-edit" onclick="updateData(${index})">
@@ -171,7 +180,23 @@ function closeModalSolicitacao() {
   document.getElementById("open-modal-solicitacao").classList.remove("show");
 }
 
-function exportTableToCSV() {}
+function details(index) {
+  let taloesList = JSON.parse(localStorage.getItem("taloesList")) || [];
+
+  document.querySelector(".containerDetails").innerHTML = `
+     <h2>Detalhes dos talões ja enviados da loja <strong>${taloesList[index].loja}</strong></h2>
+    <span>Quantidade enviada: ${taloesList[index].quantidade}</span>
+    <span>Data/Hora envio: ${taloesList[index].dataEnvio}</span>
+    <span>Previsão: ${taloesList[index].previsaoChegada}</span>
+      <span>Remessa: ${taloesList[index].remessa}</span>
+    `;
+
+  document.getElementById("open-modal-detalhes").classList.add("show");
+}
+
+function closeModalDetails() {
+  document.getElementById("open-modal-detalhes").classList.remove("show");
+}
 
 document.addEventListener("DOMContentLoaded", function () {
   getDataSolicitacao();

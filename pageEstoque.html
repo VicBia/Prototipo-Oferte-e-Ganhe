@@ -37,7 +37,7 @@
         </div>
         <div class="dropdown">
           <button class="buttonMenu" onclick="toggleDropdown()">
-            <span>Usuário</span>
+            <span id="loggedUser"></span>
             <img
               src="./assets/images/arrow-down.svg"
               alt="Menu Usuario"
@@ -150,9 +150,7 @@
 
       <section>
         <h1>Estoque de talões</h1>
-        <p>- Configurar Estoque Mínimo e Máximo;</p>
-        <p>- Gerar Alertas de Estoque Baixo;</p>
-        <p>- Consultar Estoque Atual.</p>
+
         <div id="search-container">
           <input
             type="search"
@@ -257,7 +255,7 @@
           cellspacing="0"
         >
           <thead>
-            <tr>
+            <tr id="stock">
               <th>Loja</th>
               <th id="organise">
                 <button
@@ -276,222 +274,25 @@
               <th>Quant. recomendada</th>
               <th>Quant. minima</th>
               <th>Status</th>
+              <th>Detalhes</th>
               <th>Ações</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>159</td>
-              <td>56</td>
-              <td>OK</td>
-              <td class="buttons">
-                <button type="button" class="btn btn-primary btn-xs dt-edit">
-                  <img
-                    src="./assets/images/edit-pencil.svg"
-                    alt="Botão Editar"
-                    width="25px"
-                  />
-                </button>
-                <button type="button" class="btn btn-danger btn-xs dt-delete">
-                  <img
-                    src="./assets/images/delete-trash.svg"
-                    alt="Botão Excluir"
-                    width="25px"
-                  />
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td>319</td>
-              <td>6</td>
-              <td>ALERTA</td>
-              <td class="buttons">
-                <button type="button" class="btn btn-primary btn-xs dt-edit">
-                  <img
-                    src="./assets/images/edit-pencil.svg"
-                    alt="Botão Editar"
-                    width="25px"
-                  />
-                </button>
-                <button type="button" class="btn btn-danger btn-xs dt-delete">
-                  <img
-                    src="./assets/images/delete-trash.svg"
-                    alt="Botão Excluir"
-                    width="25px"
-                  />
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td>164</td>
-              <td>26</td>
-              <td>OK</td>
-              <td class="buttons">
-                <button type="button" class="btn btn-primary btn-xs dt-edit">
-                  <img
-                    src="./assets/images/edit-pencil.svg"
-                    alt="Botão Editar"
-                    width="25px"
-                  />
-                </button>
-                <button type="button" class="btn btn-danger btn-xs dt-delete">
-                  <img
-                    src="./assets/images/delete-trash.svg"
-                    alt="Botão Excluir"
-                    width="25px"
-                  />
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td>267</td>
-              <td>85</td>
-              <td>OK</td>
-              <td class="buttons">
-                <button type="button" class="btn btn-primary btn-xs dt-edit">
-                  <img
-                    src="./assets/images/edit-pencil.svg"
-                    alt="Botão Editar"
-                    width="25px"
-                  />
-                </button>
-                <button type="button" class="btn btn-danger btn-xs dt-delete">
-                  <img
-                    src="./assets/images/delete-trash.svg"
-                    alt="Botão Excluir"
-                    width="25px"
-                  />
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td>25</td>
-              <td>10</td>
-              <td>ALERTA</td>
-              <td class="buttons">
-                <button type="button" class="btn btn-primary btn-xs dt-edit">
-                  <img
-                    src="./assets/images/edit-pencil.svg"
-                    alt="Botão Editar"
-                    width="25px"
-                  />
-                </button>
-                <button type="button" class="btn btn-danger btn-xs dt-delete">
-                  <img
-                    src="./assets/images/delete-trash.svg"
-                    alt="Botão Excluir"
-                    width="25px"
-                  />
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td>342</td>
-              <td>67</td>
-              <td>OK</td>
-              <td class="buttons">
-                <button type="button" class="btn btn-primary btn-xs dt-edit">
-                  <img
-                    src="./assets/images/edit-pencil.svg"
-                    alt="Botão Editar"
-                    width="25px"
-                  />
-                </button>
-                <button type="button" class="btn btn-danger btn-xs dt-delete">
-                  <img
-                    src="./assets/images/delete-trash.svg"
-                    alt="Botão Excluir"
-                    width="25px"
-                  />
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td>201</td>
-              <td>70</td>
-              <td>OK</td>
-              <td class="buttons">
-                <button type="button" class="btn btn-primary btn-xs dt-edit">
-                  <img
-                    src="./assets/images/edit-pencil.svg"
-                    alt="Botão Editar"
-                    width="25px"
-                  />
-                </button>
-                <button type="button" class="btn btn-danger btn-xs dt-delete">
-                  <img
-                    src="./assets/images/delete-trash.svg"
-                    alt="Botão Excluir"
-                    width="25px"
-                  />
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td>56</td>
-              <td>50</td>
-              <td>OK</td>
-              <td class="buttons">
-                <button type="button" class="btn btn-primary btn-xs dt-edit">
-                  <img
-                    src="./assets/images/edit-pencil.svg"
-                    alt="Botão Editar"
-                    width="25px"
-                  />
-                </button>
-                <button type="button" class="btn btn-danger btn-xs dt-delete">
-                  <img
-                    src="./assets/images/delete-trash.svg"
-                    alt="Botão Excluir"
-                    width="25px"
-                  />
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td>184</td>
-              <td>99</td>
-              <td>OK</td>
-              <td class="buttons">
-                <button type="button" class="btn btn-primary btn-xs dt-edit">
-                  <img
-                    src="./assets/images/edit-pencil.svg"
-                    alt="Botão Editar"
-                    width="25px"
-                  />
-                </button>
-                <button type="button" class="btn btn-danger btn-xs dt-delete">
-                  <img
-                    src="./assets/images/delete-trash.svg"
-                    alt="Botão Excluir"
-                    width="25px"
-                  />
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td>46</td>
-              <td>7</td>
-              <td>ALERTA</td>
-              <td class="buttons">
-                <button type="button" class="btn btn-primary btn-xs dt-edit">
-                  <img
-                    src="./assets/images/edit-pencil.svg"
-                    alt="Botão Editar"
-                    width="25px"
-                  />
-                </button>
-                <button type="button" class="btn btn-danger btn-xs dt-delete">
-                  <img
-                    src="./assets/images/delete-trash.svg"
-                    alt="Botão Excluir"
-                    width="25px"
-                  />
-                </button>
-              </td>
-            </tr>
-          </tbody>
+          <tbody></tbody>
         </table>
+
+        <div id="open-modal-detalhes" class="modal-window">
+          <div>
+            <a
+              href="#"
+              title="Close"
+              class="modal-close"
+              onclick="closeModalDetails()"
+              >X</a
+            >
+            <div class="containerDetails"></div>
+          </div>
+        </div>
 
         <div id="open-modal-editUser" class="modal-window">
           <div>

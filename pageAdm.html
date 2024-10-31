@@ -37,7 +37,7 @@
         </div>
         <div class="dropdown">
           <button class="buttonMenu" onclick="toggleDropdown()">
-            <span>Usuário</span>
+            <span id="loggedUser"></span>
             <img
               src="./assets/images/arrow-down.svg"
               alt="Menu Usuario"
@@ -239,7 +239,7 @@
           cellspacing="0"
         >
           <thead>
-            <tr>
+            <tr id="users">
               <th id="organise">
                 <button
                   type="button"
@@ -283,11 +283,25 @@
                   />
                 </button>
               </th>
+              <th>Detalhes</th>
               <th>Ações</th>
             </tr>
           </thead>
           <tbody></tbody>
         </table>
+
+        <div id="open-modal-detalhes" class="modal-window">
+          <div>
+            <a
+              href="#"
+              title="Close"
+              class="modal-close"
+              onclick="closeModalDetails()"
+              >X</a
+            >
+            <div class="containerDetails"></div>
+          </div>
+        </div>
 
         <div id="open-modal-editUser" class="modal-window">
           <div>

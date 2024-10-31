@@ -19,3 +19,9 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+@media screen and (max-width: 456px) {
+  h1 {
+    text-align: center;
+  }
+}

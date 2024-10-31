@@ -171,18 +171,29 @@ function getData() {
   let taloesList = JSON.parse(localStorage.getItem("taloesList")) || [];
 
   if (hasLojaEspecifica) {
-    taloesList = taloesList.filter(element => element.loja === lojaEspecifica);
+    taloesList = taloesList.filter(
+      (element) => element.loja === lojaEspecifica
+    );
   }
 
   var html = "";
   taloesList.forEach(function (element, index) {
     if (element.status === "Enviado" || element.status === "Atrasado") {
-      html += "<tr>";
+      html += `<tr class="manutencao">   `;
       html += `<td>${element.loja}</td>`;
       html += `<td>${element.quantidade}</td>`;
       html += `<td>${element.dataEnvio}</td>`;
       html += `<td>${element.previsaoChegada}</td>`;
       html += `<td>${element.remessa}</td>`;
+      html += "<td>";
+      html +=
+        `
+        <button type="button" class="btn btn-add btn-xs dt-add"  onclick="details(` +
+        index +
+        `)">
+                  Detalhes
+                </button>`;
+      html += "</td>";
       html += '<td class="buttons">';
       html += `
         <button type="button" class="btn btn-primary btn-xs dt-edit" onclick="updateData(${index})">
@@ -230,6 +241,24 @@ function updateData(index) {
     getDataEnviados();
     getDataRecebidos();
   };
+}
+
+function details(index) {
+  let taloesList = JSON.parse(localStorage.getItem("taloesList")) || [];
+
+  document.querySelector(".containerDetails").innerHTML = `
+     <h2>Detalhes manutenção loja <strong>${taloesList[index].loja}</strong></h2>
+    <span>Quantidade: ${taloesList[index].quantidade}</span>
+    <span>Data do envio: ${taloesList[index].dataEnvio}</span>
+    <span>Previsão: ${taloesList[index].previsaoChegada}</span>
+    <span>Remessa: ${taloesList[index].remessa}</span>
+    `;
+
+  document.getElementById("open-modal-detalhes").classList.add("show");
+}
+
+function closeModalDetails() {
+  document.getElementById("open-modal-detalhes").classList.remove("show");
 }
 
 function closeModalRecebido() {

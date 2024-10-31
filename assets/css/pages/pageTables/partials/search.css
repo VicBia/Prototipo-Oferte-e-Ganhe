@@ -29,7 +29,7 @@
   background-color: transparent;
   max-width: 400px;
   width: 100%;
-  padding: 0.5em 0.3em;
+  padding: 0.5em 0.7em;
   margin: 0;
   /* border-bottom: 2px solid #0a1b12; */
 }
@@ -39,7 +39,7 @@
 }
 
 #search-container button {
-  padding: 1em 2em;
+  padding: 0.5em 1em;
   margin-left: 1em;
   background-color: #64ba8c;
   color: #ffffff;

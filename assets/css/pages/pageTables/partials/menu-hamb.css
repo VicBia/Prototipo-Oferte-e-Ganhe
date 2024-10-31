@@ -33,3 +33,9 @@
     margin-left: 0;
   }
 }
+
+@media (max-width: 450px) {
+  #menu-hamb-section {
+    width: 100vw;
+  }
+}

@@ -144,6 +144,12 @@ function checkSession() {
   }
 }
 
+window.onload = function() {
+  let user = JSON.parse(sessionStorage.getItem("authenticatedUser")) || { name: "Usuário" };
+  document.getElementById("loggedUser").textContent = user.name;
+};
+
+
 window.addEventListener("load", () => {
   checkSession(); 
   configureMenuByPerfil(); 

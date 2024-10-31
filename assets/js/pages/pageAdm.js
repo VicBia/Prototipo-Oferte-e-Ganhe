@@ -59,11 +59,20 @@ function showData() {
 
   var html = "";
   registerList.forEach(function (element, index) {
-    html += "<tr>";
+    html += `<tr class="users">`;
     html += `<td>${element.name}</td>`;
     html += `<td>${element.email}</td>`;
     html += `<td>${element.loja}</td>`;
     html += "<td>" + new Date().toLocaleString() + "</td>";
+    html += "<td>";
+    html +=
+      `
+      <button type="button" class="btn btn-add btn-xs dt-add"  onclick="details(` +
+      index +
+      `)">
+                Detalhes
+              </button>`;
+    html += "</td>";
     html += '<td class="buttons">';
     html +=
       `
@@ -199,10 +208,24 @@ function updateData(index) {
   showData();
 }
 
+function details(index) {
+  let registerList = JSON.parse(localStorage.getItem("registerList")) || [];
+
+  document.querySelector(".containerDetails").innerHTML = `
+     <h2>Detalhes do usuário <strong>${registerList[index].name}</strong></h2>
+    <span>Email: ${registerList[index].email}</span>
+    <span>Loja: ${registerList[index].loja}</span>
+    <span>Perfil: ${registerList[index].perfis}</span>
+    `;
+
+  document.getElementById("open-modal-detalhes").classList.add("show");
+}
+
+function closeModalDetails() {
+  document.getElementById("open-modal-detalhes").classList.remove("show");
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   initializeRegisterList();
   showData();
 });
-
-
-

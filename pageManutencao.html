@@ -37,7 +37,7 @@
         </div>
         <div class="dropdown">
           <button class="buttonMenu" onclick="toggleDropdown()">
-            <span>Usuário</span>
+            <span id="loggedUser"></span>
             <img
               src="./assets/images/arrow-down.svg"
               alt="Menu Usuario"
@@ -150,9 +150,7 @@
 
       <section id="manutencao">
         <h1>Manutenção</h1>
-        <p>- Consultar Talões Enviados;</p>
-        <p>- Exportar Dados de Envio;</p>
-        <p>- Editar Talões Enviados.</p>
+
         <div id="search-container">
           <input
             type="search"
@@ -208,7 +206,7 @@
           cellspacing="0"
         >
           <thead>
-            <tr>
+            <tr id="manutencao">
               <th>Loja</th>
               <th id="organise">
                 <button
@@ -227,11 +225,26 @@
               <th>DATA/HORA envio</th>
               <th>Previsão</th>
               <th>Remessa</th>
+              <th>Detalhes</th>
               <th>Editar</th>
             </tr>
           </thead>
           <tbody id="enviadosBody"></tbody>
         </table>
+
+        <div id="open-modal-detalhes" class="modal-window">
+          <div>
+            <a
+              href="#"
+              title="Close"
+              class="modal-close"
+              onclick="closeModalDetails()"
+              >X</a
+            >
+            <div class="containerDetails"></div>
+          </div>
+        </div>
+
         <div id="open-modal-recebido" class="modal-window">
           <div>
             <a

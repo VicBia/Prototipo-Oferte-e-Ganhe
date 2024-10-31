@@ -37,7 +37,7 @@
         </div>
         <div class="dropdown">
           <button class="buttonMenu" onclick="toggleDropdown()">
-            <span>Usuário</span>
+            <span id="loggedUser"></span>
             <img
               src="./assets/images/arrow-down.svg"
               alt="Menu Usuario"
@@ -150,11 +150,7 @@
 
       <section>
         <h1>Gestão recebimento de talões</h1>
-        <p>- Registrar Recebimento de Talões;</p>
-        <p>- Consultar Talões Pendentes de Recebimento;</p>
-        <p>- Gerar Relatório de Talões Recebidos;</p>
-        <p>- Gerar Alerta de Talões Não Recebidos;</p>
-        <p>- Visualizar Histórico de Recebimento de Talões.</p>
+
         <h2>Talões pendentes</h2>
         <table
           id="example"
@@ -162,18 +158,33 @@
           cellspacing="0"
         >
           <thead>
-            <tr>
+            <tr id="receive">
               <th>Loja</th>
               <th>Quantidade</th>
               <th>DATA/HORA envio</th>
               <th>Previsão</th>
               <th>Remessa</th>
               <th>Status</th>
+              <th>Detalhes</th>
               <th>Clique se...</th>
             </tr>
           </thead>
           <tbody id="enviadosBody"></tbody>
         </table>
+
+        <div id="open-modal-detalhesPendentes" class="modal-window">
+          <div>
+            <a
+              href="#"
+              title="Close"
+              class="modal-close"
+              onclick="closeModalDetailsPendentes()"
+              >X</a
+            >
+            <div class="containerDetailsPendentes"></div>
+          </div>
+        </div>
+
         <div class="title">
           <h2>Talões recebidos</h2>
           <button>Gerar relatorio talões recebidos</button>
@@ -184,7 +195,7 @@
           cellspacing="0"
         >
           <thead>
-            <tr>
+            <tr id="receive2">
               <th>Loja</th>
               <th>Quantidade</th>
               <th>DATA/HORA recebimento</th>
@@ -264,7 +275,6 @@
             <div class="containerDetails"></div>
           </div>
         </div>
-
       </section>
     </main>
     <footer>
