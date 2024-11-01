@@ -155,5 +155,17 @@ window.addEventListener("load", () => {
   configureMenuByPerfil(); 
 });
 
+function exportTableToCSV() {
+  showCSVExportModal();
+}
 
+function showCSVExportModal() {
+  const modal = document.getElementById("csvExportModal");
+  
+  modal.classList.add("show");
+
+  setTimeout(() => {
+    modal.classList.remove("show");
+  }, 1000);
+}
 

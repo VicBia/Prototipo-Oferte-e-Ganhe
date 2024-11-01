@@ -70,6 +70,56 @@
   text-align: justify;
 }
 
+.modal-window {
+  height: 150px;
+  max-width: 500px;
+  width: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #4fb967;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.modal-content {
+  text-align: center;
+}
+
+.modal-message {
+  font-size: 1.2rem;
+  color: #000;
+  font-weight: 600;
+}
+
+.modal-window.show {
+  display: block;
+  opacity: 1;
+}
+
+.hidden {
+  display: none;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  20%,
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 @media (max-width: 450px) {
   .modal-window > div {
     width: 90%;

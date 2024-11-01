@@ -159,7 +159,13 @@
           />
           <button id="search">Pesquisar...</button>
         </div>
-        <button id="makeCSV">Exportar CSV</button>
+        <button id="makeCSV" onclick="exportTableToCSV()">Exportar CSV</button>
+
+        <div id="csvExportModal" class="modal-window hidden">
+          <div class="modal-content">
+            <span class="modal-message">CSV exportado com sucesso!</span>
+          </div>
+        </div>
         <div class="actionsUser">
           <button
             type="button"
@@ -302,6 +308,8 @@
             </div>
           </div>
         </div>
+
+
       </section>
     </main>
     <footer>

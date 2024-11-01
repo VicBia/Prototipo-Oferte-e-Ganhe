@@ -288,6 +288,7 @@ function hasLojaEspecifica() {
     );
   });
 }
+
 function getDataSolicitacao() {
   let taloesList = JSON.parse(localStorage.getItem("taloesList")) || [];
 
@@ -307,7 +308,7 @@ function getDataSolicitacao() {
         <button type="button" class="btn btn-primary btn-xs dt-edit" onclick="aprovarSolicitacao(${index})">
           <img src="./assets/images/edit-pencil.svg" alt="Botão Editar" width="25px"/>
         </button>
-        <button type="button" class="btn btn-danger btn-xs dt-delete" onclick="openModalDeleteSolicitacap(${index})">
+        <button type="button" class="btn btn-danger btn-xs dt-delete" onclick="deleteSolicitacao(${index})">
           <img src="./assets/images/delete-trash.svg" alt="Botão Excluir" width="25px"/>
         </button>`;
       html += "</td>";
@@ -340,6 +341,62 @@ function details(index) {
 
 function closeModalDetails() {
   document.getElementById("open-modal-detalhes").classList.remove("show");
+}
+
+function aprovarSolicitacao(index) {
+  document.getElementById("open-modal-aprovaSolicit").classList.add("show");
+
+  const taloesList = JSON.parse(localStorage.getItem("taloesList")) || [];
+  const selectedTalao = taloesList[index];
+
+  document.getElementById("lojaEditSolic").value = selectedTalao.loja;
+  document.getElementById("quantSolic").value = selectedTalao.quantidade;
+
+  document.getElementById("aprovaSolicit").onsubmit = function (e) {
+    e.preventDefault();
+
+    selectedTalao.status = "Solicitado";
+    taloesList[index] = selectedTalao;
+    localStorage.setItem("taloesList", JSON.stringify(taloesList));
+
+    closeModalEdituser();
+    getDataSolicitacao(); 
+  };
+}
+
+let deleteSolicIndex;
+
+function deleteSolicitacao(index) {
+  deleteSolicIndex = index;
+  let taloesList = JSON.parse(localStorage.getItem("taloesList")) || [];
+
+  const lojaNumber = taloesList[index].loja;
+  document.querySelector(".containerDeleteSolicit").innerHTML = `
+     <h2> Realmente deseja deletar a solicitação da loja <strong>${lojaNumber}</strong>?</h2>
+      <button type="button" id="delete" class="btn-del" onclick="deleteDataSolic()">
+        Deletar
+      </button>
+    `;
+
+  document.getElementById("open-modal-deleteAprovaSolicit").classList.add("show");
+}
+
+function closeModalDeleteUser() {
+  document.getElementById("open-modal-deleteAprovaSolicit").classList.remove("show");
+}
+
+function closeModalEdituser() {
+  document.getElementById("open-modal-aprovaSolicit").classList.remove("show");
+}
+
+function deleteDataSolic() {
+  let taloesList = JSON.parse(localStorage.getItem("taloesList")) || [];
+
+  taloesList.splice(deleteSolicIndex, 1);
+  localStorage.setItem("taloesList", JSON.stringify(taloesList));
+  document.getElementById("open-modal-deleteAprovaSolicit").classList.remove("show");
+
+  showData();
 }
 
 document.addEventListener("DOMContentLoaded", function () {

@@ -175,6 +175,13 @@
           <button id="makeCSV" onclick="exportTableToCSV()">
             Exportar CSV (talões enviados)
           </button>
+
+          <div id="csvExportModal" class="modal-window hidden">
+            <div class="modal-content">
+              <span class="modal-message">CSV exportado com sucesso!</span>
+            </div>
+          </div>
+          
           <div id="open-modal-newSolicitacao" class="modal-window">
             <div>
               <a
@@ -362,6 +369,58 @@
               >X</a
             >
             <div class="containerDelete"></div>
+          </div>
+        </div>
+
+        <div id="open-modal-editarTalaiEnviado" class="modal-window">
+          <div>
+            <a
+              href="#"
+              title="Close"
+              class="modal-close"
+              onclick="closeModalEditEnvio()"
+              >X</a
+            >
+            <div class="containerRegister">
+              <form id="editEnvioForm">
+                <h1>Editar envio</h1>
+                <div>
+                  <label for="editLojaEnvio">Loja:</label>
+                  <input type="text" id="editLojaEnvio" name="editLoja" readonly />
+                </div>
+                <div>
+                  <label for="editQuantidadeEnvio">Quantidade de Talões:</label>
+                  <input
+                    type="number"
+                    id="editQuantidadeEnvio"
+                    name="editQuantidadeEnvio"
+                    readonly
+                  />
+                </div>
+                <div>
+                  <label for="remessaEnvio">Remessa:</label>
+                  <input type="text" id="remessaEnvio" name="remessa" required />
+                </div>
+                <div>
+                  <label for="dataEnvioEdit">Data de Envio:</label>
+                  <input type="date" id="dataEnvioEdit" name="dataEnvio" required />
+                </div>
+                <div>
+                  <label for="horaEnvioEdit">Hora de Envio:</label>
+                  <input type="time" id="horaEnvioEdit" name="horaEnvio" required />
+                </div>
+                <div>
+                  <label for="previsaoChegadaEdit">Previsão de Chegada:</label>
+                  <input
+                    type="date"
+                    id="previsaoChegadaEdit"
+                    name="previsaoChegada"
+                    required
+                  />
+                </div>
+                <button type="submit">Enviar</button>
+              </form>
+            </div>
           </div>
         </div>
       </section>

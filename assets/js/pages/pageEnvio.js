@@ -127,7 +127,7 @@ function getDataEnviados() {
       html += "</td>";
       html += '<td class="buttons">';
       html += `
-      <button type="button" class="btn btn-primary btn-xs dt-edit" onclick="updateData(${index})">
+      <button type="button" class="btn btn-primary btn-xs dt-edit" onclick="editEnvio(${index})">
           <img src="./assets/images/edit-pencil.svg" alt="Botão Editar" width="25px"/>
           </button>`;
       html += "</td>";
@@ -196,6 +196,58 @@ function details(index) {
 
 function closeModalDetails() {
   document.getElementById("open-modal-detalhes").classList.remove("show");
+}
+
+function editEnvio(index) {
+  document.getElementById("open-modal-editarTalaiEnviado").classList.add("show");
+
+  const taloesList = JSON.parse(localStorage.getItem("taloesList")) || [];
+  const selectedTalao = taloesList[index];
+
+
+  document.getElementById("editLojaEnvio").value = selectedTalao.loja;
+  document.getElementById("editQuantidadeEnvio").value =
+    selectedTalao.quantidade;
+  document.getElementById("dataEnvioEdit").value = selectedTalao.dataEnvio;
+  document.getElementById("horaEnvioEdit").value = selectedTalao.horaEnvio;
+  document.getElementById("previsaoChegadaEdit").value =
+    selectedTalao.previsaoChegada;
+  document.getElementById("remessaEnvio").value = selectedTalao.remessa;
+
+  document.getElementById("editEnvioForm").onsubmit = function (e) {
+    e.preventDefault();
+
+    const dataEnvio = document.getElementById("dataEnvioEdit").value;
+    const horaEnvio = document.getElementById("horaEnvioEdit").value;
+    const previsaoChegada = document.getElementById(
+      "previsaoChegadaEdit"
+    ).value;
+    const remessa = document.getElementById("remessaEnvio").value;
+
+    if (!dataEnvio || !horaEnvio || !previsaoChegada || !remessa) {
+      alert("Por favor, preencha todos os campos de envio e previsão.");
+      return;
+    }
+
+    const envioFormatado = `${dataEnvio} ${horaEnvio}`;
+
+    selectedTalao.remessa = remessa;
+    selectedTalao.dataEnvio = envioFormatado;
+    selectedTalao.previsaoChegada = previsaoChegada;
+    selectedTalao.status = "Enviado";
+
+    taloesList[index] = selectedTalao;
+    localStorage.setItem("taloesList", JSON.stringify(taloesList));
+
+    closeModalEditEnvio();
+    getDataEnviados();
+  };
+}
+
+function closeModalEditEnvio() {
+  document
+    .getElementById("open-modal-editarTalaiEnviado")
+    .classList.remove("show");
 }
 
 document.addEventListener("DOMContentLoaded", function () {

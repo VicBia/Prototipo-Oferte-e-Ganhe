@@ -187,7 +187,7 @@
 
         <div class="title">
           <h2>Talões recebidos</h2>
-          <button>Gerar relatorio talões recebidos</button>
+          <button id="makeCSV" onclick="exportTableToCSV()">Gerar relatorio talões recebidos</button>
         </div>
         <table
           id="example"
@@ -275,6 +275,13 @@
             <div class="containerDetails"></div>
           </div>
         </div>
+
+        <div id="csvExportModal" class="modal-window hidden">
+          <div class="modal-content">
+            <span class="modal-message">CSV exportado com sucesso!</span>
+          </div>
+        </div>
+
       </section>
     </main>
     <footer>

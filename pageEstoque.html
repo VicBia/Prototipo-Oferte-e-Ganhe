@@ -362,12 +362,58 @@
               onclick="closeModalDeleteUser()"
               >X</a
             >
-            <div class="containerDelete">
-              <!-- Realmente deseja deletar esse usuario?
-              <button type="submit" id="delete" onclick="deleteData()">
-                Deletar
-              </button> -->
+            <div class="containerDelete"></div>
+          </div>
+        </div>
+
+        <div id="open-modal-aprovaSolicit" class="modal-window">
+          <div>
+            <a
+              href="#"
+              title="Close"
+              class="modal-close"
+              onclick="closeModalEdituser()"
+              >X</a
+            >
+            <div class="containerRegister">
+              <form id="aprovaSolicit">
+                <h1>Aprovar solicitação</h1>
+                <div class="formContent">
+                  <div>
+                    <label for="lojaEditSolic">Loja:</label>
+                    <input
+                      type="number"
+                      id="lojaEditSolic"
+                      placeholder="Digite o numero da sua loja"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label for="quantSolic">Quantidade:</label>
+                    <input
+                      type="number"
+                      id="quantSolic"
+                      placeholder="Digite o numero da sua loja"
+                      required
+                    />
+                  </div>
+                  <button type="submit" id="update">Aprovar</button>
+                </div>
+              </form>
             </div>
+          </div>
+        </div>
+
+        <div id="open-modal-deleteAprovaSolicit" class="modal-window">
+          <div>
+            <a
+              href="#"
+              title="Close"
+              class="modal-close"
+              onclick="closeModalDeleteUser()"
+              >X</a
+            >
+            <div class="containerDeleteSolicit"></div>
           </div>
         </div>
       </section>

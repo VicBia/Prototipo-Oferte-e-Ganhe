@@ -1,4 +1,4 @@
-const LOGIN_TIMEOUT = 10 * 2 * 10;
+const LOGIN_TIMEOUT = 10 * 200 * 1000;
 const MAX_ATTEMPTS = 3;
 let loginAttempts = 0;
 
