@@ -55,7 +55,7 @@
         <nav>
           <ul>
             <li data-permission="dashboard">
-              <a href="./pageDashboard.html">
+              <a href="/dashboard">
                 <img
                   src="./assets/images/dashboard-svgrepo-com.svg"
                   alt="Dashboard"
@@ -64,8 +64,8 @@
                 <span> Dashboard </span>
               </a>
             </li>
-            <li data-permission="usuarios">
-              <a href="./pageAdm.html">
+            <li data-permission="users">
+              <a href="/gestao_usuarios">
                 <img
                   src="./assets/images/profile-svgrepo-com.svg"
                   alt="Gestão de usuarios"
@@ -74,8 +74,8 @@
                 <span> Gestão de usuarios </span>
               </a>
             </li>
-            <li data-permission="perfis">
-              <a href="./pagePerfis.html">
+            <li data-permission="profile">
+              <a href="/gestao_perfis">
                 <img
                   src="./assets/images/user-adm.svg"
                   alt="Gestão de perfis"
@@ -84,8 +84,8 @@
                 <span> Gestão de perfil </span>
               </a>
             </li>
-            <li data-permission="lojas">
-              <a href="./pageLoja.html">
+            <li data-permission="store">
+              <a href="/gestao_lojas">
                 <img
                   src="./assets/images/store-svgrepo-com.svg"
                   alt="Gestão de loja"
@@ -94,8 +94,8 @@
                 <span> Gestão de loja </span>
               </a>
             </li>
-            <li data-permission="estoque">
-              <a href="./pageEstoque.html">
+            <li data-permission="stock">
+              <a href="#">
                 <img
                   src="./assets/images/reposrts-folders-svgrepo-com.svg"
                   alt="Gestão de estoque"
@@ -104,8 +104,8 @@
                 <span> Gestão de estoque </span>
               </a>
             </li>
-            <li data-permission="envio">
-              <a href="./pageEnvio.html">
+            <li data-permission="send">
+              <a href="/gestao_envio">
                 <img
                   src="./assets/images/send-arrow.svg"
                   alt="Gestão de envio"
@@ -114,8 +114,8 @@
                 <span> Gestão de envio </span>
               </a>
             </li>
-            <li data-permission="recebimento">
-              <a href="./pageRecebimento.html">
+            <li data-permission="receive">
+              <a href="/gestao_recebimento">
                 <img
                   src="./assets/images/receive.svg"
                   alt="Gestão de recebimento"
@@ -124,8 +124,8 @@
                 <span> Gestão de recebimento </span>
               </a>
             </li>
-            <li data-permission="manutencao">
-              <a href="./pageManutencao.html">
+            <li data-permission="maintenance">
+              <a href="/manutencao">
                 <img
                   src="./assets/images/maintenance-svgrepo-com.svg"
                   alt="Manutenção"
@@ -134,14 +134,14 @@
                 <span> Manutenção </span>
               </a>
             </li>
-            <li data-permission="relatorios">
-              <a href="./pageRelatorios.html">
+            <li data-permission="reports">
+              <a href="/relatorios">
                 <img
                   src="./assets/images/stock-market.svg"
-                  alt="Relatorios"
+                  alt="Relatórios"
                   width="25px"
                 />
-                <span> Relatorios </span>
+                <span> Relatórios </span>
               </a>
             </li>
           </ul>
@@ -300,7 +300,7 @@
               href="#"
               title="Close"
               class="modal-close"
-              onclick="closeModalEdituser()"
+              onclick="closeModalEditEst()"
               >X</a
             >
             <div class="containerRegister">
@@ -359,7 +359,7 @@
               href="#"
               title="Close"
               class="modal-close"
-              onclick="closeModalDeleteUser()"
+              onclick="closeModalDeleteEst()"
               >X</a
             >
             <div class="containerDelete"></div>

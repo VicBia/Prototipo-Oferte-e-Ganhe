@@ -70,9 +70,10 @@
   text-align: justify;
 }
 
-.modal-window {
-  height: 150px;
-  max-width: 500px;
+.modal-csv {
+  align-content: center;
+  height: 100px;
+  max-width: 450px;
   width: 100%;
   position: fixed;
   top: 50%;
@@ -98,7 +99,7 @@
   font-weight: 600;
 }
 
-.modal-window.show {
+.modal-csv.show {
   display: block;
   opacity: 1;
 }

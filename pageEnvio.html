@@ -54,7 +54,7 @@
         <nav>
           <ul>
             <li data-permission="dashboard">
-              <a href="./pageDashboard.html">
+              <a href="/dashboard">
                 <img
                   src="./assets/images/dashboard-svgrepo-com.svg"
                   alt="Dashboard"
@@ -63,8 +63,8 @@
                 <span> Dashboard </span>
               </a>
             </li>
-            <li data-permission="usuarios">
-              <a href="./pageAdm.html">
+            <li data-permission="users">
+              <a href="/gestao_usuarios">
                 <img
                   src="./assets/images/profile-svgrepo-com.svg"
                   alt="Gestão de usuarios"
@@ -73,8 +73,8 @@
                 <span> Gestão de usuarios </span>
               </a>
             </li>
-            <li data-permission="perfis">
-              <a href="./pagePerfis.html">
+            <li data-permission="profile">
+              <a href="/gestao_perfis">
                 <img
                   src="./assets/images/user-adm.svg"
                   alt="Gestão de perfis"
@@ -83,8 +83,8 @@
                 <span> Gestão de perfil </span>
               </a>
             </li>
-            <li data-permission="lojas">
-              <a href="./pageLoja.html">
+            <li data-permission="store">
+              <a href="/gestao_lojas">
                 <img
                   src="./assets/images/store-svgrepo-com.svg"
                   alt="Gestão de loja"
@@ -93,8 +93,8 @@
                 <span> Gestão de loja </span>
               </a>
             </li>
-            <li data-permission="estoque">
-              <a href="./pageEstoque.html">
+            <li data-permission="stock">
+              <a href="/estoque">
                 <img
                   src="./assets/images/reposrts-folders-svgrepo-com.svg"
                   alt="Gestão de estoque"
@@ -103,8 +103,8 @@
                 <span> Gestão de estoque </span>
               </a>
             </li>
-            <li data-permission="envio">
-              <a href="./pageEnvio.html">
+            <li data-permission="send">
+              <a href="#">
                 <img
                   src="./assets/images/send-arrow.svg"
                   alt="Gestão de envio"
@@ -113,8 +113,8 @@
                 <span> Gestão de envio </span>
               </a>
             </li>
-            <li data-permission="recebimento">
-              <a href="./pageRecebimento.html">
+            <li data-permission="receive">
+              <a href="/gestao_recebimento">
                 <img
                   src="./assets/images/receive.svg"
                   alt="Gestão de recebimento"
@@ -123,8 +123,8 @@
                 <span> Gestão de recebimento </span>
               </a>
             </li>
-            <li data-permission="manutencao">
-              <a href="./pageManutencao.html">
+            <li data-permission="maintenance">
+              <a href="/manutencao">
                 <img
                   src="./assets/images/maintenance-svgrepo-com.svg"
                   alt="Manutenção"
@@ -133,14 +133,14 @@
                 <span> Manutenção </span>
               </a>
             </li>
-            <li data-permission="relatorios">
-              <a href="./pageRelatorios.html">
+            <li data-permission="reports">
+              <a href="/relatorios">
                 <img
                   src="./assets/images/stock-market.svg"
-                  alt="Relatorios"
+                  alt="Relatórios"
                   width="25px"
                 />
-                <span> Relatorios </span>
+                <span> Relatórios </span>
               </a>
             </li>
           </ul>
@@ -176,12 +176,12 @@
             Exportar CSV (talões enviados)
           </button>
 
-          <div id="csvExportModal" class="modal-window hidden">
+          <div id="csvExportModal" class="modal-csv hidden">
             <div class="modal-content">
               <span class="modal-message">CSV exportado com sucesso!</span>
             </div>
           </div>
-          
+
           <div id="open-modal-newSolicitacao" class="modal-window">
             <div>
               <a
@@ -386,7 +386,12 @@
                 <h1>Editar envio</h1>
                 <div>
                   <label for="editLojaEnvio">Loja:</label>
-                  <input type="text" id="editLojaEnvio" name="editLoja" readonly />
+                  <input
+                    type="text"
+                    id="editLojaEnvio"
+                    name="editLoja"
+                    readonly
+                  />
                 </div>
                 <div>
                   <label for="editQuantidadeEnvio">Quantidade de Talões:</label>
@@ -399,15 +404,30 @@
                 </div>
                 <div>
                   <label for="remessaEnvio">Remessa:</label>
-                  <input type="text" id="remessaEnvio" name="remessa" required />
+                  <input
+                    type="text"
+                    id="remessaEnvio"
+                    name="remessa"
+                    required
+                  />
                 </div>
                 <div>
                   <label for="dataEnvioEdit">Data de Envio:</label>
-                  <input type="date" id="dataEnvioEdit" name="dataEnvio" required />
+                  <input
+                    type="date"
+                    id="dataEnvioEdit"
+                    name="dataEnvio"
+                    required
+                  />
                 </div>
                 <div>
                   <label for="horaEnvioEdit">Hora de Envio:</label>
-                  <input type="time" id="horaEnvioEdit" name="horaEnvio" required />
+                  <input
+                    type="time"
+                    id="horaEnvioEdit"
+                    name="horaEnvio"
+                    required
+                  />
                 </div>
                 <div>
                   <label for="previsaoChegadaEdit">Previsão de Chegada:</label>

@@ -63,7 +63,7 @@ menuButton.addEventListener("click", function () {
 function configureMenuByPerfil() {
   const user = JSON.parse(sessionStorage.getItem("authenticatedUser"));
 
-  if (!user || !user.perfis || user.perfis.length === 0) {
+  if (!user || !user.profiles || user.profiles.length === 0) {
     alert("Usuário não autenticado ou sem perfil.");
     window.location.href = "./login.html"; 
     return;

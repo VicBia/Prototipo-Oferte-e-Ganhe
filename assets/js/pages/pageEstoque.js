@@ -193,7 +193,7 @@ function openModalDeleteUser(index) {
   document.getElementById("open-modal-DeleteUser").classList.add("show");
 }
 
-function closeModalDeleteUser() {
+function closeModalDeleteEst() {
   document.getElementById("open-modal-DeleteUser").classList.remove("show");
 }
 
@@ -262,6 +262,10 @@ function updateData(index) {
       document.getElementById("quantMinEdit").value = "";
     }
   };
+}
+
+function closeModalEditEst() {
+  document.getElementById("open-modal-editUser").classList.remove("show");
 }
 
 function hasLojaEspecifica() {
