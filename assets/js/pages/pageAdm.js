@@ -53,40 +53,47 @@ function initializeRegisterList() {
 }
 
 let deleteIndex;
+async function fetchData() {
+  try {
+    const response = await fetch("http://localhost:3000/api/register", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return await response.json();
+  } catch (error) {
+    console.error("Erro ao buscar dados de usuarios:", error);
+    alert("Erro ao se conectar ao servidor. Tente novamente mais tarde.");
+  }
+}
 
-function showData() {
-  let registerList = JSON.parse(localStorage.getItem("registerList")) || [];
+async function showData() {
+  let usersList = await fetchData();
 
+  // Exibe os dados retornados pela API
   var html = "";
-  registerList.forEach(function (element, index) {
+  usersList.forEach(function (element, index) {
     html += `<tr class="users">`;
-    html += `<td>${element.name}</td>`;
+    html += `<td>${element.user_name}</td>`;
     html += `<td>${element.email}</td>`;
-    html += `<td>${element.loja}</td>`;
-    html += "<td>" + new Date().toLocaleString() + "</td>";
+    html += `<td>${element.id_store}</td>`;
+    html += `<td>${new Date(element.registration_date).toLocaleString()}</td>`;
     html += "<td>";
-    html +=
-      `
-      <button type="button" class="btn btn-add btn-xs dt-add"  onclick="details(` +
-      index +
-      `)">
-                Detalhes
-              </button>`;
+    html += `
+          <button type="button" class="btn btn-add btn-xs dt-add" onclick="details(${index})">
+            Detalhes
+          </button>`;
     html += "</td>";
     html += '<td class="buttons">';
-    html +=
-      `
-        <button type="button" class="btn btn-primary btn-xs dt-edit" onclick="updateData(` +
-      index +
-      `)">
-          <img src="./assets/images/edit-pencil.svg" alt="Botão Editar" width="25px"/>
-        </button>
-        <button type="button" class="btn btn-danger btn-xs dt-delete" onclick="openModalDeleteUser(` +
-      index +
-      `)">
-          <img src="./assets/images/delete-trash.svg" alt="Botão Excluir" width="25px"/>
-        </button>
-      `;
+    html += `
+            <button type="button" class="btn btn-primary btn-xs dt-edit" onclick="updateData(${index})">
+              <img src="./assets/images/edit-pencil.svg" alt="Botão Editar" width="25px"/>
+            </button>
+            <button type="button" class="btn btn-danger btn-xs dt-delete" onclick="openModalDeleteUser(${index})">
+              <img src="./assets/images/delete-trash.svg" alt="Botão Excluir" width="25px"/>
+            </button>
+          `;
     html += "</td>";
     html += "</tr>";
   });

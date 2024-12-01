@@ -83,7 +83,7 @@ function redirectUserByPerfil(perfis) {
 
   // Itera sobre os perfis do usuário logado
   for (const perfil of perfis) {
-    console.log("perfil of perfis")
+    console.log("perfil of perfis");
     // Verifica se o perfil está na lista de perfis do sessionStorage
     if (perfilList.includes(perfil)) {
       // Itera sobre as rotas para verificar as permissões do perfil
@@ -102,14 +102,15 @@ function redirectUserByPerfil(perfis) {
   }
 
   // Caso nenhuma permissão corresponda, redireciona para o dashboard
-  console.warn("Nenhuma permissão correspondente encontrada. Redirecionando ao dashboard.");
+  console.warn(
+    "Nenhuma permissão correspondente encontrada. Redirecionando ao dashboard."
+  );
   window.location.href = "/dashboard";
 }
 
-
 // Captura o evento de submissão do formulário de login
 document.getElementById("loginForm").addEventListener("submit", function (e) {
-  e.preventDefault(); // Previne o comportamento padrão do formulário
+  e.preventDefault(); 
 
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;

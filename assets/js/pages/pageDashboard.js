@@ -1,3 +1,20 @@
+async function fetchData(endpoint) {
+  try {
+    const response = await fetch(`http://localhost:3000/api/${endpoint}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return await response.json();
+  } catch (error) {
+    console.error(`Erro ao buscar dados de ${endpoint}:`, error);
+    alert(
+      `Erro ao se conectar ao servidor ao buscar ${endpoint}. Tente novamente mais tarde.`
+    );
+  }
+}
+
 function calculateStatus(estoque, quantRecom, quantMin) {
   if (estoque > quantRecom) {
     return "OK";
@@ -8,31 +25,31 @@ function calculateStatus(estoque, quantRecom, quantMin) {
   }
 }
 
-function showData() {
-  let perfilList = JSON.parse(localStorage.getItem("perfilList")) || [];
-  let registerList = JSON.parse(localStorage.getItem("registerList")) || [];
-  let lojaList = JSON.parse(localStorage.getItem("lojaList")) || [];
-  let estoqueList = JSON.parse(localStorage.getItem("estoqueList")) || [];
+async function showData() {
+  let profiles = await fetchData("profile");
+  let users = await fetchData("register");
+  let userprofile = await fetchData("association");
+  let stores = await fetchData("store");
+  let stocks = await fetchData("stock");
 
   let totalAlertas = 0;
-  estoqueList.forEach(function (element) {
-    const status = calculateStatus(
-      element.estoque,
-      element.quantRecom,
-      element.quantMin
-    );
-    if (status === "ALERTA") totalAlertas += 1;
-  });
+  if (stocks.length > 0) {
+    stocks.forEach(function (element) {
+      const status = calculateStatus(
+        element.current_quantity,
+        element.recommended_quantity,
+        element.minimum_quantity
+      );
+      if (status === "ALERTA") totalAlertas += 1;
+    });
+  }
 
-  let totalAssociacoes = 0;
-  registerList.forEach(function (element) {
-    if (element.perfis) totalAssociacoes += 1;
-  });
+  let totalAssociacoes = userprofile.length;
+  let totalUsuarios = users.length;
+  let totalPerfis = profiles.length;
+  let totalLojas = stores.length;
 
-  let totalUsuarios = registerList.length;
-  let totalPerfis = perfilList.length;
-  let totalLojas = lojaList.length;
-
+  // Atualiza a interface
   document.getElementById("totalUsuarios").textContent = totalUsuarios;
   document.getElementById("totalPerfis").textContent = totalPerfis;
   document.getElementById("totalAssociacoes").textContent = totalAssociacoes;

@@ -82,25 +82,25 @@ function formatPermissions(permissions) {
     .filter(([key, value]) => value)
     .map(([key]) => {
       switch (key) {
-        case "lojaEspecifica":
+        case "justStore":
           return "Apenas loja";
         case "dashboard":
           return "Dashboard";
-        case "usuarios":
+        case "users":
           return "Gestão de Usuários";
-        case "perfis":
+        case "profile":
           return "Gestão de Perfis";
-        case "lojas":
+        case "store":
           return "Gestão de Lojas";
-        case "estoque":
+        case "stock":
           return "Gestão de Estoque";
-        case "envio":
+        case "send":
           return "Gestão de Envio";
-        case "recebimento":
+        case "receive":
           return "Gestão de Recebimento";
-        case "manutencao":
+        case "maintenance":
           return "Manutenção";
-        case "relatorios":
+        case "reports":
           return "Relatórios";
         default:
           return key;
@@ -112,14 +112,31 @@ function formatPermissions(permissions) {
     : "Sem permissões";
 }
 
-function showData() {
-  let perfilList = JSON.parse(localStorage.getItem("perfilList")) || [];
+async function fetchData(endpoint) {
+  try {
+    const response = await fetch(`http://localhost:3000/api/${endpoint}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return await response.json();
+  } catch (error) {
+    console.error(`Erro ao buscar dados de ${endpoint}:`, error);
+    alert(
+      `Erro ao se conectar ao servidor ao buscar ${endpoint}. Tente novamente mais tarde.`
+    );
+  }
+}
+
+async function showData() {
+  let perfilList = await fetchData("profile");
 
   var html = "";
   perfilList.forEach(function (element, index) {
     html += "<tr>";
-    html += `<td>${element.name}</td>`;
-    html += `<td>${formatPermissions(element.permissions)}</td>`;
+    html += `<td>${element.profile_name}</td>`;
+    html += `<td>${formatPermissions(element.description)}</td>`;
     html += '<td class="buttons">';
     html +=
       `
@@ -436,14 +453,14 @@ function savePerfilToUser() {
   }
 }
 
-function showDataPerfilUsuario() {
-  let registerList = JSON.parse(localStorage.getItem("registerList")) || [];
+async function showDataPerfilUsuario() {
+  let registerList = await fetchData("association");
 
   var html = "";
   registerList.forEach(function (element, index) {
     html += "<tr>";
-    html += `<td>${element.name}</td>`;
-    html += `<td>${element.perfis}</td>`;
+    html += `<td>${element.registration}</td>`;
+    html += `<td>${element.id_profile}</td>`;
     html += '<td class="buttons">';
     html +=
       `
