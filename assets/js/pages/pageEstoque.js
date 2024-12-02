@@ -13,34 +13,6 @@ function validateFormRegister() {
   return true;
 }
 
-function initializeEstoqueList() {
-  let estoqueList = JSON.parse(localStorage.getItem("estoqueList")) || [];
-
-  if (estoqueList.length === 0) {
-    estoqueList.push(
-      {
-        loja: "126",
-        estoque: 50,
-        quantRecom: 126,
-        quantMin: 25,
-      },
-      {
-        loja: "245",
-        estoque: 126,
-        quantRecom: 150,
-        quantMin: 50,
-      },
-      {
-        loja: "54",
-        estoque: 12,
-        quantRecom: 78,
-        quantMin: 20,
-      }
-    );
-    localStorage.setItem("estoqueList", JSON.stringify(estoqueList));
-  }
-}
-
 let deleteIndex;
 
 function calculateStatus(estoque, quantRecom, quantMin) {
@@ -53,87 +25,89 @@ function calculateStatus(estoque, quantRecom, quantMin) {
   }
 }
 
-function showData() {
+async function fetchData(endpoint) {
+  try {
+    const response = await fetch(`http://localhost:3000/api/${endpoint}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return await response.json();
+  } catch (error) {
+    console.error(`Erro ao buscar dados de ${endpoint}:`, error);
+    alert(
+      `Erro ao se conectar ao servidor ao buscar ${endpoint}. Tente novamente mais tarde.`
+    );
+  }
+}
+
+async function showData() {
   const user = JSON.parse(sessionStorage.getItem("authenticatedUser"));
 
-  if (!user || !user.perfis || user.perfis.length === 0) {
+  if (!user || !user.profiles || user.profiles.length === 0) {
     alert("Usuário não autenticado ou sem perfil.");
-    window.location.href = "./login.html";
+    window.location.href = "/login";
     return;
   }
 
-  const perfilList = JSON.parse(localStorage.getItem("perfilList"));
-  if (!perfilList) {
-    console.error("Lista de perfis não encontrada no localStorage.");
-    return;
-  }
+  let hasJustStoreAccess = false;
+  let userStoreId = "";
 
-  let hasLojaEspecifica = false;
-  let lojaEspecifica = "";
+  let estoqueList = await fetchData("stock");
+  let users = await fetchData("register");
 
-  user.perfis.forEach((userPerfil) => {
-    const perfilData = perfilList.find((perfil) => perfil.name === userPerfil);
-    if (
-      perfilData &&
-      perfilData.permissions &&
-      perfilData.permissions.lojaEspecifica
-    ) {
-      hasLojaEspecifica = true;
-      lojaEspecifica = user.loja;
+  // Verifica se o usuário tem o perfil "justStore" e define a loja do usuário
+  user.profiles.forEach((userProfile) => {
+    if (userProfile === "justStore") {
+      hasJustStoreAccess = true;
+      userStoreId = user.loja; // Supõe-se que 'user.loja' contém o ID da loja do usuário
     }
   });
 
-  let estoqueList = JSON.parse(localStorage.getItem("estoqueList")) || [];
-
-  if (hasLojaEspecifica) {
+  // Se o usuário tiver "justStore", filtra os dados apenas para a loja dele
+  if (hasJustStoreAccess) {
     estoqueList = estoqueList.filter(
-      (element) => element.loja === lojaEspecifica
+      (element) => element.id_store === userStoreId
     );
   }
 
   var html = "";
   estoqueList.forEach(function (element, index) {
+    // Corrigido: O segundo parâmetro da função calculateStatus estava duplicado
     const status = calculateStatus(
-      element.estoque,
-      element.quantRecom,
-      element.quantMin
+      element.recommended_quantity,
+      element.current_quantity,
+      element.minimum_quantity
     );
 
-    html += `<tr class="stock">   `;
-    html += `<td>${element.loja}</td>`;
-    html += `<td>${element.estoque}</td>`;
-    html += `<td>${element.quantRecom}</td>`;
-    html += `<td>${element.quantMin}</td>`;
+    html += `<tr class="stock">`;
+    html += `<td>${element.id_store}</td>`;
+    html += `<td>${element.recommended_quantity}</td>`;
+    html += `<td>${element.current_quantity}</td>`;
+    html += `<td>${element.minimum_quantity}</td>`;
     html += `<td>${status}</td>`;
     html += "<td>";
-    html +=
-      `
-      <button type="button" class="btn btn-add btn-xs dt-add"  onclick="details(` +
-      index +
-      `)">
-                Detalhes
-              </button>`;
+    html += `
+      <button type="button" class="btn btn-add btn-xs dt-add" onclick="details(${index})">
+        Detalhes
+      </button>`;
     html += "</td>";
     html += '<td class="buttons">';
-    html +=
-      `
-        <button type="button" class="btn btn-primary btn-xs dt-edit" onclick="updateData(` +
-      index +
-      `)">
-          <img src="./assets/images/edit-pencil.svg" alt="Botão Editar" width="25px"/>
-        </button>
-        <button type="button" class="btn btn-danger btn-xs dt-delete" onclick="openModalDeleteUser(` +
-      index +
-      `)">
-          <img src="./assets/images/delete-trash.svg" alt="Botão Excluir" width="25px"/>
-        </button>
-      `;
+    html += `
+      <button type="button" class="btn btn-primary btn-xs dt-edit" onclick="updateData(${index})">
+        <img src="./assets/images/edit-pencil.svg" alt="Botão Editar" width="25px"/>
+      </button>
+      <button type="button" class="btn btn-danger btn-xs dt-delete" onclick="openModalDeleteUser(${index})">
+        <img src="./assets/images/delete-trash.svg" alt="Botão Excluir" width="25px"/>
+      </button>`;
     html += "</td>";
     html += "</tr>";
   });
 
   document.querySelector("#registerCRUD tbody").innerHTML = html;
 
+  // Aplicação de estilos de alerta com base no status
   document.querySelectorAll("tr").forEach(function (row) {
     row.querySelectorAll("td").forEach(function (cell) {
       if (cell.textContent.trim() === "ALERTA") {
@@ -271,19 +245,13 @@ function closeModalEditEst() {
 function hasLojaEspecifica() {
   const user = JSON.parse(sessionStorage.getItem("authenticatedUser"));
 
-  if (!user || !user.perfis || user.perfis.length === 0) {
+  if (!user || !user.profiles || user.profiles.length === 0) {
     console.error("Usuário não autenticado ou sem perfil.");
     return false;
   }
 
-  const perfilList = JSON.parse(localStorage.getItem("perfilList"));
-  if (!perfilList) {
-    console.error("Lista de perfis não encontrada no localStorage.");
-    return false;
-  }
-
   // Verifica se algum dos perfis do usuário tem lojaEspecifica: true
-  return user.perfis.some((userPerfil) => {
+  return user.profiles.some((userPerfil) => {
     const perfilData = perfilList.find((perfil) => perfil.name === userPerfil);
     return (
       perfilData &&
@@ -364,7 +332,7 @@ function aprovarSolicitacao(index) {
     localStorage.setItem("taloesList", JSON.stringify(taloesList));
 
     closeModalEdituser();
-    getDataSolicitacao(); 
+    getDataSolicitacao();
   };
 }
 
@@ -382,11 +350,15 @@ function deleteSolicitacao(index) {
       </button>
     `;
 
-  document.getElementById("open-modal-deleteAprovaSolicit").classList.add("show");
+  document
+    .getElementById("open-modal-deleteAprovaSolicit")
+    .classList.add("show");
 }
 
 function closeModalDeleteUser() {
-  document.getElementById("open-modal-deleteAprovaSolicit").classList.remove("show");
+  document
+    .getElementById("open-modal-deleteAprovaSolicit")
+    .classList.remove("show");
 }
 
 function closeModalEdituser() {
@@ -398,13 +370,14 @@ function deleteDataSolic() {
 
   taloesList.splice(deleteSolicIndex, 1);
   localStorage.setItem("taloesList", JSON.stringify(taloesList));
-  document.getElementById("open-modal-deleteAprovaSolicit").classList.remove("show");
+  document
+    .getElementById("open-modal-deleteAprovaSolicit")
+    .classList.remove("show");
 
   showData();
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  initializeEstoqueList();
   showData();
   getDataSolicitacao();
 });

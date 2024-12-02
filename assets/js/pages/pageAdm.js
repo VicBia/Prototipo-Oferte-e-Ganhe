@@ -24,33 +24,6 @@ function validateFormRegister() {
   return true;
 }
 
-function initializeRegisterList() {
-  let registerList = JSON.parse(localStorage.getItem("registerList")) || [];
-
-  if (registerList.length === 0) {
-    registerList.push(
-      {
-        name: "Ana",
-        email: "admin@example.com",
-        loja: "Matriz",
-        password: "admin123",
-      },
-      {
-        name: "Julio",
-        email: "gerente@example.com",
-        loja: "126",
-        password: "gerente123",
-      },
-      {
-        name: "Carla",
-        email: "loja@example.com",
-        loja: "126",
-        password: "loja123",
-      }
-    );
-    localStorage.setItem("registerList", JSON.stringify(registerList));
-  }
-}
 
 let deleteIndex;
 async function fetchData() {
@@ -68,16 +41,36 @@ async function fetchData() {
   }
 }
 
+async function fetchDataStore() {
+  try {
+    const response = await fetch("http://localhost:3000/api/store", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return await response.json();
+  } catch (error) {
+    console.error("Erro ao buscar dados de lojas:", error);
+    alert("Erro ao se conectar ao servidor. Tente novamente mais tarde.");
+  }
+}
+
 async function showData() {
   let usersList = await fetchData();
+  let storeList = await fetchDataStore();
 
   // Exibe os dados retornados pela API
   var html = "";
   usersList.forEach(function (element, index) {
+    const store = storeList.find(
+      (store) => store.id_store === element.id_store
+    );
+    const store_name = store ? store.store_name : "Loja não encontrada"; // Verifica se a loja foi encontrada
     html += `<tr class="users">`;
     html += `<td>${element.user_name}</td>`;
     html += `<td>${element.email}</td>`;
-    html += `<td>${element.id_store}</td>`;
+    html += `<td>${store_name}</td>`;
     html += `<td>${new Date(element.registration_date).toLocaleString()}</td>`;
     html += "<td>";
     html += `
@@ -233,6 +226,5 @@ function closeModalDetails() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  initializeRegisterList();
   showData();
 });

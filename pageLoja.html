@@ -251,21 +251,18 @@
               >X</a
             >
             <div class="containerRegister">
-              <form
-                action="./pageLoja.html"
-                onsubmit="addData(); return false;"
-              >
+              <form id="editUserForm">
                 <h1>Editar loja</h1>
-                <div>
-                  <label for="nameEdit">Nome:</label>
-                  <input
-                    type="text"
-                    id="nameEdit"
-                    placeholder="Digite o nome da loja"
-                    required
-                  />
-                </div>
                 <div class="formContent">
+                  <div>
+                    <label for="nameEdit">Nome:</label>
+                    <input
+                      type="text"
+                      id="nameEdit"
+                      placeholder="Digite o nome da loja"
+                      required
+                    />
+                  </div>
                   <div>
                     <label for="codLojaEdit">Numero:</label>
                     <input
@@ -276,7 +273,7 @@
                     />
                   </div>
 
-                  <button type="submit" id="update">Atualizar</button>
+                  <button type="button" id="update">Atualizar</button>
                 </div>
               </form>
             </div>

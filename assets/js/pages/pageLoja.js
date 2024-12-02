@@ -11,40 +11,6 @@ function validateFormRegister() {
   return true;
 }
 
-function initializeLojaList() {
-  let lojaList = JSON.parse(localStorage.getItem("lojaList")) || [];
-
-  if (lojaList.length === 0) {
-    lojaList.push(
-      {
-        name: "Matriz",
-        codLoja: "0",
-      },
-      {
-        name: "Rio Grande",
-        codLoja: "126",
-      },
-      {
-        name: "Caxias do Sul",
-        codLoja: "245",
-      },
-      {
-        name: "Arroio Grande",
-        codLoja: "54",
-      },
-      {
-        name: "Viamão",
-        codLoja: "191",
-      },
-      {
-        name: "Alpestre",
-        codLoja: "12",
-      }
-    );
-    localStorage.setItem("lojaList", JSON.stringify(lojaList));
-  }
-}
-
 let deleteIndex;
 async function fetchData() {
   try {
@@ -173,37 +139,46 @@ async function updateData(index) {
   document.getElementById("nameEdit").value = lojaList[index].store_name;
   document.getElementById("codLojaEdit").value = lojaList[index].store_number;
 
-  document.querySelector("#update").onclick = async function () {
-    if (validateFormEdit() == true) {
+  document.querySelector("#update").onclick = async function (event) {
+    event.preventDefault(); 
+
+    // Chama a função de validação
+    if (validateFormEdit()) {
       let updatedName = document.getElementById("nameEdit").value;
       let updatedCodLoja = document.getElementById("codLojaEdit").value;
 
-      // Enviar dados atualizados para a API
-      await fetch(
-        `http://localhost:3000/api/store/${lojaList[index].codLoja}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            store_name: updatedName,
-            store_number: updatedCodLoja,
-          }),
-        }
-      );
+      try {
+        await fetch(
+          `http://localhost:3000/api/store/${lojaList[index].id_store}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              store_name: updatedName,
+              store_number: updatedCodLoja,
+            }),
+          }
+        );
 
-      document.getElementById("open-modal-editUser").classList.remove("show");
+        // Fechar modal e atualizar os dados exibidos
+        document.getElementById("open-modal-editUser").classList.remove("show");
+        showData();
 
-      showData();
-
-      document.getElementById("codLojaEdit").value = "";
+        // Limpar os campos após a atualização
+        document.getElementById("codLojaEdit").value = "";
+        document.getElementById("nameEdit").value = "";
+      } catch (error) {
+        console.error("Erro ao atualizar os dados:", error);
+        alert("Ocorreu um erro ao atualizar a loja.");
+      }
+    } else {
+      alert("Por favor, preencha todos os campos corretamente.");
     }
   };
-  showData();
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  initializeLojaList();
   showData();
 });

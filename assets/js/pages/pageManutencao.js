@@ -141,7 +141,7 @@ document
 function getData() {
   const user = JSON.parse(sessionStorage.getItem("authenticatedUser"));
 
-  if (!user || !user.perfis || user.perfis.length === 0) {
+  if (!user || !user.profiles || user.profiles.length === 0) {
     alert("Usuário não autenticado ou sem perfil.");
     window.location.href = "./login.html";
     return;
@@ -156,7 +156,7 @@ function getData() {
   let hasLojaEspecifica = false;
   let lojaEspecifica = "";
 
-  user.perfis.forEach((userPerfil) => {
+  user.profiles.forEach((userPerfil) => {
     const perfilData = perfilList.find((perfil) => perfil.name === userPerfil);
     if (
       perfilData &&

@@ -20,60 +20,6 @@ function validateFormRegister() {
   return true;
 }
 
-function initializeperfilList() {
-  let perfilList = JSON.parse(localStorage.getItem("perfilList")) || [];
-
-  if (perfilList.length === 0) {
-    perfilList.push(
-      {
-        name: "ADM",
-        permissions: {
-          lojaEspecifica: false,
-          dashboard: true,
-          usuarios: true,
-          perfis: true,
-          lojas: true,
-          estoque: true,
-          envio: true,
-          recebimento: true,
-          manutencao: true,
-          relatorios: true,
-        },
-      },
-      {
-        name: "Gerente",
-        permissions: {
-          lojaEspecifica: true,
-          dashboard: true,
-          usuarios: false,
-          perfis: false,
-          lojas: false,
-          estoque: true,
-          envio: true,
-          recebimento: true,
-          manutencao: false,
-          relatorios: true,
-        },
-      },
-      {
-        name: "Caixa",
-        permissions: {
-          lojaEspecifica: true,
-          dashboard: false,
-          usuarios: false,
-          perfis: false,
-          lojas: false,
-          estoque: false,
-          envio: false,
-          recebimento: true,
-          manutencao: true,
-          relatorios: false,
-        },
-      }
-    );
-    localStorage.setItem("perfilList", JSON.stringify(perfilList));
-  }
-}
 
 let deleteIndex;
 
@@ -343,7 +289,6 @@ function updateData(index) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  initializeperfilList();
   showData();
   showDataPerfilUsuario();
 });

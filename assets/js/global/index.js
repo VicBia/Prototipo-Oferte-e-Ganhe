@@ -58,76 +58,56 @@ menuButton.addEventListener("click", function () {
   }
 });
 
-// Autenticação
-
 function configureMenuByPerfil() {
   const user = JSON.parse(sessionStorage.getItem("authenticatedUser"));
 
   if (!user || !user.profiles || user.profiles.length === 0) {
-    alert("Usuário não autenticado ou sem perfil.");
-    window.location.href = "./login.html"; 
+    alert("Usuário não autenticado ou sem perfis.");
+    window.location.href = "/login";
     return;
   }
 
-  const perfilList = JSON.parse(localStorage.getItem("perfilList"));
+  const userProfiles = user.profiles; // Lista de perfis do usuário
+  console.log("Perfis do usuário:", userProfiles);
 
-  if (!perfilList) {
-    console.error("Lista de perfis não encontrada no localStorage.");
-    return;
-  }
-
-  // Cria um objeto para armazenar todas as permissões agregadas dos perfis do usuário
-  let combinedPermissions = {};
-
-  // Itera sobre os perfis do usuário e combina as permissões
-  user.perfis.forEach((userPerfil) => {
-    const perfilData = perfilList.find((perfil) => perfil.name === userPerfil);
-
-    if (perfilData && perfilData.permissions) {
-      Object.keys(perfilData.permissions).forEach((permission) => {
-        // Se a permissão for verdadeira em qualquer perfil, ela será mantida como verdadeira
-        if (perfilData.permissions[permission]) {
-          combinedPermissions[permission] = true;
-        }
-      });
-    }
-  });
-
-  // Seleciona todos os itens da navegação
+  // Seleciona todos os itens do menu
   const allLinks = document.querySelectorAll("#menu-hamb-section nav ul li");
 
   allLinks.forEach((link) => {
     const permission = link.getAttribute("data-permission");
 
-    // Verifica se a permissão agregada permite exibir o link
-    if (!combinedPermissions[permission]) {
-      link.style.display = "none"; // Esconde o link se o perfil não tem permissão
+    // Verifica se o usuário tem a permissão correspondente para exibir o item do menu
+    if (!userProfiles.includes(permission)) {
+      link.style.display = "none"; 
     } else {
-      link.style.display = ""; // Exibe o link se a permissão está presente
+      link.style.display = ""; 
     }
   });
 }
 
-// Chama a função quando a página carregar
+document.addEventListener("DOMContentLoaded", configureMenuByPerfil);
 
-function logout() {
-  const authenticatedUser = JSON.parse(
-    sessionStorage.getItem("authenticatedUser")
-  );
 
-  if (authenticatedUser) {
-    const registerList = JSON.parse(localStorage.getItem("registerList")) || [];
-    const updatedUsers = registerList.map((user) => {
-      if (user.email === authenticatedUser.email) {
-        user.isLoggedIn = false;
-      }
-      return user;
+async function logout() {
+  try {
+    // Faz a chamada para o backend para realizar o logout
+    const response = await fetch("/api/auth/logout", {
+      method: "POST",
+      credentials: "include", 
     });
-    localStorage.setItem("registerList", JSON.stringify(updatedUsers));
 
-    sessionStorage.removeItem("authenticatedUser");
-
-    window.location.href = "./login.html";
+    if (response.ok) {
+      // Se o logout for bem-sucedido no backend, redireciona para a página de login
+      sessionStorage.removeItem("authenticatedUser"); 
+      window.location.href = "/login";
+    } else {
+      const errorData = await response.json();
+      console.error("Erro ao fazer logout:", errorData.message);
+      alert("Erro ao fazer logout. Tente novamente.");
+    }
+  } catch (erro) {
+    console.error("Erro durante o logout:", erro);
+    alert("Erro ao fazer logout. Tente novamente.");
   }
 }
 
@@ -140,19 +120,20 @@ function checkSession() {
 
   if (!authenticatedUser) {
     alert("Sessão expirada ou não iniciada. Faça login novamente.");
-    window.location.href = "./login.html";
+    window.location.href = "/login";
   }
 }
 
-window.onload = function() {
-  let user = JSON.parse(sessionStorage.getItem("authenticatedUser")) || { name: "Usuário" };
+window.onload = function () {
+  let user = JSON.parse(sessionStorage.getItem("authenticatedUser")) || {
+    name: "Usuário",
+  };
   document.getElementById("loggedUser").textContent = user.name;
 };
 
-
 window.addEventListener("load", () => {
-  checkSession(); 
-  configureMenuByPerfil(); 
+  checkSession();
+  configureMenuByPerfil();
 });
 
 function exportTableToCSV() {
@@ -161,11 +142,10 @@ function exportTableToCSV() {
 
 function showCSVExportModal() {
   const modal = document.getElementById("csvExportModal");
-  
+
   modal.classList.add("show");
 
   setTimeout(() => {
     modal.classList.remove("show");
   }, 1000);
 }
-
