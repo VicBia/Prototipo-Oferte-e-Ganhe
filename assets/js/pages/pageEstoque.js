@@ -61,7 +61,10 @@ async function showData() {
   user.profiles.forEach((userProfile) => {
     if (userProfile === "justStore") {
       hasJustStoreAccess = true;
-      userStoreId = user.loja; // Supõe-se que 'user.loja' contém o ID da loja do usuário
+      users = users.filter(
+        (element) => element.name === user.name
+      );
+      userStoreId = users.id_store; // Supõe-se que 'user.loja' contém o ID da loja do usuário
     }
   });
 
